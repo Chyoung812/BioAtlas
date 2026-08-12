@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 시맨틱 색상 토큰 — 다크가 기본, html.light에서 값만 뒤집는다.
+   채널(R G B) 형식이라 Tailwind /opacity 수식이 그대로 동작한다. */
+:root {
+  color-scheme: dark;
+  --c-canvas: 10 14 26; /* ink-950 */
+  --c-surface: 14 19 34; /* ink-900 */
+  --c-raised: 26 34 56; /* ink-800 */
+  --c-subtle: 37 47 74; /* ink-700 */
+  --c-line: 37 47 74; /* ink-700 */
+  --c-fg: 241 245 249; /* slate-100 */
+  --c-fg-muted: 148 163 184; /* slate-400 */
+  --c-fg-faint: 100 116 139; /* slate-500 */
+  --scene-from: #0a0e1a;
+  --scene-to: #0e1322;
+}
+
+html.light {
+  color-scheme: light;
+  --c-canvas: 248 250 252; /* slate-50 */
+  --c-surface: 255 255 255; /* white */
+  --c-raised: 241 245 249; /* slate-100 */
+  --c-subtle: 226 232 240; /* slate-200 */
+  --c-line: 226 232 240; /* slate-200 */
+  --c-fg: 15 23 42; /* slate-900 */
+  --c-fg-muted: 71 85 105; /* slate-600 */
+  --c-fg-faint: 100 116 139; /* slate-500 */
+  --scene-from: #eef2f7;
+  --scene-to: #dbe3ee;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-canvas text-fg antialiased;
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-subtle rounded-full;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 패널 공통 스타일 */
+.panel {
+  @apply bg-surface/80 border border-line backdrop-blur-md;
+}
