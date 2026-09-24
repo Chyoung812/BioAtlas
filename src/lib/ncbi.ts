@@ -41,6 +41,7 @@ export async function fetchNcbiGene(geneId: string) {
   return {
     fullName: rec.nomenclaturename || rec.description || undefined,
     chromosome: rec.maplocation || undefined,
+    summary: (rec.summary as string) || undefined,
     aliases:
       typeof rec.otheraliases === "string" && rec.otheraliases
         ? rec.otheraliases.split(",").map((s: string) => s.trim())
@@ -82,6 +83,7 @@ export function mergeGene(base: GeneDetail, live: LiveParts): GeneDetail {
     fullName: live.ncbi?.fullName ?? base.fullName,
     chromosome: live.ncbi?.chromosome ?? base.chromosome,
     pubmed: live.pubmed && live.pubmed.length > 0 ? live.pubmed : base.pubmed,
+    ncbiSummary: live.ncbi?.summary,
     _meta: { source: "live", fetchedAt: new Date().toISOString() },
   };
 }

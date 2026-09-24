@@ -38,6 +38,7 @@ export function NetworkView() {
             id: n.id,
             label: n.label,
             color: ROLE_COLOR[n.role ?? "signaling"],
+            contextual: n.membership === "contextual",
           },
         })),
         ...edges.map((e: GeneEdge, i) => ({
@@ -66,6 +67,15 @@ export function NetworkView() {
             "border-color": dark ? "#0a0e1a" : "#ffffff",
             "transition-property": "width height border-width",
             "transition-duration": 150,
+          },
+        },
+        // 출처 경로 밖의 교육용 맥락 유전자: 옅게 + 점선 테두리
+        {
+          selector: "node[?contextual]",
+          style: {
+            "background-opacity": 0.45,
+            "border-style": "dashed",
+            "border-color": dark ? "#94a3b8" : "#64748b",
           },
         },
         {
@@ -135,12 +145,25 @@ export function NetworkView() {
   return (
     <div className="relative h-full w-full">
       <div ref={containerRef} className="h-full w-full" />
-      <NetworkLegend />
+      <NetworkLegend
+        source={getPathway(pathwayId ?? "")?.source}
+        hasContextual={
+          !!getPathway(pathwayId ?? "")?.network.nodes.some(
+            (n) => n.membership === "contextual"
+          )
+        }
+      />
     </div>
   );
 }
 
-function NetworkLegend() {
+function NetworkLegend({
+  source,
+  hasContextual,
+}: {
+  source?: string;
+  hasContextual: boolean;
+}) {
   return (
     <div className="panel pointer-events-none absolute bottom-4 left-4 rounded-xl px-3 py-2 text-[11px] leading-relaxed">
       <div className="mb-1 font-semibold text-brand-400">범례</div>
@@ -152,6 +175,14 @@ function NetworkLegend() {
       </div>
       <div className="flex items-center gap-2">
         <span className="text-fg-faint">┈┈</span> Interaction (상호작용)
+      </div>
+      {hasContextual && (
+        <div className="flex items-center gap-2">
+          <span className="text-fg-faint">◌</span> 관련 맥락 ({source} 경로 밖)
+        </div>
+      )}
+      <div className="mt-1 text-[10px] text-fg-faint">
+        연결선은 이해를 돕기 위해 단순화한 흐름이에요
       </div>
     </div>
   );

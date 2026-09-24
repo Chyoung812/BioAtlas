@@ -1,4 +1,9 @@
 import { GeneDetail } from "./types";
+import synonyms from "./synonyms.json";
+
+/** HGNC·NCBI에서 모은 다른 기호·이름 — npm run check:data -- --write 로 갱신 */
+export const SYNONYMS: Record<string, { symbols: string[]; names: string[] }> =
+  synonyms;
 
 // 큐레이션된 유전자 마이크로 도감 데이터 (뇌 + 심장/간/폐/신장)
 // 실데이터는 NCBI Gene / HGNC / PubMed / PDB API로 대체될 자리입니다.
@@ -13,6 +18,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Tumor protein p53",
     easyExplanation:
       "세포의 '품질 검사관'이에요. DNA가 심하게 망가지면 세포를 멈추거나 스스로 사라지게 해서 암을 막아요. 그래서 '유전체의 수호자'라고 불려요.",
+    guide: {
+      role: "DNA 손상 같은 세포 스트레스를 감지하고, 대응에 필요한 유전자들을 켜고 꺼요.",
+      how: "손상이 가벼우면 세포 분열을 멈추고 DNA를 고칠 시간을 벌어요. 고칠 수 없으면 BAX 같은 사멸 유전자를 켜서 세포가 스스로 사라지게 해요.",
+      ifBroken: "망가진 세포가 멈추지 않고 분열할 수 있어요. 그래서 TP53 돌연변이는 여러 암과 관련 있고, 태어날 때부터 돌연변이가 있으면 암이 잘 생기는 리-프라우메니 증후군이 돼요.",
+    },
     microMapAsset: "guardian",
     chromosome: "17p13.1",
     proteinPdbId: "1TUP",
@@ -21,7 +31,7 @@ export const GENES: Record<string, GeneDetail> = {
       { title: "p53 in neuronal apoptosis", pmid: "12042762" },
       { title: "Guardian of the genome revisited", pmid: "31802989" },
     ],
-    relatedPathwayIds: ["hsa04210", "R-HSA-69541"],
+    relatedPathwayIds: ["hsa04210", "hsa04115"],
   },
   CASP3: {
     symbol: "CASP3",
@@ -31,6 +41,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Caspase 3",
     easyExplanation:
       "세포 사멸의 '집행관'이에요. 신호를 받으면 세포 안의 단백질들을 잘라내며 세포를 깔끔하게 해체해요. 사멸 경로의 거의 마지막 단계를 담당해요.",
+    guide: {
+      role: "세포자멸(세포가 스스로 사라지는 과정)의 마지막 실행 단계를 맡는 단백질 분해효소예요.",
+      how: "앞 단계의 카스파제(8·9·10)에 잘려서 켜져요. 켜지면 DNA 수리 효소 PARP를 잘라 끄고, 카스파제-6·7 같은 다른 카스파제를 켜서 세포 해체를 진행해요.",
+      ifBroken: "알츠하이머병과 관련된 아밀로이드 전구단백질을 주로 자르는 카스파제라서, 신경세포가 죽는 과정과 연결돼 연구되고 있어요.",
+    },
     microMapAsset: "scissors",
     chromosome: "4q35.1",
     proteinPdbId: "1CP3",
@@ -46,6 +61,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "BCL2 associated X, apoptosis regulator",
     easyExplanation:
       "미토콘드리아에 '구멍을 뚫는' 단백질이에요. 구멍이 뚫리면 사멸 신호물질이 쏟아져 나와 세포가 죽기 시작해요. 사멸을 '켜는' 역할이에요.",
+    guide: {
+      role: "세포를 죽일지 살릴지 정하는 BCL2 가족 중 '죽이는 쪽' 단백질이에요.",
+      how: "미토콘드리아 막의 통로를 더 열리게 해 시토크롬 c가 새어 나오게 해요. BCL2와 짝을 이루는데, 둘의 비율이 세포의 생사를 가르고, p53이 BAX 발현을 늘려요.",
+      ifBroken: "BAX가 제 역할을 못하면 p53이 보내는 사멸 신호가 제대로 이어지지 않아, 없어져야 할 손상 세포가 남을 수 있어요.",
+    },
     microMapAsset: "pore",
     chromosome: "19q13.33",
     proteinPdbId: "1F16",
@@ -61,6 +81,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "BCL2 apoptosis regulator",
     easyExplanation:
       "BAX의 '브레이크'예요. 미토콘드리아에 구멍이 뚫리지 못하게 막아 세포를 살려둬요. 사멸을 '끄는' 보호자 역할을 해요.",
+    guide: {
+      role: "미토콘드리아 바깥막에 박혀 세포자멸을 막는 '살리는 쪽' 단백질이에요.",
+      how: "BAX와 짝을 이뤄 BAX가 사멸을 일으키지 못하게 붙잡아요. 림프구 같은 세포가 필요 이상으로 죽지 않게 지켜요.",
+      ifBroken: "너무 많이 만들어지면 사라져야 할 세포가 계속 살아남아요. 염색체 자리바꿈으로 BCL2가 늘 켜져 있는 것이 여포성 림프종의 원인으로 여겨져요.",
+    },
     microMapAsset: "shield",
     chromosome: "18q21.33",
     proteinPdbId: "1GJH",
@@ -76,6 +101,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Cytochrome c, somatic",
     easyExplanation:
       "평소엔 미토콘드리아에서 에너지를 만드는 일을 도와요. 하지만 BAX가 구멍을 뚫으면 밖으로 새어 나와 사멸 스위치를 켜는 '경보 신호'가 돼요.",
+    guide: {
+      role: "미토콘드리아에서 전자를 나르며 에너지 생산을 돕는 작은 단백질(시토크롬 c)이에요.",
+      how: "평소에는 미토콘드리아 안쪽 막에서 전자를 시토크롬 b에서 시토크롬 산화효소로 넘겨요. 막에 구멍이 나 세포질로 새어 나오면 APAF1에 붙어 세포자멸을 시작하게 해요.",
+      ifBroken: "이 유전자의 돌연변이는 혈소판이 적어지는 상염색체 우성 비증후군성 혈소판감소증과 관련 있어요.",
+    },
     microMapAsset: "alarm",
     chromosome: "7p15.3",
     proteinPdbId: "3ZCF",
@@ -91,6 +121,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Apoptotic peptidase activating factor 1",
     easyExplanation:
       "경보 신호(시토크롬 c)를 받으면 '아폽토솜'이라는 처형대를 조립해요. 여기서 카스파제가 깨어나 본격적인 세포 해체가 시작돼요.",
+    guide: {
+      role: "시토크롬 c 신호를 받아 세포자멸을 출발시키는 세포질 단백질이에요.",
+      how: "시토크롬 c와 dATP가 붙으면 여러 개가 모여 '아폽토솜'이라는 복합체를 만들어요. 여기서 카스파제-9가 활성형으로 잘리고, 이어서 카스파제 연쇄반응이 시작돼요.",
+      ifBroken: "APAF1이 없으면 미토콘드리아에서 신호가 나와도 카스파제-9가 깨어나지 못해, 이 경로의 세포자멸이 진행되지 않아요.",
+    },
     microMapAsset: "assembler",
     chromosome: "12q23.1",
     proteinPdbId: "1Z6T",
@@ -106,6 +141,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Dopamine receptor D2",
     easyExplanation:
       "신경세포 표면의 '도파민 수신 안테나'예요. 도파민이 도착하면 신호를 안쪽으로 전달해 기분, 동기, 운동 조절에 관여해요.",
+    guide: {
+      role: "도파민을 받는 D2형 수용체예요. 세포막에 박힌 G단백질 연결 수용체예요.",
+      how: "도파민이 붙으면 cAMP를 만드는 효소(아데닐산 고리화효소)를 억제해요. 도파민을 내보내는 신경세포 쪽에서는 도파민 합성·방출을 스스로 조절하는 '자기 수용체' 역할도 해요.",
+      ifBroken: "한 가지 돌연변이는 근간대성 근긴장이상증을 일으키고, 다른 변이들은 조현병과의 연관이 보고됐어요.",
+    },
     microMapAsset: "antenna",
     chromosome: "11q23.2",
     proteinPdbId: "6CM4",
@@ -121,6 +161,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "G protein subunit alpha i2",
     easyExplanation:
       "수신 안테나(DRD2)에 붙어 있는 '중계기'예요. 신호를 받으면 세포 안의 다음 단계로 메시지를 넘겨요.",
+    guide: {
+      role: "수용체 신호를 세포 안으로 넘기는 G단백질의 알파 소단위예요.",
+      how: "GTP(에너지 분자)가 붙는 자리를 가지고 있고, 호르몬 신호에 따라 cAMP를 만드는 효소를 조절해요. 이 앱의 도파민 경로에서는 DRD2 신호를 받아 다음 단계로 넘기는 중계기로 연결돼 있어요.",
+      ifBroken: "제대로 작동하지 않으면 수용체가 신호를 받아도 세포 안으로 전달되지 않아요.",
+    },
     microMapAsset: "relay",
     chromosome: "3p21.31",
     proteinPdbId: "7YK7",
@@ -137,6 +182,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "cAMP responsive element binding protein 1",
     easyExplanation:
       "신호의 '최종 결재자'예요. 핵 안에서 어떤 유전자를 켤지 결정해, 기억 형성과 신경세포 생존에 핵심 역할을 해요.",
+    guide: {
+      role: "cAMP 신호에 반응해 유전자를 켜는 전사인자예요.",
+      how: "여러 인산화효소가 CREB1에 인산기를 붙이면, 두 개가 짝을 이뤄 DNA의 cAMP 반응 부위(CRE)에 붙어 표적 유전자를 켜요. 이 앱의 경로에서는 생존 단백질 BCL2를 켜는 쪽으로 연결돼 있어요.",
+      ifBroken: "신호가 들어와도 표적 유전자가 켜지지 않아, 호르몬·신경전달물질이 보낸 명령이 세포 반응으로 이어지지 못해요.",
+    },
     microMapAsset: "switch",
     chromosome: "2q33.3",
     proteinPdbId: "1DH3",
@@ -154,6 +204,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Calcium voltage-gated channel subunit alpha1 C",
     easyExplanation:
       "심근 세포막의 'L형 칼슘 대문'이에요. 전기 신호가 오면 열려서 칼슘을 조금 들여보내고, 이 칼슘이 훨씬 큰 칼슘 방출을 촉발하는 방아쇠가 돼요.",
+    guide: {
+      role: "심근 세포막의 전압 개폐 L형 칼슘 통로에서 실제 구멍을 이루는 알파1 소단위예요.",
+      how: "세포막 전압이 바뀌면 열려 칼슘을 들여보내요. 이 칼슘이 방아쇠가 되어 근소포체의 RYR2를 열어요(칼슘 유발 칼슘 방출). 디하이드로피리딘 계열 약이 이 통로에 붙어 막아요.",
+      ifBroken: "통로가 제대로 열리지 않으면 수축을 시작할 칼슘 신호가 약해져요.",
+    },
     microMapAsset: "ltype",
     chromosome: "12p13.33",
     proteinPdbId: "5GJV",
@@ -169,6 +224,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Ryanodine receptor 2",
     easyExplanation:
       "근소포체(칼슘 창고)의 '대형 방출 밸브'예요. 작은 칼슘 신호를 감지하면 저장해 둔 칼슘을 왈칵 쏟아내 심장이 힘차게 수축하게 해요.",
+    guide: {
+      role: "근소포체(심근 세포 안의 칼슘 창고)에 있는 칼슘 방출 통로(리아노딘 수용체 2)예요.",
+      how: "L형 칼슘 통로로 들어온 적은 칼슘을 감지하면 열려서 창고의 칼슘을 한꺼번에 내보내요. RYR2 네 개와 FKBP1B 네 개가 모여 하나의 통로를 이뤄요.",
+      ifBroken: "돌연변이는 스트레스·운동 때 생기는 다형성 심실빈맥, 부정맥 유발성 우심실 이형성증과 관련 있어요.",
+    },
     microMapAsset: "calcium",
     chromosome: "1q43",
     proteinPdbId: "4JKQ",
@@ -184,6 +244,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "ATPase sarcoplasmic/endoplasmic reticulum Ca2+ transporting 2 (SERCA2)",
     easyExplanation:
       "수축이 끝나면 흩어진 칼슘을 다시 창고로 '퍼 담는 펌프(SERCA2)'예요. 덕분에 심장이 이완하고 다음 박동을 준비할 수 있어요.",
+    guide: {
+      role: "세포질의 칼슘을 근소포체 안으로 다시 퍼 넣는 SERCA 펌프예요.",
+      how: "ATP를 분해한 에너지로 칼슘을 창고로 옮겨요. 칼슘이 치워져야 근육이 이완되므로 수축·이완 주기를 조절해요. 인산화되지 않은 PLN이 이 펌프를 억제해요.",
+      ifBroken: "돌연변이는 피부 세포끼리 잘 붙지 않는 유전 피부병인 다리에병을 일으켜요. 다른 종류의 돌연변이는 여러 근이영양증과도 관련 있어요.",
+    },
     microMapAsset: "serca",
     chromosome: "12q24.11",
     proteinPdbId: "1SU4",
@@ -199,6 +264,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Phospholamban",
     easyExplanation:
       "SERCA 펌프의 '브레이크'예요. 평소엔 펌프 속도를 늦추지만, 아드레날린 신호로 인산화되면 브레이크가 풀려 심장이 더 빠르게 이완·수축해요.",
+    guide: {
+      role: "SERCA2 펌프의 속도를 조절하는 작은 단백질(포스포람반)이에요. 다섯 개가 모여 있어요.",
+      how: "인산화되지 않았을 때는 펌프를 억제해요. 아드레날린 신호로 PKA가 인산기를 붙이면 억제가 풀려 칼슘이 빨리 치워지고, 심장이 더 빨리 이완하고 더 세게 뛰어요.",
+      ifBroken: "돌연변이는 치료가 잘 되지 않는 심부전을 동반하는 유전성 확장성 심근증, 그리고 가족성 비대성 심근증의 원인이에요.",
+    },
     microMapAsset: "phospholamban",
     chromosome: "6q22.31",
     proteinPdbId: "2KYV",
@@ -214,6 +284,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Troponin T2, cardiac type",
     easyExplanation:
       "수축 스위치인 트로포닌 복합체를 '가느다란 필라멘트에 고정하는 걸쇠'예요. 칼슘 신호를 근육 움직임으로 바꾸는 데 꼭 필요해요.",
+    guide: {
+      role: "근육 수축을 켜고 끄는 트로포닌 복합체 중 트로포미오신에 붙는 소단위예요(심장형).",
+      how: "트로포닌 복합체는 가는 필라멘트 위에 있으면서, 세포 안 칼슘 농도가 오르내리는 데 맞춰 수축을 조절해요. TNNT2는 이 복합체를 트로포미오신에 고정해요.",
+      ifBroken: "돌연변이는 가족성 비대성 심근증, 확장성 심근증과 관련 있어요.",
+    },
     microMapAsset: "troponin",
     chromosome: "1q32.1",
     proteinPdbId: "1J1E",
@@ -230,6 +305,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Myosin heavy chain 7 (β-cardiac myosin)",
     easyExplanation:
       "심장 근육의 '모터'예요. 에너지를 써서 액틴 필라멘트를 잡아당겨 실제 수축력을 만들어요. 여기 돌연변이가 생기면 심근증이 잘 생겨요.",
+    guide: {
+      role: "심장 미오신의 베타(느린형) 무거운 사슬이에요. 주로 심실에서 만들어져요.",
+      how: "미오신이 액틴을 붙잡아 당기면서 근육이 수축해요. 베타형과 알파형(빠른형) 미오신의 비율에 따라 심근의 수축 속도가 달라져요.",
+      ifBroken: "돌연변이는 가족성 비대성 심근증, 확장성 심근증, 미오신 축적 근병증, 랭 원위 근병증과 관련 있어요.",
+    },
     microMapAsset: "motor",
     chromosome: "14q11.2",
     proteinPdbId: "4P7H",
@@ -245,6 +325,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Actin alpha cardiac muscle 1",
     easyExplanation:
       "미오신 모터가 잡아당기는 '레일(가느다란 필라멘트)'이에요. 미오신과 함께 미끄러지며 근육이 짧아지게 해요.",
+    guide: {
+      role: "심근의 수축 장치를 이루는 알파 액틴이에요.",
+      how: "공 모양 액틴(G-액틴)이 이어 붙어 두 가닥 나선형 필라멘트(F-액틴)를 만들어요. 이 필라멘트를 미오신이 붙잡아 당기면서 근육이 짧아져요.",
+      ifBroken: "결함은 특발성 확장성 심근증, 가족성 비대성 심근증과 관련 있어요.",
+    },
     microMapAsset: "actin",
     chromosome: "15q14",
     proteinPdbId: "5JLH",
@@ -260,6 +345,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Adrenoceptor beta 1",
     easyExplanation:
       "심장 표면의 'β1 아드레날린 안테나'예요. 긴장하거나 운동할 때 나오는 아드레날린을 받아 심박수와 수축력을 끌어올려요.",
+    guide: {
+      role: "아드레날린(에피네프린)과 노르에피네프린을 받는 베타1 아드레날린 수용체예요. 심장에 가장 많아요.",
+      how: "호르몬이 붙으면 Gs 단백질 → cAMP → PKA 순서로 신호가 전달돼, 리아노딘 수용체·포스포람반·L형 칼슘 통로 등에 인산기가 붙어요. 그 결과 심장이 더 세게, 더 빨리 뛰어요.",
+      ifBroken: "특정 유전 변이는 안정 시 심박수에 영향을 주고 심부전과 관련될 수 있어요. 이 수용체가 오래 자극되면 심근 비대와 세포자멸이 생겨 오히려 해로워요.",
+    },
     microMapAsset: "antenna",
     chromosome: "10q25.3",
     proteinPdbId: "2VT4",
@@ -275,6 +365,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "GNAS complex locus (Gs alpha)",
     easyExplanation:
       "수용체 신호를 '증폭기(아데닐산 고리화효소)'로 넘기는 자극성 G단백질(Gs)이에요. 심장·신장 등 여러 조직에서 cAMP 신호를 켜는 공용 부품이에요.",
+    guide: {
+      role: "수용체 신호를 받아 cAMP 생산을 켜는 '자극성' G단백질(Gs)의 알파 소단위를 만드는 유전자예요.",
+      how: "수용체에 호르몬이 붙으면 Gs가 아데닐산 고리화효소를 켜서 cAMP를 만들어요. 심장의 베타1 수용체, 신장의 V2 수용체가 모두 이 부품을 써요. 부모 중 누구에게서 받았는지에 따라 발현이 달라지는 각인 유전자이기도 해요.",
+      ifBroken: "돌연변이는 가성부갑상선기능저하증, 올브라이트 유전성 골이영양증, 맥큔-올브라이트 증후군, 일부 뇌하수체 종양 등 여러 질환을 일으켜요.",
+    },
     microMapAsset: "relay",
     chromosome: "20q13.32",
     proteinPdbId: "7BPH",
@@ -290,6 +385,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Protein kinase cAMP-activated catalytic subunit alpha (PKA)",
     easyExplanation:
       "cAMP가 켜는 '만능 인산화 스위치(PKA)'예요. 표적 단백질에 인산기를 붙여 심장에선 수축을, 신장에선 물통로 이동을 촉발해요.",
+    guide: {
+      role: "cAMP에 의해 켜지는 단백질 인산화효소 A(PKA)의 촉매 소단위예요.",
+      how: "평소에는 조절 소단위에 붙잡혀 꺼져 있다가, cAMP가 조절 소단위에 붙으면 풀려나 활성화돼요. 풀려난 촉매 소단위가 여러 단백질에 인산기를 붙여 세포 분화·증식·세포자멸 등에 관여해요.",
+      ifBroken: "돌연변이나 유전자 중복으로 늘 켜져 있으면 부신 피질에 증식·선종이 생기고, 부신 자체가 원인인 쿠싱 증후군과 연결돼요.",
+    },
     microMapAsset: "switch",
     chromosome: "19p13.12",
     proteinPdbId: "1ATP",
@@ -305,6 +405,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Myosin binding protein C3, cardiac",
     easyExplanation:
       "근육 모터 미오신을 '제자리에 묶고 속도를 조율하는 조율사'예요. 이 유전자 돌연변이는 비대성 심근증의 가장 흔한 원인 중 하나예요.",
+    guide: {
+      role: "미오신에 붙는 심장형 미오신 결합 단백질 C예요. 심장 근육에서만 만들어져요.",
+      how: "근절에서 굵은 필라멘트가 있는 A띠 중 미오신 머리(교차다리)가 있는 C 영역에 자리해 심장 수축을 조절해요.",
+      ifBroken: "돌연변이는 가족성 비대성 심근증의 흔한 원인이에요.",
+    },
     microMapAsset: "conductor",
     chromosome: "11p11.2",
     proteinPdbId: "5K6P",
@@ -320,6 +425,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Tropomyosin 1",
     easyExplanation:
       "가느다란 필라멘트를 감싸 '수축 스위치를 덮어두는 덮개'예요. 칼슘이 오면 옆으로 비켜나 미오신이 액틴을 잡을 수 있게 길을 열어줘요.",
+    guide: {
+      role: "액틴 필라멘트를 따라 붙어 필라멘트를 안정시키는 트로포미오신이에요. 가로무늬근의 주된 트로포미오신이에요.",
+      how: "두 가닥 알파 나선이 꼬인 긴 막대 모양으로 액틴의 홈을 따라 이어 붙어요. 트로포닌 복합체와 함께 칼슘 농도에 따라 액틴과 미오신의 결합을 조절해요.",
+      ifBroken: "돌연변이는 가족성 비대성 심근증(3형), 확장성 심근증과 관련 있어요.",
+    },
     microMapAsset: "cover",
     chromosome: "15q22.2",
     proteinPdbId: "1C1G",
@@ -332,11 +442,16 @@ export const GENES: Record<string, GeneDetail> = {
   NR1H4: {
     symbol: "NR1H4",
     geneId: "9971",
-    hgnc: "HGNC:4085",
+    hgnc: "HGNC:7967",
     uniprot: "Q96RI1",
     fullName: "Nuclear receptor subfamily 1 group H member 4 (FXR)",
     easyExplanation:
       "담즙산 농도를 감지하는 간의 '센서(FXR)'예요. 담즙산이 많아지면 배출펌프를 켜고 합성은 줄여, 담즙산이 넘치지 않게 균형을 맞춰요.",
+    guide: {
+      role: "담즙산을 감지하는 핵수용체(FXR)이자 전사인자예요.",
+      how: "담즙산이 붙으면 DNA에 결합해 담즙산의 합성과 수송에 관여하는 유전자를 조절해요. 이 앱의 경로에서는 배출 펌프 ABCB11을 켜고 합성 효소 CYP7A1을 억제하는 것으로 연결돼 있어요.",
+      ifBroken: "담즙산이 많아져도 합성·배출 조절이 제대로 되지 않아 담즙산 균형이 흐트러질 수 있어요.",
+    },
     microMapAsset: "bilesensor",
     chromosome: "12q23.1",
     proteinPdbId: "1OSH",
@@ -352,6 +467,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "ATP binding cassette subfamily B member 11 (BSEP)",
     easyExplanation:
       "간세포가 담즙산을 담관 쪽으로 퍼내는 '배출펌프(BSEP)'예요. 고장 나면 담즙산이 간에 쌓여 담즙정체성 간질환이 생겨요.",
+    guide: {
+      role: "간세포에서 담즙산을 모세담관 쪽으로 내보내는 주된 담즙산 배출 펌프(BSEP)예요.",
+      how: "ATP를 쓰는 ABC 수송체로, 간세포 막을 가로질러 담즙산을 퍼내요. 이렇게 모세담관으로 나간 액이 1차 담즙이 돼요.",
+      ifBroken: "돌연변이는 진행성 가족성 간내 담즙정체증을 일으켜요. 아기 때부터 심한 담즙정체성 간질환이 생기는 유전 질환이에요.",
+    },
     microMapAsset: "bilepump",
     chromosome: "2q31.1",
     proteinPdbId: "9EGE",
@@ -367,6 +487,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Cytochrome P450 family 7 subfamily A member 1",
     easyExplanation:
       "콜레스테롤을 담즙산으로 바꾸는 '첫 단추이자 속도 결정 효소'예요. FXR 센서가 담즙산이 충분하다고 판단하면 이 효소를 꺼서 과잉 생산을 막아요.",
+    guide: {
+      role: "콜레스테롤을 담즙산으로 바꾸는 첫 반응을 맡는 간 효소예요.",
+      how: "이 반응은 담즙산 합성 전체의 속도를 결정하는 단계이자 주된 조절 지점이에요. 몸에서 콜레스테롤을 없애는 주요 경로이기도 해요.",
+      ifBroken: "유전자 앞부분(프로모터)의 변이는 담즙산 합성 결함과 관련 있어요.",
+    },
     microMapAsset: "bilesynth",
     chromosome: "8q12.1",
     proteinPdbId: "3V8D",
@@ -382,6 +507,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Solute carrier family 10 member 1 (NTCP)",
     easyExplanation:
       "장을 돌고 온 담즙산을 간세포 안으로 다시 '빨아들이는 흡수 통로(NTCP)'예요. 담즙산을 재활용하고 그 농도를 센서에 알려주는 입구예요.",
+    guide: {
+      role: "간세포의 혈액 쪽 막에 있는 나트륨-담즙산 공동수송체(NTCP)예요.",
+      how: "장을 거쳐 돌아온 담즙산을 나트륨과 함께 간세포 안으로 다시 들여보내요. 담즙산이 장과 간을 오가며 재사용되는 과정(장간 순환)의 한 부분이에요.",
+      ifBroken: "담즙산은 콜레스테롤이 분해돼 생기는 산물이라, 이 수송체가 제 역할을 못하면 콜레스테롤 균형에도 영향을 줄 수 있어요.",
+    },
     microMapAsset: "uptake",
     chromosome: "14q24.1",
     proteinPdbId: "7ZYI",
@@ -397,12 +527,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Sterol regulatory element binding transcription factor 1",
     easyExplanation:
       "지방·콜레스테롤 만드는 공장을 통째로 켜는 '지질 합성 총감독(SREBP-1)'이에요. 영양이 넘칠 때 활성화돼 여러 지방 합성 효소를 한꺼번에 켜요.",
+    guide: {
+      role: "콜레스테롤·지방 합성 유전자들을 켜는 전사인자 SREBP-1이에요.",
+      how: "처음엔 소포체·핵막에 붙은 전구체로 만들어지고, 잘려야 성숙형이 되어 핵으로 들어가 유전자를 켜요. 스테롤이 많으면 이 절단이 억제돼 과잉 생산을 막아요.",
+      ifBroken: "조절이 흐트러지면 이 인자가 켜는 지방·콜레스테롤 합성 유전자들이 한꺼번에 영향을 받아요.",
+    },
     microMapAsset: "lipidboss",
     chromosome: "17p11.2",
     proteinPdbId: "1AM9",
     expression: ["간세포", "지방조직"],
     pubmed: [{ title: "SREBP-1 in lipogenesis", pmid: "12208414" }],
-    relatedPathwayIds: ["hsa00071"],
+    relatedPathwayIds: ["R-HSA-2426168"],
   },
   FASN: {
     symbol: "FASN",
@@ -412,12 +547,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Fatty acid synthase",
     easyExplanation:
       "당에서 얻은 재료로 지방산을 직접 조립하는 '지방 조립 라인'이에요. 남는 에너지를 지방으로 저장하는 핵심 효소예요.",
+    guide: {
+      role: "지방산을 만드는 효소예요. 여러 반응 기능을 한 단백질에 모은 다기능 효소예요.",
+      how: "NADPH를 써서 아세틸-CoA와 말로닐-CoA를 이어 붙여 팔미트산 같은 긴 포화 지방산을 만들어요.",
+      ifBroken: "지방산 합성이 제대로 되지 않으면 남는 에너지를 지방으로 저장하는 과정이 막혀요.",
+    },
     microMapAsset: "assemblyline",
     chromosome: "17q25.3",
     proteinPdbId: "2VZ8",
     expression: ["간세포", "지방조직"],
     pubmed: [{ title: "Fatty acid synthase in metabolism", pmid: "17882480" }],
-    relatedPathwayIds: ["hsa00071"],
+    relatedPathwayIds: ["R-HSA-2426168"],
   },
   HMGCR: {
     symbol: "HMGCR",
@@ -427,12 +567,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "3-hydroxy-3-methylglutaryl-CoA reductase",
     easyExplanation:
       "콜레스테롤 합성의 '속도 조절 밸브'예요. 스타틴 약이 바로 이 효소를 막아 콜레스테롤을 낮춰요.",
+    guide: {
+      role: "콜레스테롤 합성의 속도를 결정하는 효소(HMG-CoA 환원효소)예요.",
+      how: "콜레스테롤 같은 스테롤이 많아지면 억제되는 음성 되먹임으로 조절돼요. LDL로 세포에 들어온 콜레스테롤도 이 효소를 누그러뜨려요.",
+      ifBroken: "이 효소를 막는 약(스타틴)은 간의 LDL 수용체를 늘려 혈중 LDL 콜레스테롤을 낮춰요. 혈중 콜레스테롤은 동맥경화의 중요한 결정 요인이에요.",
+    },
     microMapAsset: "valve",
     chromosome: "5q13.3",
     proteinPdbId: "1HW9",
     expression: ["간세포", "전신"],
     pubmed: [{ title: "HMG-CoA reductase and statins", pmid: "11413485" }],
-    relatedPathwayIds: ["hsa00071"],
+    relatedPathwayIds: ["R-HSA-2426168"],
   },
   LDLR: {
     symbol: "LDLR",
@@ -442,12 +587,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Low density lipoprotein receptor",
     easyExplanation:
       "혈액 속 'LDL 콜레스테롤을 낚아채 간으로 들이는 수용체'예요. 고장 나면 콜레스테롤이 혈액에 쌓이는 가족성 고콜레스테롤혈증이 생겨요.",
+    guide: {
+      role: "혈액의 LDL(저밀도 지단백) 콜레스테롤을 붙잡아 세포 안으로 들이는 세포막 수용체예요.",
+      how: "LDL과 결합한 채 세포 안으로 들어가고, 리소좀에서 콜레스테롤이 풀려나요. 이 콜레스테롤이 합성 효소 HMG-CoA 환원효소를 억제해, 세포가 콜레스테롤을 더 만들지 않게 해요.",
+      ifBroken: "돌연변이는 혈중 콜레스테롤이 높아지는 가족성 고콜레스테롤혈증(상염색체 우성)을 일으켜요.",
+    },
     microMapAsset: "catcher",
     chromosome: "19p13.2",
     proteinPdbId: "1N7D",
     expression: ["간세포", "전신"],
     pubmed: [{ title: "LDL receptor and cholesterol clearance", pmid: "3513311" }],
-    relatedPathwayIds: ["hsa00071"],
+    relatedPathwayIds: ["R-HSA-2426168"],
   },
   PPARA: {
     symbol: "PPARA",
@@ -457,12 +607,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Peroxisome proliferator activated receptor alpha",
     easyExplanation:
       "굶거나 지방이 많을 때 '지방을 태우라'고 지시하는 감독(PPARα)이에요. 지방 합성을 부추기는 SREBP와 균형을 이뤄 간의 지질 상태를 조율해요.",
+    guide: {
+      role: "PPAR-알파라는 핵 전사인자예요. 지질 강하제 같은 '페록시좀 증식제'의 작용을 전달하는 수용체예요.",
+      how: "이런 물질이 붙으면 표적 유전자를 켜서, 지질 대사 효소를 가진 세포 소기관(페록시좀)의 크기와 수를 늘려요. 세포 증식·분화, 면역·염증 반응에도 영향을 줘요.",
+      ifBroken: "이 앱의 경로에서는 지방 합성을 켜는 SREBF1을 억제하는 쪽으로 연결돼 있어, 기능이 떨어지면 지방 합성과 분해 사이 균형이 흐트러질 수 있어요.",
+    },
     microMapAsset: "burner",
     chromosome: "22q13.31",
     proteinPdbId: "2P54",
     expression: ["간세포", "심근", "신장"],
     pubmed: [{ title: "PPARα in fatty acid oxidation", pmid: "16601267" }],
-    relatedPathwayIds: ["hsa00071"],
+    relatedPathwayIds: ["R-HSA-2426168"],
   },
   NR1I2: {
     symbol: "NR1I2",
@@ -472,6 +627,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Nuclear receptor subfamily 1 group I member 2 (PXR)",
     easyExplanation:
       "낯선 약물·독소를 감지하는 간의 '이물질 경비원(PXR)'이에요. 위험 물질이 감지되면 해독 효소들을 대량으로 켜서 몸 밖으로 내보낼 준비를 해요.",
+    guide: {
+      role: "약물·외부 물질을 감지하는 핵수용체(PXR)예요.",
+      how: "덱사메타손, 리팜피신 같은 물질에 의해 켜지면 RXR과 짝을 지어 CYP3A4 유전자 앞부분에 붙어 발현을 늘려요.",
+      ifBroken: "어떤 약이 PXR을 켜면 CYP3A4가 늘어나 함께 먹는 다른 약의 분해가 빨라질 수 있어요.",
+    },
     microMapAsset: "guard",
     chromosome: "3q13.33",
     proteinPdbId: "1ILG",
@@ -487,6 +647,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Cytochrome P450 family 3 subfamily A member 4",
     easyExplanation:
       "우리가 먹는 약의 절반가량을 분해하는 간의 '대표 해독 효소'예요. 약물 상호작용이 문제 되는 이유가 대부분 이 효소를 두고 서로 경쟁하기 때문이에요.",
+    guide: {
+      role: "간과 소장에서 약물을 분해하는 대표적인 사이토크롬 P450 효소예요.",
+      how: "소포체에 자리하며 산소를 이용해 물질을 산화해요. 현재 쓰이는 약의 약 절반(아세트아미노펜, 코데인, 디아제팜, 에리트로마이신 등)과 일부 스테로이드·발암물질을 분해해요.",
+      ifBroken: "많은 약이 이 효소 하나를 같이 쓰기 때문에, 효소가 늘거나 줄면 여러 약의 혈중 농도가 함께 바뀔 수 있어요.",
+    },
     microMapAsset: "detox",
     chromosome: "7q22.1",
     proteinPdbId: "1TQN",
@@ -502,6 +667,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Cytochrome P450 family 2 subfamily E member 1",
     easyExplanation:
       "알코올과 일부 약물·독소를 분해하는 효소예요. 대사 과정에서 활성산소를 만들어, 과음 시 간 손상에 관여하기도 해요.",
+    guide: {
+      role: "알코올과 여러 독성 물질을 분해하는 사이토크롬 P450 효소예요.",
+      how: "에탄올·아세톤 같은 몸속 물질과 벤젠·사염화탄소·담배 연기 속 니트로사민 같은 외부 물질을 분해해요. 에탄올, 당뇨 상태, 굶주림에 의해 발현이 늘어요.",
+      ifBroken: "분해하는 물질이 워낙 다양해 포도당 신생합성, 간경변, 당뇨, 암 같은 여러 과정에 관여할 수 있어요.",
+    },
     microMapAsset: "alcohol",
     chromosome: "10q26.3",
     proteinPdbId: "3E4E",
@@ -519,6 +689,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "ATP binding cassette subfamily A member 3",
     easyExplanation:
       "표면활성물질의 지질을 저장 창고(판층소체)로 옮기는 '지질 운반 펌프'예요. 고장 나면 신생아 호흡곤란의 원인이 될 만큼 폐 기능에 필수예요.",
+    guide: {
+      role: "ATP를 써서 분자를 막 너머로 옮기는 ABC 수송체예요.",
+      how: "폐포 제2형 세포에서 표면활성물질의 지질을 저장 구조(판층소체)로 옮기는 것으로 알려져 있어요.",
+      ifBroken: "기능을 잃으면 표면활성물질이 제대로 만들어지지 않아 신생아 호흡곤란이 생길 수 있어요.",
+    },
     microMapAsset: "lipidcargo",
     chromosome: "16p13.3",
     proteinPdbId: "7W01",
@@ -534,6 +709,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Surfactant protein B",
     easyExplanation:
       "표면활성물질이 폐포 표면에 얇게 잘 펴지도록 돕는 '계면활성 단백(SP-B)'이에요. 폐포가 숨 내쉴 때 쪼그라들어 붙지 않게 막아줘요.",
+    guide: {
+      role: "폐 표면활성물질에 들어 있는 단백질 B예요. 태어난 뒤 폐가 제 기능을 하는 데 꼭 필요해요.",
+      how: "표면활성물질은 지질 90%, 단백질 10%로 된 복합체로, 폐포를 덮은 액체의 표면장력을 낮춰 폐포가 쪼그라들지 않게 해요. SP-B는 이 막이 빨리 퍼지고 안정되게 도와요.",
+      ifBroken: "돌연변이는 표면활성물질 대사 장애 1형을 일으키고, 신생아기의 치명적인 호흡곤란과 관련 있어요.",
+    },
     microMapAsset: "surfactant",
     chromosome: "2p11.2",
     proteinPdbId: "1SSZ",
@@ -549,6 +729,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Surfactant protein C",
     easyExplanation:
       "SP-B와 함께 표면활성 지질막을 안정화하는 작은 소수성 단백(SP-C)이에요. 폐포 표면장력을 낮게 유지하는 데 힘을 보태요.",
+    guide: {
+      role: "폐 표면활성물질에 들어 있는 단백질 C예요. 물을 매우 싫어하는(소수성) 작은 단백질이에요.",
+      how: "표면활성물질의 일부로 폐포 표면의 표면장력을 낮게 유지해 폐 조직을 안정시켜요.",
+      ifBroken: "돌연변이는 표면활성물질 대사 장애 2형을 일으키고, 영아·어린이·성인의 간질성 폐질환과 관련 있어요.",
+    },
     microMapAsset: "spc",
     chromosome: "8p21.3",
     proteinPdbId: "2YAD",
@@ -564,6 +749,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Surfactant protein A1",
     easyExplanation:
       "표면활성물질의 일부이면서 폐의 '선천 면역 파수꾼(SP-A)'이에요. 세균·바이러스를 붙잡아 대식세포가 잘 삼키도록 표시해줘요.",
+    guide: {
+      role: "폐 표면활성물질 단백질 A1이에요. 특정 당 구조를 알아보는 콜렉틴 계열 단백질이에요.",
+      how: "지질과 미생물 표면의 특정 당 구조에 붙어요. 표면활성물질의 균형을 유지하고, 호흡기 병원체를 막는 방어에 필수 역할을 해요.",
+      ifBroken: "돌연변이는 특발성 폐섬유증과 관련 있어요.",
+    },
     microMapAsset: "sentry",
     chromosome: "10q22.3",
     expression: ["폐포 제2형 상피세포"],
@@ -578,6 +768,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Hypoxia inducible factor 1 subunit alpha",
     easyExplanation:
       "산소가 부족한지 감시하는 '저산소 경보 대장(HIF-1α)'이에요. 산소가 모자라면 안정화되어 혈관을 늘리고 대사를 바꾸는 유전자들을 켜요.",
+    guide: {
+      role: "산소가 부족할 때 켜지는 전사인자 HIF-1의 알파 소단위예요.",
+      how: "산소가 충분하면 알파 소단위가 곧바로 분해돼요. 산소가 부족하면 안정화되어 베타 소단위와 합쳐지고, 에너지 대사·혈관 신생 등 산소 공급과 적응에 필요한 유전자들을 켜요.",
+      ifBroken: "HIF-1은 배아의 혈관 형성뿐 아니라 종양의 혈관 신생, 허혈성 질환(혈류가 막히는 병)에도 핵심 역할을 해요.",
+    },
     microMapAsset: "oxygen",
     chromosome: "14q23.2",
     proteinPdbId: "4ZPK",
@@ -593,6 +788,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Von Hippel-Lindau tumor suppressor",
     easyExplanation:
       "산소가 충분할 때 HIF-1α에 '분해 딱지'를 붙여 없애는 청소부예요. 이 유전자가 망가지면 HIF가 계속 켜져 혈관종양이 잘 생겨요.",
+    guide: {
+      role: "단백질에 분해 표지(유비퀴틴)를 붙이는 복합체의 구성 요소예요.",
+      how: "산소가 충분할 때 HIF에 분해 표지를 붙여 없애요. 섬모 형성, 사이토카인 신호, 세포 노화 조절 등에도 관여해요.",
+      ifBroken: "변이는 폰히펠-린다우 증후군, 갈색세포종, 적혈구증가증, 신장세포암, 소뇌 혈관모세포종과 관련 있어요.",
+    },
     microMapAsset: "tagger",
     chromosome: "3p25.3",
     proteinPdbId: "1LM8",
@@ -609,6 +809,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Vascular endothelial growth factor A",
     easyExplanation:
       "'새 혈관을 만들라'는 성장 신호예요. 저산소 경보(HIF)가 켜지면 분비되어, 산소가 모자란 곳으로 혈관이 자라나게 유도해요.",
+    guide: {
+      role: "혈관 내피세포를 자라게 하는 성장인자예요.",
+      how: "혈관 내피세포의 증식과 이동을 유도해 새 혈관을 만들어요. 정상적인 혈관 형성과 병적인 혈관 신생 모두에 필수예요. 이 앱의 경로에서는 HIF-1α가 켜는 표적으로 연결돼 있어요.",
+      ifBroken: "많은 종양에서 많이 만들어지고, 그 양은 종양의 병기·진행과 관련돼요. 당뇨의 미세혈관 합병증, 동맥경화와 관련된 변이도 보고됐어요.",
+    },
     microMapAsset: "angio",
     chromosome: "6p21.1",
     proteinPdbId: "1VPF",
@@ -624,6 +829,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Interleukin 4",
     easyExplanation:
       "알레르기성 제2형 면역을 지휘하는 사이토카인이에요. 면역세포를 알레르기 반응 쪽으로 몰아가 천식의 밑바탕을 만들어요.",
+    guide: {
+      role: "활성화된 T세포가 만드는 사이토카인(면역 신호 단백질)이에요.",
+      how: "IL-4 수용체에 붙어 STAT6을 통해 신호를 전달해요. 같은 수용체에 IL-13도 붙어 기능이 많이 겹쳐요. 알레르기 반응에서 알레르겐에 맞는 IgE 항체를 만드는 데 꼭 필요해요.",
+      ifBroken: "조직 회복을 돕는 면도 있지만, 알레르기성 기도 염증을 부추겨요.",
+    },
     microMapAsset: "th2",
     chromosome: "5q31.1",
     proteinPdbId: "2B8U",
@@ -639,6 +849,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Interleukin 13",
     easyExplanation:
       "천식에서 기도를 직접 자극하는 '주동자 사이토카인'이에요. 점액 분비와 기도 과민반응을 늘려 숨을 쌕쌕거리게 만들어요.",
+    guide: {
+      role: "주로 활성화된 Th2 세포가 만드는 면역 조절 사이토카인이에요.",
+      how: "B세포가 IgE 항체를 만들도록 전환시키고, 대식세포 활동을 눌러 염증성 사이토카인 생산을 줄여요.",
+      ifBroken: "알레르겐으로 생기는 천식의 발병에 핵심적이며, IgE나 호산구와는 별개의 방식으로 작동해요.",
+    },
     microMapAsset: "asthma",
     chromosome: "5q31.1",
     proteinPdbId: "3L5X",
@@ -654,6 +869,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Mucin 5AC, oligomeric mucus/gel-forming",
     easyExplanation:
       "기도 점액의 주성분인 '끈끈한 젤 단백질'이에요. 평소엔 이물질을 잡아 내보내지만, 천식에선 과다 분비돼 기도를 막기도 해요.",
+    guide: {
+      role: "기도 점액을 이루는 젤 형태의 뮤신(끈적한 당단백질)이에요.",
+      how: "여러 개가 이어 붙어 끈끈한 젤을 만들고, 기도에 들어온 이물질을 붙잡아 밖으로 내보내는 데 쓰여요.",
+      ifBroken: "이 앱의 천식 경로에서는 IL-13 자극으로 많이 분비되는 것으로 연결돼 있어요. 낭포성 섬유증 등 여러 질환의 생체지표로도 쓰여요.",
+    },
     microMapAsset: "mucus",
     chromosome: "11p15.5",
     proteinPdbId: "9GVJ",
@@ -671,6 +891,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Renin",
     easyExplanation:
       "혈압이 떨어지면 신장이 분비하는 '혈압 조절 방아쇠 효소'예요. 안지오텐시노겐을 잘라 혈압 상승 연쇄반응(RAS)의 첫 단계를 켜요.",
+    guide: {
+      role: "신장이 분비하는 단백질 분해효소(레닌)예요.",
+      how: "혈압이 떨어지면 혈액 속 안지오텐시노겐을 잘라 안지오텐신 I을 만들어요. 이것이 ACE에 의해 안지오텐신 II로 바뀌면서 혈관이 좁아지고 알도스테론이 나와 혈압이 올라가요.",
+      ifBroken: "돌연변이는 가족성 청소년 고요산혈증 신병증 2형, 가족성 고프로레닌혈증, 신세뇨관 발육부전과 관련 있어요.",
+    },
     microMapAsset: "renin",
     chromosome: "1q32.1",
     proteinPdbId: "2REN",
@@ -686,6 +911,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Angiotensinogen",
     easyExplanation:
       "간이 혈액에 늘 흘려보내는 '원료 단백질'이에요. 레닌이 이걸 잘라 안지오텐신 I을 만들면서 혈압 조절 반응이 시작돼요.",
+    guide: {
+      role: "간에서 만들어져 혈액으로 나가는 안지오텐시노겐(안지오텐신의 원료)이에요.",
+      how: "혈압이 떨어지면 레닌이 이를 잘라 안지오텐신 I을 만들고, ACE가 다시 잘라 활성형인 안지오텐신 II가 돼요.",
+      ifBroken: "변이는 본태성 고혈압과 전자간증(임신중독증)의 위험과 관련 있고, 일부 돌연변이는 신세뇨관 발육부전을 일으켜요.",
+    },
     microMapAsset: "substrate",
     chromosome: "1q42.2",
     proteinPdbId: "5M3Y",
@@ -701,6 +931,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Angiotensin I converting enzyme",
     easyExplanation:
       "약한 안지오텐신 I을 강력한 안지오텐신 II로 바꾸는 '전환 효소'예요. 고혈압 치료제 'ACE 억제제'가 바로 이 효소를 막아요.",
+    guide: {
+      role: "안지오텐신 I을 안지오텐신 II로 바꾸는 효소예요.",
+      how: "만들어진 안지오텐신 II는 혈관을 강하게 수축시키고 알도스테론 분비를 늘려요. 동시에 혈관을 넓히는 브라디키닌을 분해해 혈압을 더 올려요.",
+      ifBroken: "그래서 이 효소를 막는 ACE 억제제가 혈압약으로 널리 쓰여요. 유전 변이는 심혈관 질환, 신장 질환, 뇌졸중 등 여러 질환과의 연관이 보고됐어요.",
+    },
     microMapAsset: "converter",
     chromosome: "17q23.3",
     proteinPdbId: "1O86",
@@ -716,6 +951,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Angiotensin II receptor type 1",
     easyExplanation:
       "안지오텐신 II를 받는 '혈압 상승 수용체'예요. 혈관을 수축시키고 알도스테론 분비를 유도해 혈압과 체액량을 끌어올려요.",
+    guide: {
+      role: "안지오텐신 II를 받는 1형 수용체예요. 안지오텐신 II의 주요 심혈관 작용을 전달해요.",
+      how: "안지오텐신 II가 붙으면 혈관이 수축하고, 신장의 나트륨 재흡수와 알도스테론 분비가 늘어 혈압이 올라가요.",
+      ifBroken: "계속 자극되면 고혈압 발생에 기여해요. 막혔던 혈류가 다시 흐를 때 생기는 재관류 부정맥에도 관여할 수 있어요.",
+    },
     microMapAsset: "at1",
     chromosome: "3q24",
     proteinPdbId: "6OS2",
@@ -731,6 +971,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Nuclear receptor subfamily 3 group C member 2 (Mineralocorticoid receptor)",
     easyExplanation:
       "알도스테론을 받는 '나트륨 재흡수 지휘 수용체(MR)'예요. 활성화되면 나트륨을 다시 흡수하는 유전자들을 켜서 혈압과 체액을 늘려요.",
+    guide: {
+      role: "알도스테론을 받는 미네랄로코르티코이드 수용체(MR)예요.",
+      how: "알도스테론이 붙으면 핵으로 들어가 표적 유전자를 켜는 전사인자로 작동해요. 그 결과 신장 집합관에서 나트륨은 다시 흡수하고 칼륨은 내보내요.",
+      ifBroken: "돌연변이는 소변으로 소금이 새는 상염색체 우성 1형 가성저알도스테론증을 일으켜요. 임신 중 심해지는 조기 발병 고혈압과도 관련 있어요.",
+    },
     microMapAsset: "mr",
     chromosome: "4q31.23",
     proteinPdbId: "2AA2",
@@ -746,6 +991,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Serum/glucocorticoid regulated kinase 1",
     easyExplanation:
       "MR 수용체의 명령을 받아 실행하는 '중간 관리자 인산화효소'예요. 나트륨 통로를 세포막에 더 오래 머물게 해 나트륨 재흡수를 늘려요.",
+    guide: {
+      role: "세포 스트레스 반응에 중요한 세린/트레오닌 인산화효소예요.",
+      how: "알도스테론 수용체가 켜지면 발현이 늘어요. SGK1이 나트륨 통로(ENaC)를 분해로 보내는 Nedd4-2에 인산기를 붙여 떼어 놓으면, 세포막의 나트륨 통로가 늘어나요.",
+      ifBroken: "너무 많이 발현되면 고혈압과 당뇨병성 신증에 기여할 수 있어요.",
+    },
     microMapAsset: "middleman",
     chromosome: "6q23.2",
     proteinPdbId: "2R5T",
@@ -761,6 +1011,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Sodium channel epithelial 1 subunit alpha (ENaC-α)",
     easyExplanation:
       "세뇨관 세포막에서 나트륨을 안으로 들이는 '상피 나트륨 통로(ENaC)'예요. 최종적으로 나트륨과 물을 재흡수해 혈압을 조절하는 관문이에요.",
+    guide: {
+      role: "상피 나트륨 통로(ENaC)의 알파 소단위예요. 알파·베타·감마 세 소단위가 모여 하나의 통로를 이뤄요.",
+      how: "전압과 관계없이 작동하는 나트륨 통로로, 신장 원위부와 대장 같은 상피를 가로지르는 나트륨·체액 이동을 조절해요. 이뇨제 아밀로라이드로 막혀요.",
+      ifBroken: "돌연변이는 1형 가성저알도스테론증과 관련 있어요. 몸이 알도스테론에 반응하지 못해 소금이 빠져나가는 드문 질환이에요.",
+    },
     microMapAsset: "enac",
     chromosome: "12p13.31",
     proteinPdbId: "6WTH",
@@ -776,6 +1031,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Arginine vasopressin receptor 2",
     easyExplanation:
       "항이뇨호르몬(바소프레신)을 받는 신장의 'V2 수용체'예요. 물을 아껴야 할 때 신호를 켜서 소변을 농축하게 해요. 고장 나면 신성 요붕증이 생겨요.",
+    guide: {
+      role: "항이뇨호르몬(바소프레신)을 받는 V2 수용체예요. 주로 신장의 원위세뇨관과 집합관에 있어요.",
+      how: "바소프레신이 붙으면 Gs 단백질을 통해 cAMP를 만드는 효소를 켜요. 그 결과 소변을 농축하는 기전이 작동해 몸의 수분을 지켜요.",
+      ifBroken: "기능을 잃으면 신성 요붕증이 생겨요. 신장이 호르몬에 반응하지 못해 묽은 소변이 많이 나오는 병이에요.",
+    },
     microMapAsset: "v2",
     chromosome: "Xq28",
     proteinPdbId: "9HB3",
@@ -792,6 +1052,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Aquaporin 2",
     easyExplanation:
       "집합관 세포막의 '물 전용 통로'예요. 바소프레신 신호가 오면 세포막으로 이동해 물을 재흡수하고, 소변을 진하게 만들어요.",
+    guide: {
+      role: "신장 집합관에 있는 물 통로 단백질(아쿠아포린-2)이에요.",
+      how: "바소프레신 신호가 오면 AQP2를 담은 소포가 소변 쪽 세포막으로 옮겨가 박혀요. 물이 이 통로로 들어와 반대편 AQP3·AQP4를 거쳐 혈액 쪽으로 돌아가고, 신호가 사라지면 AQP2는 다시 세포 안으로 들어가요.",
+      ifBroken: "돌연변이는 상염색체 우성형과 열성형 신성 요붕증과 관련 있어요.",
+    },
     microMapAsset: "waterchannel",
     chromosome: "12q13.12",
     proteinPdbId: "4NEF",
@@ -807,11 +1072,16 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Nephrin",
     easyExplanation:
       "사구체 여과막의 '지퍼 단백질(네프린)'이에요. 옆 세포의 발돌기와 맞물려 촘촘한 여과 틈을 만들어, 물은 통과시키되 단백질은 못 새게 막아요.",
+    guide: {
+      role: "사구체 족세포의 여과 틈(슬릿막)에 있는 세포 접착 단백질 네프린이에요.",
+      how: "족세포 발돌기 사이의 슬릿막을 이루어, 소변이 만들어질 때 알부민 같은 큰 혈장 단백질이 빠져나가지 못하게 거르는 것으로 여겨져요.",
+      ifBroken: "돌연변이는 핀란드형 선천성 신증후군 1형을 일으켜요. 소변으로 단백질이 심하게 빠지고 슬릿막과 발돌기가 사라져요.",
+    },
     microMapAsset: "zipper",
     chromosome: "19q13.12",
     expression: ["신장 사구체 족세포"],
     pubmed: [{ title: "Nephrin and the slit diaphragm", pmid: "11562357" }],
-    relatedPathwayIds: ["R-HSA-9013700"],
+    relatedPathwayIds: ["R-HSA-373753"],
   },
   NPHS2: {
     symbol: "NPHS2",
@@ -821,11 +1091,16 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Podocin",
     easyExplanation:
       "네프린을 세포막 제자리에 붙들어 주는 '고정 받침대(포도신)'예요. 이 유전자 돌연변이는 어린이 스테로이드 저항성 신증후군의 흔한 원인이에요.",
+    guide: {
+      role: "사구체의 여과 투과성을 조절하는 단백질 포도신이에요.",
+      how: "족세포 막에서 네프린과 함께 슬릿막 구조를 유지하는 것으로 알려져 있어요.",
+      ifBroken: "돌연변이는 스테로이드 저항성 신증후군을 일으켜요.",
+    },
     microMapAsset: "anchor",
     chromosome: "1q25.2",
     expression: ["신장 사구체 족세포"],
     pubmed: [{ title: "Podocin in the podocyte slit diaphragm", pmid: "10742096" }],
-    relatedPathwayIds: ["R-HSA-9013700"],
+    relatedPathwayIds: ["R-HSA-373753"],
   },
   PODXL: {
     symbol: "PODXL",
@@ -835,11 +1110,16 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Podocalyxin like",
     easyExplanation:
       "족세포 표면을 음전하로 코팅해 서로 밀어내게 하는 단백질이에요. 덕분에 여과 틈이 눌려 붙지 않고 열린 상태를 유지해요.",
+    guide: {
+      role: "시알로뮤신 계열 단백질 포도칼릭신이에요. 사구체 족세포의 중요한 구성 요소로 처음 발견됐어요.",
+      how: "족세포는 발돌기가 서로 맞물려 사구체 기저막 바깥을 덮고 있어요. 포도칼릭신은 막 단백질 복합체를 통해 세포 안 골격과 연결되고, 혈관 내피세포에도 있어요.",
+      ifBroken: "제 역할을 못하면 족세포 발돌기 구조가 흐트러져 여과 장벽이 약해질 수 있어요.",
+    },
     microMapAsset: "repel",
     chromosome: "7q32.3",
     expression: ["신장 사구체 족세포", "혈관 내피"],
     pubmed: [{ title: "Podocalyxin maintains podocyte architecture", pmid: "11724794" }],
-    relatedPathwayIds: ["R-HSA-9013700"],
+    relatedPathwayIds: ["R-HSA-373753"],
   },
 
   // ═══════════════ 췌장 (Pancreas) ═══════════════
@@ -851,6 +1131,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Glucokinase",
     easyExplanation:
       "베타세포의 '혈당 계량기'예요. 포도당이 들어온 양에 딱 맞춰 반응해, 인슐린을 언제 얼마나 낼지 결정하는 첫 단추 역할을 해요. 여기 돌연변이는 MODY형 당뇨의 원인이에요.",
+    guide: {
+      role: "포도당에 인산기를 붙이는 효소(글루코키나아제)예요. 대부분의 포도당 대사에서 첫 단계예요.",
+      how: "다른 헥소키나아제와 달리 생성물에 억제되지 않아, 포도당이 많으면 계속 작동해요. 그래서 췌장에서는 포도당에 따른 인슐린 분비를, 간에서는 포도당 흡수와 글리코겐 저장을 맡아요.",
+      ifBroken: "효소 활성을 바꾸는 돌연변이는 여러 유형의 당뇨병, 그리고 고인슐린혈성 저혈당증과 관련 있어요.",
+    },
     microMapAsset: "sensor",
     chromosome: "7p13",
     proteinPdbId: "1V4S",
@@ -866,6 +1151,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "ATP binding cassette subfamily C member 8 (SUR1)",
     easyExplanation:
       "K-ATP 통로의 '조절 손잡이(SUR1)'예요. 세포 안 ATP(에너지) 신호를 읽어 통로를 여닫으며 인슐린 분비의 방아쇠를 조절해요. 당뇨약 설포닐우레아가 붙는 표적이기도 해요.",
+    guide: {
+      role: "ATP 민감성 칼륨 통로(K-ATP)를 조절하는 소단위(SUR1)예요.",
+      how: "칼륨 통로(KCNJ11)와 짝을 이뤄 통로 개폐와 인슐린 분비를 조절해요. 포도당 대사로 ATP가 늘면 K-ATP 통로가 닫히고, 칼슘이 들어와 인슐린이 분비돼요.",
+      ifBroken: "돌연변이는 인슐린이 조절 없이 과도하게 나오는 영아 고인슐린혈성 저혈당증, 그리고 인슐린 분비가 부족한 제2형 당뇨병과 관련 있어요.",
+    },
     microMapAsset: "sur1",
     chromosome: "11p15.1",
     proteinPdbId: "7S5V",
@@ -882,6 +1172,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Potassium inwardly rectifying channel subfamily J member 11 (Kir6.2)",
     easyExplanation:
       "K-ATP 통로의 '실제 칼륨 문(Kir6.2)'이에요. 혈당이 오르면 이 문이 닫히면서 세포가 흥분해 인슐린이 쏟아져 나와요. 신생아 당뇨의 흔한 원인 유전자예요.",
+    guide: {
+      role: "K-ATP 통로에서 실제 칼륨 통로를 이루는 내향 정류 칼륨 통로(Kir6.2)예요.",
+      how: "설포닐우레아 수용체(SUR1, ABCC8)와 짝을 이뤄 작동해요. ATP가 늘면 통로가 닫히고 세포가 흥분해 칼슘이 들어오면서 인슐린 과립이 분비돼요.",
+      ifBroken: "돌연변이는 영아 지속성 고인슐린혈성 저혈당증의 원인이고, 일과성·영구 신생아 당뇨병과 제2형 당뇨병에도 기여할 수 있어요.",
+    },
     microMapAsset: "kir",
     chromosome: "11p15.1",
     proteinPdbId: "9KGL",
@@ -897,6 +1192,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Glucagon like peptide 1 receptor",
     easyExplanation:
       "장에서 나온 인크레틴 호르몬(GLP-1)을 받는 '증폭 안테나'예요. 식사 후 인슐린 분비를 끌어올려요. 비만·당뇨 치료제(GLP-1 작용제)가 바로 이 수용체를 자극해요.",
+    guide: {
+      role: "장에서 나오는 호르몬 GLP-1을 받는 세포막 수용체예요.",
+      how: "GLP-1이 붙으면 포도당 농도에 따라 인슐린 분비를 늘려요. 식욕, 위 배출 속도, 에너지 균형 조절에도 관여해요.",
+      ifBroken: "변이는 제2형 당뇨병 위험과 관련 있어요. 당뇨병·비만 치료제의 핵심 표적이에요.",
+    },
     microMapAsset: "antenna",
     chromosome: "6p21.2",
     proteinPdbId: "5VEW",
@@ -912,6 +1212,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Insulin",
     easyExplanation:
       "혈당을 낮추는 몸의 '연료 저장 신호'예요. 식사 후 분비되어 근육·간·지방에게 포도당을 거둬들이라고 명령해요. 부족하거나 안 들으면 당뇨병이 생겨요.",
+    guide: {
+      role: "탄수화물과 지질 대사를 조절하는 펩타이드 호르몬 인슐린이에요.",
+      how: "전구체(프로인슐린)가 잘려 B사슬, A사슬, C-펩타이드가 되고, B·A 사슬이 이황화 결합으로 이어져 인슐린이 돼요. 인슐린이 수용체(INSR)에 붙으면 세포가 포도당을 흡수해요.",
+      ifBroken: "돌연변이는 인슐린 의존성 당뇨병, 영구 신생아 당뇨병, 청년기 발병 성인형 당뇨병(MODY) 10형, 고프로인슐린혈증과 관련 있어요.",
+    },
     microMapAsset: "hormone",
     chromosome: "11p15.5",
     proteinPdbId: "4INS",
@@ -927,12 +1232,17 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Serine protease 1 (Trypsin-1)",
     easyExplanation:
       "단백질을 잘게 자르는 대표 소화효소 '트립신'의 원본이에요. 장에서 켜져 다른 소화효소들까지 깨워요. 췌장 안에서 잘못 켜지면 췌장염을 일으킬 수 있어요.",
+    guide: {
+      role: "트립시노겐(트립신의 비활성 전구체)이에요. 단백질을 자르는 세린 단백질분해효소 계열이에요.",
+      how: "췌장에서 분비된 뒤 소장에서 잘려 활성형 트립신이 돼요. 트립신은 단백질 사슬에서 라이신이나 아르지닌 뒤를 잘라요.",
+      ifBroken: "돌연변이는 유전성 췌장염과 관련 있어요.",
+    },
     microMapAsset: "trypsin",
     chromosome: "7q34",
     proteinPdbId: "1TRN",
     expression: ["췌장 선포세포"],
     pubmed: [{ title: "PRSS1 mutations in hereditary pancreatitis", pmid: "8841182" }],
-    relatedPathwayIds: ["hsa04972"],
+    relatedPathwayIds: ["hsa04972", "hsa04974"],
   },
   PNLIP: {
     symbol: "PNLIP",
@@ -942,6 +1252,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Pancreatic lipase",
     easyExplanation:
       "음식 속 지방(중성지방)을 잘라 흡수 가능한 형태로 바꾸는 '지방 가위'예요. 비만약 오를리스타트가 이 효소를 막아 지방 흡수를 줄여요.",
+    guide: {
+      role: "췌장에서 분비되는 지방 분해효소(라이페이스)예요.",
+      how: "소장에서 음식 속 중성지방을 분해해요. 지방을 효율적으로 소화하는 데 꼭 필요해요.",
+      ifBroken: "돌연변이는 선천성 췌장 라이페이스 결핍증을 일으켜 지방이 섞인 변(지방변)이 나와요. 반대로 이 효소를 억제하면 비만 환자의 체중이 줄 수 있어요.",
+    },
     microMapAsset: "fatscissors",
     chromosome: "10q25.3",
     proteinPdbId: "1LPA",
@@ -958,6 +1273,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Amylase alpha 2A, pancreatic",
     easyExplanation:
       "녹말(탄수화물)을 잘라 작은 당으로 만드는 '탄수화물 가위'예요. 침 속 아밀레이스와 형제로, 소장에서 최종 소화가 이어지도록 밑작업을 해요.",
+    guide: {
+      role: "췌장에서 만들어지는 알파-아밀레이스예요.",
+      how: "당 사슬의 1,4-알파 결합을 잘라, 음식 속 녹말과 글리코겐 소화의 첫 단계를 맡아요.",
+      ifBroken: "기능이 떨어지면 녹말이 작은 당으로 잘리지 못해 탄수화물 소화가 늦어질 수 있어요.",
+    },
     microMapAsset: "starch",
     chromosome: "1p21.1",
     proteinPdbId: "5U3A",
@@ -973,6 +1293,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "CF transmembrane conductance regulator",
     easyExplanation:
       "염소·중탄산 이온을 내보내 분비액을 묽고 잘 흐르게 하는 '수문'이에요. 고장 나면 분비액이 끈끈해져 폐·췌장이 막히는 낭포성 섬유증이 생겨요.",
+    guide: {
+      role: "ABC 수송체 계열 중 유일하게 염소 이온 통로로 작동하는 단백질이에요.",
+      how: "상피 조직에서 이온과 물의 분비·흡수를 조절해요. 췌관에서는 cAMP 신호로 CFTR이 켜져, 위산을 중화하는 중탄산 이온이 분비돼요.",
+      ifBroken: "돌연변이는 낭포성 섬유증을 일으켜요. 가장 흔한 돌연변이(ΔF508)는 단백질이 제대로 접히지 못해 세포막까지 가지 못해요.",
+    },
     microMapAsset: "channel",
     chromosome: "7q31.2",
     proteinPdbId: "5UAK",
@@ -990,6 +1315,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Gastrin",
     easyExplanation:
       "'위산 분비 대장' 호르몬이에요. 음식이 들어오면 분비되어 벽세포에게 산을 만들라고, 주세포에게 효소를 내라고 지시해요.",
+    guide: {
+      role: "위 점막의 염산(위산) 분비를 촉진하는 호르몬 가스트린이에요.",
+      how: "가스트린이 위산 분비를 자극하고, 늘어난 위산은 다시 가스트린 생성을 억제해요(되먹임). 위장관 상피세포의 증식을 돕는 역할도 해요.",
+      ifBroken: "이 되먹임 조절이 흐트러지면 위산 분비량이 너무 많거나 적어질 수 있어요.",
+    },
     microMapAsset: "hormone",
     chromosome: "17q21.2",
     expression: ["위 유문부 G세포"],
@@ -1004,6 +1334,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Histamine receptor H2",
     easyExplanation:
       "벽세포에 있는 '히스타민 수신기'예요. 히스타민이 붙으면 위산 펌프를 강하게 켜요. 위산 억제제(H2 차단제, 예: 라니티딘)가 바로 이 수용체를 막아요.",
+    guide: {
+      role: "히스타민을 받는 H2 수용체예요. G단백질 연결 수용체예요.",
+      how: "위 벽세포에서 히스타민을 받으면 위산 분비를 자극해요. 위장관 운동과 장 분비 조절에도 관여해요.",
+      ifBroken: "이 수용체를 막는 H2 차단제는 위산 분비를 줄이는 약으로 쓰여요.",
+    },
     microMapAsset: "antenna",
     chromosome: "5q35.2",
     proteinPdbId: "9IXJ",
@@ -1020,6 +1355,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "ATPase H+/K+ transporting subunit alpha (proton pump)",
     easyExplanation:
       "위산을 실제로 뿜어내는 '양성자 펌프'예요. 수소이온을 위 안으로 퍼내 강산성을 만들어요. 위산 치료제(PPI, 예: 오메프라졸)가 이 펌프를 직접 잠가요.",
+    guide: {
+      role: "위의 양성자 펌프(H+/K+-ATPase)에서 촉매 역할을 하는 알파 소단위예요.",
+      how: "ATP를 분해하면서 수소 이온을 위 안으로 내보내고 칼륨 이온을 들여와요. 이 펌프가 위산 분비를 직접 맡아요.",
+      ifBroken: "양성자 펌프 억제제(PPI)가 이 펌프를 막아 위산을 줄여요.",
+    },
     microMapAsset: "protonpump",
     chromosome: "19q13.12",
     expression: ["위 벽세포"],
@@ -1034,6 +1374,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Potassium voltage-gated channel subfamily Q member 1",
     easyExplanation:
       "양성자 펌프가 쓸 칼륨을 위 내강으로 계속 대주는 '칼륨 재공급 통로'예요. 심장에서는 심장 박동 리듬에도 관여해, 고장 나면 부정맥(LQT1)과도 연결돼요.",
+    guide: {
+      role: "전압 개폐 칼륨 통로예요. 심장 활동전위가 끝나고 원래 상태로 돌아가는 재분극 단계에 필요해요.",
+      how: "KCNE1, KCNE3 같은 다른 칼륨 통로 단백질과 함께 통로를 이뤄요. 이 앱의 위산 경로에서는 양성자 펌프에 칼륨을 공급하는 통로로 연결돼 있어요.",
+      ifBroken: "돌연변이는 유전성 긴 QT 증후군 1형, 저벨-랑게-닐슨 증후군, 가족성 심방세동과 관련 있어요.",
+    },
     microMapAsset: "krecycle",
     chromosome: "11p15.5",
     proteinPdbId: "6V00",
@@ -1049,6 +1394,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Progastricsin (Pepsinogen C)",
     easyExplanation:
       "단백질 분해효소 펩신의 '잠긴 원본(펩시노겐)'이에요. 강한 위산을 만나면 잘려서 활성 펩신이 되어 단백질을 자르기 시작해요.",
+    guide: {
+      role: "위에서 만들어지는 단백질 분해효소 전구체(프로가스트릭신)예요.",
+      how: "비활성 전구체로 만들어진 뒤, 산성 환경(낮은 pH)에서 스스로 앞부분을 잘라 활성형이 돼요.",
+      ifBroken: "변이는 위암 감수성과 관련 있고, 혈중 농도는 헬리코박터 파일로리 위염 같은 위 질환의 지표로 쓰여요.",
+    },
     microMapAsset: "pepsin",
     chromosome: "6p21.1",
     proteinPdbId: "1HTR",
@@ -1065,6 +1415,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Solute carrier family 15 member 1 (PEPT1)",
     easyExplanation:
       "잘게 잘린 단백질 조각(펩타이드)을 장 세포 안으로 실어 나르는 '흡수 통로(PEPT1)'예요. 일부 약물(예: 일부 항생제)도 이 통로를 타고 흡수돼요.",
+    guide: {
+      role: "소장 상피의 솔가장자리막에 있는 수소-펩타이드 공동수송체(PEPT1)예요.",
+      how: "장 안의 아미노산 2~3개짜리 작은 펩타이드를 수소 이온과 함께 장 세포 안으로 들여요. 세포 안에서 펩타이드는 아미노산으로 분해돼 혈액으로 나가요.",
+      ifBroken: "음식 단백질 흡수에 중요하고, 펩타이드와 비슷한 구조의 약물도 이 통로로 흡수돼요.",
+    },
     microMapAsset: "peptide",
     chromosome: "13q33.1",
     proteinPdbId: "7PMX",
@@ -1082,6 +1437,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Sucrase-isomaltase",
     easyExplanation:
       "장 표면에서 설탕·녹말 조각을 포도당으로 잘라 흡수 직전 단계까지 마무리하는 '이당류 가위'예요. 부족하면 당을 소화 못 해 설사가 생겨요.",
+    guide: {
+      role: "소장 솔가장자리에 있는 수크레이스-아이소말테이스 효소예요.",
+      how: "전구체로 만들어진 뒤 췌장 단백질분해효소에 잘려 두 소단위가 되고, 다시 짝을 이뤄 녹말·설탕·아이소말토스를 소화해요.",
+      ifBroken: "돌연변이는 선천성 수크레이스-아이소말테이스 결핍증을 일으켜요.",
+    },
     microMapAsset: "sucrase",
     chromosome: "3q26.1",
     proteinPdbId: "3LPP",
@@ -1097,6 +1457,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Solute carrier family 5 member 1 (SGLT1)",
     easyExplanation:
       "나트륨과 포도당을 함께 끌어들이는 '동반 흡수 펌프(SGLT1)'예요. 경구 수액(ORS)이 설사 탈수 치료에 효과적인 이유가 바로 이 통로 덕분이에요.",
+    guide: {
+      role: "나트륨 의존성 포도당 수송체 SGLT1이에요.",
+      how: "장 안의 포도당과 갈락토스를 받아들이는 주된 통로예요. 장 쪽 막에서 당을 세포 안으로 들이고, 반대편에서는 GLUT2가 혈액으로 내보내요.",
+      ifBroken: "돌연변이는 포도당-갈락토스 흡수장애와 관련 있어요.",
+    },
     microMapAsset: "sglt1",
     chromosome: "22q12.3",
     proteinPdbId: "7SLA",
@@ -1112,6 +1477,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Solute carrier family 2 member 2 (GLUT2)",
     easyExplanation:
       "세포로 들어온 포도당을 반대편(혈액 쪽)으로 내보내는 '출구 통로(GLUT2)'예요. 흡수한 당을 온몸으로 실어 나르는 마지막 관문이에요.",
+    guide: {
+      role: "간, 췌장 베타세포, 장, 신장 상피에 있는 포도당 수송체 GLUT2예요.",
+      how: "포도당을 농도 차이에 따라 양방향으로 옮겨요. 포도당과의 친화도가 낮아 포도당 센서 역할을 할 것으로 제안돼요.",
+      ifBroken: "변이는 판코니-비켈 증후군, 제2형 당뇨병 감수성과 관련 있어요.",
+    },
     microMapAsset: "exit",
     chromosome: "3q26.2",
     expression: ["소장 상피", "간세포", "췌장 베타세포"],
@@ -1126,6 +1496,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Wnt family member 3",
     easyExplanation:
       "'계속 자라라'는 재생 신호물질이에요. 장샘 바닥의 줄기세포에게 증식하라고 지시해, 매일 벗겨지는 장 상피를 끊임없이 새로 채우게 해요.",
+    guide: {
+      role: "세포 밖으로 분비되는 신호 단백질 WNT 가족의 하나예요.",
+      how: "배아 발생에서 세포의 운명과 배치를 정하는 데 관여하고, 생쥐 실험에서는 몸의 기본 축을 만드는 데 필요했어요. WNT-β-카테닌-TCF 신호를 켜요.",
+      ifBroken: "이 신호가 켜지는 것이 일부 유방암·직장암·폐암·위암에서 중요한 역할을 할 수 있다고 여겨져요.",
+    },
     microMapAsset: "wnt",
     chromosome: "17q21.31",
     proteinPdbId: "6AHY",
@@ -1142,6 +1517,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "APC regulator of WNT signaling pathway",
     easyExplanation:
       "β-카테닌을 붙잡아 없애는 '증식 브레이크(종양억제자)'예요. 이 유전자가 망가지면 브레이크가 풀려 세포가 멋대로 증식해, 대장암의 첫 단추가 돼요.",
+    guide: {
+      role: "Wnt 신호를 억제하는 종양억제 단백질이에요.",
+      how: "평소에는 β-카테닌을 붙잡아 분해되게 해 증식 신호를 꺼 둬요. 세포 이동·접착, 세포자멸에도 관여해요.",
+      ifBroken: "결함은 가족성 선종성 용종증(FAP)을 일으키고, 대부분의 대장암에서 APC 돌연변이가 발견돼요. 이 돌연변이는 대개 짧게 잘린 단백질을 만들어요.",
+    },
     microMapAsset: "brake",
     chromosome: "5q22.2",
     proteinPdbId: "3NMZ",
@@ -1157,6 +1537,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Catenin beta 1 (β-catenin)",
     easyExplanation:
       "평소엔 세포끼리 붙이는 접착 부품이지만, Wnt 신호가 오면 핵으로 들어가 증식 유전자를 켜는 '스위치'가 돼요. APC 브레이크가 고장 나면 계속 쌓여 암을 부추겨요.",
+    guide: {
+      role: "세포끼리 붙잡아 주는 부착 연접을 이루는 단백질 β-카테닌이에요.",
+      how: "상피 세포층을 만들고 유지하며, 세포가 빈틈없이 차면 분열을 멈추라는 신호를 전달할 수 있어요. Wnt 신호가 오면 분해되지 않고 쌓여 핵으로 들어가 TCF 전사인자와 함께 유전자를 켜요.",
+      ifBroken: "돌연변이는 대장암, 모기질종, 수모세포종, 난소암의 원인이에요.",
+    },
     microMapAsset: "betacatenin",
     chromosome: "3p22.1",
     proteinPdbId: "1G3J",
@@ -1172,6 +1557,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "Transcription factor 7 like 2",
     easyExplanation:
       "β-카테닌과 짝을 이뤄 어떤 유전자를 켤지 정하는 '핵 안의 결재자'예요. 이 유전자의 변이는 제2형 당뇨병 위험과도 강하게 연관돼 있어요.",
+    guide: {
+      role: "Wnt 신호의 핵심 전사인자예요.",
+      how: "핵에서 β-카테닌과 함께 Wnt 표적 유전자를 켜요. 혈당 균형 조절에도 관여하는 것으로 알려져 있어요.",
+      ifBroken: "유전 변이는 제2형 당뇨병 위험 증가와 관련 있어요.",
+    },
     microMapAsset: "decider",
     chromosome: "10q25.2",
     proteinPdbId: "1JDH",
@@ -1188,6 +1578,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "MYC proto-oncogene, bHLH transcription factor",
     easyExplanation:
       "세포 성장·증식을 총괄하는 '가속 페달(원발암유전자)'이에요. Wnt 신호의 핵심 표적으로, 통제를 벗어나 과하게 켜지면 여러 암에서 종양을 키워요.",
+    guide: {
+      role: "세포 주기 진행, 세포자멸, 세포 변형에 관여하는 원발암유전자예요.",
+      how: "MAX 단백질과 짝을 이뤄 DNA의 E-박스 서열에 붙어 표적 유전자를 켜고 꺼요.",
+      ifBroken: "유전자 증폭이 많은 암에서 관찰되고, 염색체 자리바꿈은 버킷 림프종과 다발골수종과 관련 있어요.",
+    },
     microMapAsset: "accelerator",
     chromosome: "8q24.21",
     proteinPdbId: "1NKP",
@@ -1203,6 +1598,11 @@ export const GENES: Record<string, GeneDetail> = {
     fullName: "KRAS proto-oncogene, GTPase",
     easyExplanation:
       "성장 신호를 켜고 끄는 '분자 스위치'예요. 돌연변이로 '켜짐' 상태에 고정되면 세포가 멈추지 않고 증식해, 대장암·췌장암에서 흔히 발견돼요.",
+    guide: {
+      role: "성장 신호를 켜고 끄는 작은 GTP 결합 단백질(분자 스위치)이에요.",
+      how: "GTP가 붙으면 켜지고, GTP가 분해되면 꺼지는 방식으로 성장 신호를 전달해요.",
+      ifBroken: "아미노산 하나만 바뀌어도 늘 켜진 상태로 고정될 수 있어요. 이런 돌연변이는 폐 선암, 췌장관암, 대장암 등 여러 암과 관련 있어요.",
+    },
     microMapAsset: "gtpase",
     chromosome: "12p12.1",
     proteinPdbId: "4OBE",

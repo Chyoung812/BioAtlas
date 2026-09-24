@@ -3,11 +3,12 @@
 import { Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
-import { GENES } from "@/lib/genes";
+import { GENES, SYNONYMS } from "@/lib/genes";
 import { getPathway } from "@/lib/atlas";
 import { useAtlas } from "@/store/useAtlas";
 import { useGeneDetail } from "@/hooks/useGeneDetail";
 import { MicroMap } from "./MicroMap";
+import { GuideCard } from "./GuideCard";
 
 // WebGL 뷰어 — 브라우저 전용이라 SSR 비활성화 + 청크 지연 로드
 const ProteinViewer = dynamic(
@@ -57,6 +58,12 @@ function GeneBody({ symbol }: { symbol: string }) {
   const easyMode = useAtlas((s) => s.easyMode);
   const jumpTo = useAtlas((s) => s.jumpTo);
   const isFallback = gene._meta?.source === "fallback";
+  const syn = SYNONYMS[gene.symbol];
+  const pathwayId = useAtlas((s) => s.pathwayId);
+  const pathwayOfGene = getPathway(pathwayId ?? "");
+  const contextNode = pathwayOfGene?.network.nodes.find(
+    (n) => n.id === gene.symbol && n.membership === "contextual"
+  );
 
   return (
     <>
@@ -85,6 +92,12 @@ function GeneBody({ symbol }: { symbol: string }) {
             )}
           </div>
           <p className="mt-0.5 text-sm text-fg-muted">{gene.fullName}</p>
+          {syn && syn.symbols.length > 0 && (
+            <p className="mt-0.5 text-xs text-fg-faint">
+              다른 이름: {syn.symbols.slice(0, 4).join(" · ")}
+              {syn.symbols.length > 4 && " …"}
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <BookmarkButton />
@@ -108,6 +121,16 @@ function GeneBody({ symbol }: { symbol: string }) {
             {gene.easyExplanation}
           </p>
         </div>
+        {gene.guide && <GuideCard guide={gene.guide} />}
+        {contextNode?.context && (
+          <p className="mt-3 rounded-lg bg-subtle/60 px-3 py-2 text-xs leading-relaxed text-fg-muted">
+            <span className="font-medium text-fg">
+              {pathwayOfGene?.name}에서는 {pathwayOfGene?.source} 경로 밖의 관련
+              맥락으로 표시돼요.
+            </span>{" "}
+            {contextNode.context.reason}
+          </p>
+        )}
 
         {/* 단백질 3D 구조 — 실험 구조가 없으면 AlphaFold 예측 모델로 폴백 */}
         <div className="mt-4">
@@ -234,6 +257,7 @@ function ExpertAccordion({
   onJumpPathway: (id: string) => void;
 }) {
   const [open, setOpen] = useState(true);
+  const syn = SYNONYMS[gene.symbol];
   return (
     <div className="mt-4 rounded-xl border border-line">
       <button
@@ -257,7 +281,39 @@ function ExpertAccordion({
               <Row label="공식 심볼 / HGNC">
                 {gene.symbol} · {gene.hgnc}
               </Row>
+              {syn && (syn.symbols.length > 0 || syn.names.length > 0) && (
+                <Row label="다른 이름">
+                  <div className="flex flex-wrap gap-1">
+                    {syn.symbols.map((a) => (
+                      <span
+                        key={a}
+                        className="rounded bg-subtle px-1.5 py-0.5 font-mono text-[11px] text-fg"
+                      >
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                  {syn.names.length > 0 && (
+                    <ul className="mt-1.5 space-y-0.5 text-xs text-fg-muted">
+                      {syn.names.map((n) => (
+                        <li key={n}>{n}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="mt-1.5 text-[10px] text-fg-faint">
+                    HGNC·NCBI 기준 · 예전 기호, 별칭, 질환 유전자좌 이름이
+                    섞여 있을 수 있어요
+                  </p>
+                </Row>
+              )}
               <Row label="크로모좀 위치">{gene.chromosome}</Row>
+              {gene.ncbiSummary && (
+                <Row label="NCBI 요약 (영문)">
+                  <p className="text-xs leading-relaxed text-fg-muted">
+                    {gene.ncbiSummary}
+                  </p>
+                </Row>
+              )}
               <Row label="단백질 구조">
                 {gene.proteinPdbId ? (
                   <a

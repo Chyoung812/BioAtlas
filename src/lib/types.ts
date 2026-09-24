@@ -32,6 +32,13 @@ export type PathwayCategory =
   | "면역"
   | "발달";
 
+/** 세 줄 설명 — NCBI·KEGG·Reactome 원문을 근거로 큐레이션 */
+export interface Guide {
+  role: string; // 하는 일
+  how: string; // 작동 방식
+  ifBroken: string; // 문제가 생기면
+}
+
 export interface Pathway {
   id: string;
   name: string;
@@ -42,6 +49,7 @@ export interface Pathway {
   /** 연관도/중요도 (정렬 기본값) */
   relevance: number;
   summary: string;
+  guide?: Guide;
   network: GeneNetwork;
   /** 연관 패스웨이 (탐색 연결) */
   relatedPathwayIds: string[];
@@ -62,7 +70,21 @@ export interface GeneNode {
   geneId: string; // NCBI Gene ID
   /** 유전자 성격 — 정식 버전에서 색상 차별화 (PRD ④) */
   role?: "oncogene" | "tumor_suppressor" | "signaling" | "structural";
+  /** 출처 경로(source/sourceId) 소속 여부. 생략하면 pathway_member */
+  membership?: PathwayGeneRole;
+  /** contextual일 때 필수 — 함께 보여주는 이유와 검증 가능한 근거 */
+  context?: {
+    reason: string;
+    /** "KEGG:hsa04971" · "Reactome:R-HSA-…" · "NCBI:<Gene ID>" · "PMID:<id>" */
+    evidence: string[];
+  };
 }
+
+/**
+ * pathway_member: 출처 DB가 이 경로에 실제로 포함시킨 유전자
+ * contextual: 출처 경로 밖이지만 생리 흐름을 이해하도록 함께 보여주는 유전자
+ */
+export type PathwayGeneRole = "pathway_member" | "contextual";
 
 export type EdgeMechanism = "activation" | "inhibition" | "interaction";
 
@@ -80,6 +102,7 @@ export interface GeneDetail {
   fullName: string;
   /** 쉬운 설명: 한두 문장 + 비유 */
   easyExplanation: string;
+  guide?: Guide;
   /** 쉬운 설명 모드에서 보여줄 Lottie/일러스트 키 */
   microMapAsset?: string;
   chromosome: string;
@@ -95,6 +118,8 @@ export interface GeneDetail {
   expression: string[]; // 발현 조직
   pubmed: { title: string; pmid: string }[];
   relatedPathwayIds: string[];
+  /** NCBI RefSeq 기능 요약(영문) — 실 API로만 채워짐 */
+  ncbiSummary?: string;
   /** 데이터 출처 — 실 API 응답이면 "live", 큐레이션 폴백이면 "fallback" */
   _meta?: { source: "live" | "fallback"; fetchedAt?: string };
 }

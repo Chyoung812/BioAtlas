@@ -1,0 +1,1385 @@
+{
+  "ABCA3": {
+    "symbols": [
+      "ABC3",
+      "ABC-C",
+      "EST111653",
+      "LBM180",
+      "SMDP3"
+    ],
+    "names": [
+      "ATP-binding cassette, sub-family A (ABC1), member 3",
+      "phospholipid-transporting ATPase ABCA3",
+      "ABC transporter 3",
+      "ABC-C transporter",
+      "ATP-binding cassette sub-family A member 3",
+      "ATP-binding cassette transporter 3",
+      "xenobiotic-transporting ATPase ABCA3"
+    ]
+  },
+  "ABCB11": {
+    "symbols": [
+      "BSEP",
+      "PFIC2",
+      "ABC16",
+      "SPGP",
+      "PFIC-2",
+      "PGY4",
+      "BRIC2"
+    ],
+    "names": [
+      "progressive familial intrahepatic cholestasis 2",
+      "bile salt export pump",
+      "ATP-binding cassette, sub-family B (MDR/TAP), member 11",
+      "ABC member 16, MDR/TAP subfamily",
+      "ATP-binding cassette sub-family B member 11",
+      "sister p-glycoprotein"
+    ]
+  },
+  "ABCC8": {
+    "symbols": [
+      "SUR",
+      "HRINS",
+      "HI",
+      "PHHI",
+      "SUR1",
+      "MRP8",
+      "ABC36",
+      "HHF1",
+      "TNDM2",
+      "MODY12",
+      "PNDM3",
+      "SUR1delta2"
+    ],
+    "names": [
+      "ATP-binding cassette, sub-family C (CFTR/MRP), member 8",
+      "sulfonylurea receptor (hyperinsulinemia)",
+      "ATP-binding cassette sub-family C member 8",
+      "ATP-binding cassette transporter sub-family C member 8",
+      "sulfonylurea receptor 1"
+    ]
+  },
+  "ACE": {
+    "symbols": [
+      "DCP1",
+      "ACE1",
+      "CD143",
+      "DCP"
+    ],
+    "names": [
+      "angiotensin I converting enzyme (peptidyl-dipeptidase A) 1",
+      "peptidyl-dipeptidase A",
+      "angiotensin-converting enzyme",
+      "CD143 antigen",
+      "carboxycathepsin",
+      "dipeptidyl carboxypeptidase 1",
+      "dipeptidyl carboxypeptidase I",
+      "kininase II",
+      "peptidase P"
+    ]
+  },
+  "ACTC1": {
+    "symbols": [
+      "ACTC",
+      "CMD1R",
+      "ASD5",
+      "CMH11",
+      "LVNC4"
+    ],
+    "names": [
+      "actin, alpha, cardiac muscle",
+      "actin, alpha cardiac muscle 1"
+    ]
+  },
+  "ADRB1": {
+    "symbols": [
+      "ADRB1R",
+      "B1AR",
+      "BETA1AR",
+      "FNSS2",
+      "RHR"
+    ],
+    "names": [
+      "adrenergic, beta-1-, receptor",
+      "beta-1 adrenergic receptor",
+      "beta-1 adrenoceptor",
+      "beta-1 adrenoreceptor"
+    ]
+  },
+  "AGT": {
+    "symbols": [
+      "SERPINA8",
+      "ANHU",
+      "hFLT1"
+    ],
+    "names": [
+      "serpin peptidase inhibitor, clade A, member 8",
+      "alpha-1 antiproteinase, antitrypsin",
+      "angiotensin I",
+      "angiotensin II",
+      "fetal-liver predominant transporter 1",
+      "pre-angiotensinogen",
+      "serine (or cysteine) proteinase inhibitor",
+      "serpin A8"
+    ]
+  },
+  "AGTR1": {
+    "symbols": [
+      "AGTR1B",
+      "AT1",
+      "AT2R1",
+      "AGTR1A",
+      "AT2R1A",
+      "HAT1R",
+      "AG2S",
+      "AT2R1B",
+      "AT1B",
+      "ATR1",
+      "AT1AR",
+      "AT1BR",
+      "AT1R"
+    ],
+    "names": [
+      "angiotensin receptor 1B",
+      "angiotensin II type 1 receptor",
+      "type-1 angiotensin II receptor",
+      "AT1 receptor",
+      "type-1B angiotensin II receptor"
+    ]
+  },
+  "AMY2A": {
+    "symbols": [
+      "AMY2",
+      "PA"
+    ],
+    "names": [
+      "amylase, alpha 2A; pancreatic",
+      "amylase alpha 2A (pancreatic)",
+      "pancreatic alpha-amylase",
+      "1,4-alpha-D-glucan glucanohydrolase",
+      "glycogenase",
+      "pancreatic amylase alpha 2A"
+    ]
+  },
+  "APAF1": {
+    "symbols": [
+      "CED4",
+      "APAF-1"
+    ],
+    "names": [
+      "apoptotic protease activating factor",
+      "apoptotic peptidase activating factor",
+      "apoptotic protease-activating factor 1"
+    ]
+  },
+  "APC": {
+    "symbols": [
+      "DP2",
+      "DP3",
+      "DP2.5",
+      "PPP1R46",
+      "BTPS2",
+      "DESMD",
+      "GS"
+    ],
+    "names": [
+      "adenomatosis polyposis coli",
+      "adenomatous polyposis coli",
+      "APC, WNT signaling pathway regulator",
+      "protein phosphatase 1, regulatory subunit 46",
+      "adenomatous polyposis coli protein",
+      "WNT signaling pathway regulator",
+      "adenomatosis polyposis coli tumor suppressor",
+      "adenomatous polyposis coli (APC)",
+      "deleted in polyposis 2.5",
+      "epididymis secretory sperm binding protein"
+    ]
+  },
+  "AQP2": {
+    "symbols": [
+      "AQP-2",
+      "AQP-CD",
+      "NDI2",
+      "WCH-CD"
+    ],
+    "names": [
+      "aquaporin 2 (collecting duct)",
+      "aquaporin-2",
+      "ADH water channel",
+      "aquaporin-CD",
+      "collecting duct water channel protein",
+      "water channel protein for renal collecting duct",
+      "water-channel aquaporin 2"
+    ]
+  },
+  "ATP2A2": {
+    "symbols": [
+      "ATP2B",
+      "DAR",
+      "SERCA2",
+      "DD",
+      "RHABDO2"
+    ],
+    "names": [
+      "ATPase, Ca++ transporting, cardiac muscle, slow twitch 2",
+      "sarcoplasmic/endoplasmic reticulum calcium ATPase 2",
+      "calcium pump 2",
+      "ATPase Ca++ transporting cardiac muscle slow twitch 2",
+      "ATPase, Ca++ dependent, slow-twitch, cardiac muscle-2",
+      "SR Ca(2+)-ATPase 2",
+      "cardiac Ca2+ ATPase",
+      "endoplasmic reticulum class 1/2 Ca(2+) ATPase"
+    ]
+  },
+  "ATP4A": {
+    "symbols": [
+      "ATP6A"
+    ],
+    "names": [
+      "ATPase, H+/K+ exchanging, alpha polypeptide",
+      "ATPase H+/K+ transporting alpha subunit",
+      "gastric H,K-ATPase alpha subunit",
+      "H(+)-K(+)-ATPase alpha subunit",
+      "proton pump",
+      "potassium-transporting ATPase alpha chain 1",
+      "ATPase, H+/K+ transporting, alpha polypeptide",
+      "epididymis secretory sperm binding protein",
+      "gastric H+/K+ ATPase alpha subunit",
+      "gastric H,K-ATPase catalytic subunit",
+      "gastric hydrogen-potassium ATPase"
+    ]
+  },
+  "AVPR2": {
+    "symbols": [
+      "DIR3",
+      "DIR",
+      "V2R",
+      "ADHR",
+      "DI1",
+      "NDI",
+      "NDI1"
+    ],
+    "names": [
+      "nephrogenic diabetes insipidus",
+      "vasopressin V2 receptor",
+      "AVPR V2",
+      "antidiuretic hormone receptor",
+      "renal-type arginine vasopressin receptor"
+    ]
+  },
+  "BAX": {
+    "symbols": [
+      "BCL2L4"
+    ],
+    "names": [
+      "BCL2-associated X protein",
+      "BCL2 associated X protein",
+      "apoptosis regulator BAX",
+      "BCL2-associated X protein omega",
+      "Baxdelta2(G8)-RFS protein",
+      "Baxdelta2G9",
+      "Baxdelta2G9omega",
+      "Baxdelta2omega",
+      "bcl-2-like protein 4",
+      "bcl2-L-4"
+    ]
+  },
+  "BCL2": {
+    "symbols": [
+      "Bcl-2",
+      "PPP1R50"
+    ],
+    "names": [
+      "B-cell CLL/lymphoma 2",
+      "BCL2, apoptosis regulator",
+      "protein phosphatase 1, regulatory subunit 50",
+      "apoptosis regulator Bcl-2"
+    ]
+  },
+  "CACNA1C": {
+    "symbols": [
+      "CCHL1A1",
+      "CACNL1A1",
+      "CACNA1C-IT2",
+      "Cav1.2",
+      "CACH2",
+      "CACN2",
+      "TS",
+      "LQT8",
+      "NEDHLSS",
+      "TS. LQT8"
+    ],
+    "names": [
+      "calcium channel, voltage-dependent, L type, alpha 1C subunit",
+      "CACNA1C intronic transcript 2",
+      "CACNA1C intronic transcript 2 (non-protein coding)",
+      "voltage-dependent L-type calcium channel subunit alpha-1C",
+      "DHPR, alpha-1 subunit",
+      "calcium channel, cardic dihydropyridine-sensitive, alpha-1 subunit",
+      "voltage-dependent L-type Ca2+ channel alpha 1 subunit"
+    ]
+  },
+  "CASP3": {
+    "symbols": [
+      "CPP32",
+      "CPP32B",
+      "Yama",
+      "apopain",
+      "SCA-1"
+    ],
+    "names": [
+      "caspase 3, apoptosis-related cysteine protease",
+      "caspase 3, apoptosis-related cysteine peptidase",
+      "caspase-3",
+      "CASP-3",
+      "CPP-32",
+      "PARP cleavage protease",
+      "SREBP cleavage activity 1",
+      "apopain",
+      "cysteine protease CPP32",
+      "procaspase3",
+      "protein Yama"
+    ]
+  },
+  "CFTR": {
+    "symbols": [
+      "CF",
+      "ABCC7",
+      "MRP7",
+      "ABC35",
+      "TNR-CFTR",
+      "dJ760C5.1",
+      "CFTR/MRP"
+    ],
+    "names": [
+      "cystic fibrosis transmembrane conductance regulator, ATP-binding cassette (sub-family C, member 7)",
+      "ATP-binding cassette sub-family C, member 7",
+      "cystic fibrosis transmembrane conductance regulator",
+      "cAMP-dependent chloride channel",
+      "channel conductance-controlling ATPase",
+      "cystic fibrosis transmembrane conductance regulating",
+      "cystic fibrosis transmembrane conductance regulator (ATP-binding cassette sub-family C, member 7)"
+    ]
+  },
+  "CREB1": {
+    "symbols": [
+      "CREB",
+      "CREB-1"
+    ],
+    "names": [
+      "cyclic AMP-responsive element-binding protein 1",
+      "active transcription factor CREB",
+      "cAMP-response element-binding protein-1",
+      "cyclic adenosine 3',5'-monophosphate response element binding protein",
+      "cyclic adenosine 3',5'-monophosphate response element-binding protein CREB",
+      "transactivator protein"
+    ]
+  },
+  "CTNNB1": {
+    "symbols": [
+      "CTNNB",
+      "beta-catenin",
+      "armadillo",
+      "EVR7",
+      "MRD19",
+      "NEDSDV"
+    ],
+    "names": [
+      "catenin (cadherin-associated protein), beta 1 (88kD)",
+      "catenin (cadherin-associated protein), beta 1, 88kDa",
+      "catenin (cadherin-associated protein), beta 1",
+      "catenin beta-1"
+    ]
+  },
+  "CYCS": {
+    "symbols": [
+      "HCS",
+      "CYC",
+      "THC4"
+    ],
+    "names": [
+      "cytochrome c"
+    ]
+  },
+  "CYP2E1": {
+    "symbols": [
+      "CYP2E",
+      "CPE1",
+      "P450-J",
+      "P450C2E"
+    ],
+    "names": [
+      "cytochrome P450, subfamily IIE (ethanol-inducible), polypeptide 1",
+      "cytochrome P450, family 2, subfamily E, polypeptide 1",
+      "cytochrome P450 2E1",
+      "4-nitrophenol 2-hydroxylase",
+      "CYPIIE1",
+      "cytochrome P450-J",
+      "flavoprotein-linked monooxygenase",
+      "microsomal monooxygenase",
+      "xenobiotic monooxygenase"
+    ]
+  },
+  "CYP3A4": {
+    "symbols": [
+      "CYP3A3",
+      "CP33",
+      "CP34",
+      "CYP3A",
+      "CYPIIIA3",
+      "CYPIIIA4",
+      "HLP",
+      "NF-25",
+      "P450C3",
+      "P450PCN1",
+      "VDDR3"
+    ],
+    "names": [
+      "cytochrome P450, subfamily IIIA (niphedipine oxidase), polypeptide 4",
+      "cytochrome P450, family 3, subfamily A, polypeptide 4",
+      "cytochrome P450 3A4",
+      "1,4-cineole 2-exo-monooxygenase",
+      "1,8-cineole 2-exo-monooxygenase",
+      "P450-III, steroid inducible",
+      "albendazole monooxygenase (sulfoxide-forming)",
+      "albendazole sulfoxidase",
+      "cholesterol 25-hydroxylase",
+      "cytochrome P450 3A3",
+      "cytochrome P450 HLp",
+      "cytochrome P450 NF-25",
+      "cytochrome P450, subfamily IIIA (niphedipine oxidase), polypeptide 3",
+      "cytochrome P450-PCN1",
+      "glucocorticoid-inducible P450",
+      "nifedipine oxidase",
+      "quinine 3-monooxygenase",
+      "taurochenodeoxycholate 6-alpha-hydroxylase"
+    ]
+  },
+  "CYP7A1": {
+    "symbols": [
+      "CYP7",
+      "CP7A",
+      "CYPVII"
+    ],
+    "names": [
+      "cytochrome P450, subfamily VIIA (cholesterol 7 alpha-monooxygenase), polypeptide 1",
+      "cytochrome P450, family 7, subfamily A, polypeptide 1",
+      "cholesterol 7 alpha-monooxygenase",
+      "cholesterol 7α-hydroxylase",
+      "cytochrome P450 7A1",
+      "24-hydroxycholesterol 7-alpha-hydroxylase",
+      "cholesterol 7-alpha-hydroxylase",
+      "cholesterol 7-alpha-monooxygenase",
+      "cholesterol 7alpha-hydroxylase",
+      "cytochrome P450, subfamily VIIA polypeptide 1"
+    ]
+  },
+  "DRD2": {
+    "symbols": [
+      "D2R",
+      "D2DR"
+    ],
+    "names": [
+      "dopamine D2 receptor",
+      "D(2) dopamine receptor",
+      "seven transmembrane helix receptor"
+    ]
+  },
+  "FASN": {
+    "symbols": [
+      "FAS",
+      "SDR27X1",
+      "OA-519"
+    ],
+    "names": [
+      "short chain dehydrogenase/reductase family 27X, member 1",
+      "[Acyl-carrier-protein] S-acetyltransferase",
+      "[Acyl-carrier-protein] S-malonyltransferase",
+      "3-oxoacyl-[acyl-carrier-protein] synthase",
+      "3-oxoacyl-[acyl-carrier-protein] reductase",
+      "3-hydroxyacyl-[acyl-carrier-protein] dehydratase",
+      "Enoyl-[acyl-carrier-protein] reductase",
+      "Acyl-[acyl-carrier-protein] hydrolase",
+      "type I fatty acid synthase"
+    ]
+  },
+  "GAST": {
+    "symbols": [
+      "GAS"
+    ],
+    "names": [
+      "preprogastrin"
+    ]
+  },
+  "GCK": {
+    "symbols": [
+      "MODY2",
+      "HK4",
+      "HKIV",
+      "FGQTL3",
+      "GK",
+      "GLK",
+      "HHF3",
+      "HXKP",
+      "LGLK",
+      "PNDM1"
+    ],
+    "names": [
+      "maturity onset diabetes of the young 2",
+      "glucokinase (hexokinase 4)",
+      "hexokinase 4",
+      "hexokinase-4",
+      "ATP:D-hexose 6-phosphotransferase",
+      "HK IV",
+      "hexokinase D, pancreatic isozyme",
+      "hexokinase type IV"
+    ]
+  },
+  "GLP1R": {
+    "symbols": [
+      "GLP-1R",
+      "GLP-1",
+      "GLP-1-R"
+    ],
+    "names": [
+      "glucagon-like peptide 1 receptor",
+      "GLP-1 receptor",
+      "GLP1 receptor",
+      "seven transmembrane helix receptor"
+    ]
+  },
+  "GNAI2": {
+    "symbols": [
+      "GNAI2B",
+      "GIP",
+      "HG1C",
+      "H_LUCA15.1",
+      "H_LUCA16.1"
+    ],
+    "names": [
+      "guanine nucleotide binding protein (G protein), alpha inhibiting activity polypeptide 2",
+      "GTP-binding regulatory protein Gi alpha-2 chain",
+      "Guanine nucleotide-binding protein G(i) subunit alpha-2",
+      "adenylate cyclase-inhibiting G alpha protein",
+      "guanine nucleotide-binding protein G(i), alpha-2 subunit",
+      "heterotrimeric guanine nucleotide-binding protein 1C"
+    ]
+  },
+  "GNAS": {
+    "symbols": [
+      "GNAS1",
+      "NESP55",
+      "NESP",
+      "GNASXL",
+      "GPSA",
+      "SCG6",
+      "SgVI",
+      "AHO",
+      "AIMAH1",
+      "C20orf45",
+      "GSA",
+      "GSP",
+      "PITA3",
+      "POH"
+    ],
+    "names": [
+      "guanine nucleotide binding protein (G protein), alpha stimulating activity polypeptide 1",
+      "secretogranin VI",
+      "G protein subunit alpha S",
+      "protein ALEX",
+      "protein GNAS",
+      "protein SCG6 (secretogranin VI)",
+      "adenylate cyclase-stimulating G alpha protein",
+      "alternative gene product encoded by XL-exon",
+      "extra large alphas protein",
+      "guanine nucleotide regulatory protein"
+    ]
+  },
+  "HIF1A": {
+    "symbols": [
+      "MOP1",
+      "HIF-1alpha",
+      "PASD8",
+      "HIF1",
+      "bHLHe78",
+      "HIF-1-alpha",
+      "HIF-1A",
+      "HIF1-ALPHA"
+    ],
+    "names": [
+      "hypoxia inducible factor 1, alpha subunit (basic helix-loop-helix transcription factor)",
+      "PAS domain-containing protein 8",
+      "Class E basic helix-loop-helix protein 78",
+      "Member of PAS protein 1",
+      "hypoxia-inducible factor 1-alpha",
+      "ARNT interacting protein",
+      "basic-helix-loop-helix-PAS protein MOP1",
+      "hypoxia inducible factor 1 alpha subunit",
+      "hypoxia-inducible factor1alpha",
+      "member of PAS superfamily 1"
+    ]
+  },
+  "HMGCR": {
+    "symbols": [
+      "LDLCQ3",
+      "LGMDR28",
+      "MYPLG"
+    ],
+    "names": [
+      "3-hydroxy-3-methylglutaryl-Coenzyme A reductase",
+      "hydroxymethylglutaryl-CoA reductase",
+      "3-hydroxy-3-methylglutaryl CoA reductase (NADPH)",
+      "HMG-CoA reductase"
+    ]
+  },
+  "HRH2": {
+    "symbols": [
+      "H2R",
+      "HH2R"
+    ],
+    "names": [
+      "histamine H2 receptor",
+      "gastric receptor 1",
+      "gastric receptor I"
+    ]
+  },
+  "IL13": {
+    "symbols": [
+      "P600",
+      "IL-13",
+      "ALRH",
+      "BHR1",
+      "MGC116786",
+      "MGC116788",
+      "MGC116789"
+    ],
+    "names": [
+      "allergic rhinitis",
+      "Bronchial hyperresponsiveness-1 (bronchial asthma)",
+      "interleukin-13"
+    ]
+  },
+  "IL4": {
+    "symbols": [
+      "BSF1",
+      "IL-4",
+      "BCGF1",
+      "BCGF-1",
+      "MGC79402",
+      "BSF-1"
+    ],
+    "names": [
+      "B_cell stimulatory factor 1",
+      "lymphocyte stimulatory factor 1",
+      "B cell growth factor 1",
+      "interleukin-4",
+      "binetrakin",
+      "pitrakinra"
+    ]
+  },
+  "INS": {
+    "symbols": [
+      "IDDM2",
+      "IDDM1",
+      "IDDM",
+      "ILPR",
+      "IRDN",
+      "MODY10",
+      "PNDM4"
+    ],
+    "names": [
+      "insulin-dependent diabetes mellitus 2",
+      "preproinsulin",
+      "proinsulin"
+    ]
+  },
+  "KCNJ11": {
+    "symbols": [
+      "Kir6.2",
+      "BIR",
+      "HHF2",
+      "IKATP",
+      "MODY13",
+      "PHHI",
+      "PNDM2",
+      "TNDM3"
+    ],
+    "names": [
+      "potassium inwardly-rectifying channel, subfamily J, member 11",
+      "ATP-sensitive inward rectifier potassium channel 11",
+      "beta-cell inward rectifier",
+      "beta-cell inward rectifier subunit",
+      "inward rectifier K(+) channel Kir6.2",
+      "inwardly rectifing potassium channel subfamily J member 11",
+      "inwardly rectifying potassium channel KIR6.2",
+      "inwardly-rectifying potassium channel subfamily J member 11",
+      "potassium channel inwardly rectifing subfamily J member 11",
+      "potassium channel, inwardly rectifying subfamily J member 11",
+      "potassium voltage-gated channel subfamily J member 11"
+    ]
+  },
+  "KCNQ1": {
+    "symbols": [
+      "LQT",
+      "KCNA9",
+      "Kv7.1",
+      "KCNA8",
+      "KVLQT1",
+      "JLNS1",
+      "LQT1",
+      "ATFB1",
+      "ATFB3",
+      "Kv1.9",
+      "RWS",
+      "SQT2",
+      "WRS"
+    ],
+    "names": [
+      "potassium voltage-gated channel, KQT-like subfamily, member 1",
+      "potassium channel, voltage gated KQT-like subfamily Q, member 1",
+      "Jervell and Lange-Nielsen syndrome 1",
+      "potassium voltage-gated channel subfamily KQT member 1",
+      "IKs producing slow voltage-gated potassium channel subunit alpha KvLQT1",
+      "kidney and cardiac voltage dependend K+ channel",
+      "slow delayed rectifier channel subunit",
+      "voltage-gated potassium channel subunit Kv7.1"
+    ]
+  },
+  "KRAS": {
+    "symbols": [
+      "KRAS2",
+      "KRAS1",
+      "K-Ras4B",
+      "'C-K-RAS",
+      "C-K-RAS",
+      "CFC2",
+      "K-RAS2A",
+      "K-RAS2B",
+      "K-RAS4A",
+      "K-Ras",
+      "K-Ras 2",
+      "KI-RAS",
+      "NS",
+      "NS3",
+      "OES",
+      "RALD",
+      "RALD2",
+      "RASK2",
+      "c-Ki-ras",
+      "c-Ki-ras2"
+    ],
+    "names": [
+      "v-Ki-ras2 Kirsten rat sarcoma 2 viral oncogene homolog",
+      "v-Ki-ras2 Kirsten rat sarcoma viral oncogene homolog",
+      "Kirsten rat sarcoma viral oncogene homolog",
+      "GTPase KRas",
+      "K-ras p21 protein",
+      "KRAS-ENOPH fusion",
+      "Kirsten rat sarcoma viral proto-oncogene",
+      "Kras-Enoph1 fusion protein",
+      "PR310 c-K-ras oncogene",
+      "c-Kirsten-ras protein",
+      "cellular c-Ki-ras2 proto-oncogene",
+      "cellular transforming proto-oncogene",
+      "oncogene KRAS2",
+      "proto-oncogene GTPase",
+      "transforming protein p21"
+    ]
+  },
+  "LDLR": {
+    "symbols": [
+      "LDLCQ2"
+    ],
+    "names": [
+      "familial hypercholesterolemia",
+      "low-density lipoprotein receptor",
+      "LDL receptor",
+      "low-density lipoprotein receptor class A domain-containing protein 3"
+    ]
+  },
+  "MUC5AC": {
+    "symbols": [
+      "MUC5",
+      "TBM",
+      "leB",
+      "mucin"
+    ],
+    "names": [
+      "mucin 5, subtypes A and C, tracheobronchial/gastric",
+      "mucin-5AC",
+      "gastric mucin",
+      "lewis B blood group antigen",
+      "major airway glycoprotein",
+      "mucin 5AC, oligomeric mucus/gel-forming pseudogene",
+      "mucin-5 subtype AC, tracheobronchial",
+      "tracheobronchial mucin"
+    ]
+  },
+  "MYBPC3": {
+    "symbols": [
+      "CMH4",
+      "FHC",
+      "cMyBP-C",
+      "CMD1MM",
+      "LVNC10",
+      "MYBP-C"
+    ],
+    "names": [
+      "myosin-binding protein C, cardiac",
+      "myosin-binding protein C, cardiac-type",
+      "myosin binding protein C, cardiac"
+    ]
+  },
+  "MYC": {
+    "symbols": [
+      "c-Myc",
+      "bHLHe39",
+      "MYCC",
+      "MRTL"
+    ],
+    "names": [
+      "v-myc avian myelocytomatosis viral oncogene homolog",
+      "myc proto-oncogene protein",
+      "avian myelocytomatosis viral oncogene homolog",
+      "class E basic helix-loop-helix protein 39",
+      "myc-related translation/localization regulatory factor",
+      "proto-oncogene c-Myc",
+      "transcription factor p64",
+      "v-myc myelocytomatosis viral oncogene homolog"
+    ]
+  },
+  "MYH7": {
+    "symbols": [
+      "CMH1",
+      "MPD1",
+      "CMD1S",
+      "CMYO7A",
+      "CMYO7B",
+      "CMYP7A",
+      "CMYP7B",
+      "MYHCB",
+      "SPMD",
+      "SPMM"
+    ],
+    "names": [
+      "myopathy, distal 1",
+      "myosin, heavy polypeptide 7, cardiac muscle, beta",
+      "myosin-7",
+      "cardiac muscle myosin heavy chain 7 beta",
+      "myHC-beta",
+      "myhc-slow",
+      "myosin 7",
+      "myosin heavy chain beta-subunit",
+      "myosin, heavy chain 7, cardiac muscle, beta",
+      "rhabdomyosarcoma antigen MU-RMS-40.7A"
+    ]
+  },
+  "NPHS1": {
+    "symbols": [
+      "CNF",
+      "NPHN"
+    ],
+    "names": [
+      "nephrosis 1, congenital, Finnish type (nephrin)",
+      "NPHS1, nephrin",
+      "renal glomerulus-specific cell adhesion receptor"
+    ]
+  },
+  "NPHS2": {
+    "symbols": [
+      "SRN1",
+      "PDCN"
+    ],
+    "names": [
+      "nephrosis 2, idiopathic, steroid-resistant (podocin)",
+      "NPHS2, podocin"
+    ]
+  },
+  "NR1H4": {
+    "symbols": [
+      "FXR",
+      "RIP14",
+      "HRR1",
+      "HRR-1",
+      "BAR",
+      "PFIC5"
+    ],
+    "names": [
+      "nuclear receptor subfamily 1, group H, member 4",
+      "farnesoid X receptor",
+      "bile acid receptor",
+      "RXR-interacting protein 14",
+      "farnesoid X nuclear receptor",
+      "farnesoid X-activated receptor",
+      "farnesol receptor HRR-1",
+      "retinoid X receptor-interacting protein 14"
+    ]
+  },
+  "NR1I2": {
+    "symbols": [
+      "ONR1",
+      "PXR",
+      "BXR",
+      "SXR",
+      "PAR2",
+      "PAR",
+      "PAR1",
+      "PARq",
+      "PRR",
+      "SAR"
+    ],
+    "names": [
+      "nuclear receptor subfamily 1, group I, member 2",
+      "pregnane X receptor",
+      "orphan nuclear receptor PXR",
+      "orphan nuclear receptor PAR1",
+      "steroid and xenobiotic receptor"
+    ]
+  },
+  "NR3C2": {
+    "symbols": [
+      "MLR",
+      "MR",
+      "MCR",
+      "NR3C2VIT"
+    ],
+    "names": [
+      "mineralocorticoid receptor",
+      "nuclear receptor subfamily 3, group C, member 2",
+      "aldosterone receptor",
+      "mineralocorticoid receptor 1",
+      "mineralocorticoid receptor 2",
+      "mineralocorticoid receptor delta"
+    ]
+  },
+  "PGC": {
+    "symbols": [
+      "PEPC",
+      "PGII"
+    ],
+    "names": [
+      "pepsinogen C",
+      "gastricsin",
+      "pepsin C",
+      "pepsinogen group II",
+      "preprogastricsin"
+    ]
+  },
+  "PLN": {
+    "symbols": [
+      "PLB",
+      "CMD1P",
+      "CMH18"
+    ],
+    "names": [
+      "cardiac phospholamban"
+    ]
+  },
+  "PNLIP": {
+    "symbols": [
+      "PL",
+      "PNLIPD",
+      "PTL"
+    ],
+    "names": [
+      "triacylglycerol lipase",
+      "pancreatic triacylglycerol lipase",
+      "triacylglycerol acylhydrolase"
+    ]
+  },
+  "PODXL": {
+    "symbols": [
+      "PCLP",
+      "Gp200",
+      "PC",
+      "PODXL1",
+      "PDX",
+      "gp135",
+      "PCLP-1"
+    ],
+    "names": [
+      "podocalyxin-like",
+      "podocalyxin",
+      "GCTM-2 antigen",
+      "podocalyxin-like protein 1"
+    ]
+  },
+  "PPARA": {
+    "symbols": [
+      "PPAR",
+      "hPPAR",
+      "NR1C1",
+      "PPAR-alpha",
+      "PPARalpha"
+    ],
+    "names": [
+      "peroxisome proliferative activated receptor, alpha",
+      "peroxisome proliferator-activated receptor alpha",
+      "nuclear receptor subfamily 1 group C member 1"
+    ]
+  },
+  "PRKACA": {
+    "symbols": [
+      "PKACa",
+      "CAFD1",
+      "PPNAD4"
+    ],
+    "names": [
+      "protein kinase, cAMP-dependent, catalytic, alpha",
+      "protein kinase, cAMP-dependent, alpha catalytic subunit",
+      "cAMP-dependent protein kinase catalytic subunit alpha",
+      "PKA C-alpha",
+      "protein kinase A catalytic subunit"
+    ]
+  },
+  "PRSS1": {
+    "symbols": [
+      "TRY1",
+      "TRP1",
+      "TRY4",
+      "TRYP1"
+    ],
+    "names": [
+      "trypsin 1",
+      "protease, serine 1",
+      "TCR V beta 4.1",
+      "anionic trypsin I",
+      "beta-trypsin",
+      "cationic trypsinogen",
+      "digestive zymogen",
+      "nonfunctional trypsin 1",
+      "pretrypsinogen I",
+      "trypsinogen 1",
+      "trypsinogen A"
+    ]
+  },
+  "REN": {
+    "symbols": [
+      "ADTKD4",
+      "HNFJ2",
+      "RTD"
+    ],
+    "names": [
+      "angiotensin-forming enzyme",
+      "angiotensinogenase",
+      "renin precursor, renal"
+    ]
+  },
+  "RYR2": {
+    "symbols": [
+      "ARVD2",
+      "ARVC2",
+      "VTSIP",
+      "RYR-2",
+      "RyR",
+      "VACRDS"
+    ],
+    "names": [
+      "arrhythmogenic right ventricular dysplasia 2",
+      "ryanodine receptor 2 (cardiac)",
+      "cardiac muscle ryanodine receptor-calcium release channel",
+      "cardiac-type ryanodine receptor",
+      "islet-type ryanodine receptor",
+      "kidney-type ryanodine receptor",
+      "type 2 ryanodine receptor"
+    ]
+  },
+  "SCNN1A": {
+    "symbols": [
+      "SCNN1",
+      "ENaCalpha",
+      "BESC2",
+      "ENaCa",
+      "LIDLS3",
+      "PHA1B1",
+      "SCNEA"
+    ],
+    "names": [
+      "sodium channel, non voltage gated 1 alpha subunit",
+      "amiloride-sensitive sodium channel subunit alpha",
+      "epithelial sodium channel subunit alpha",
+      "ENaC subunit alpha",
+      "alpha ENaC-2",
+      "alpha-ENaC",
+      "alpha-NaCH",
+      "amiloride-sensitive epithelial sodium channel alpha subunit",
+      "amiloride-sensitive sodium channel subunit alpha 2",
+      "epithelial Na(+) channel subunit alpha",
+      "nasal epithelial sodium channel alpha subunit",
+      "nonvoltage-gated sodium channel 1 subunit alpha",
+      "sodium channel epithelial 1 alpha subunit",
+      "sodium channel, non-voltage-gated 1 alpha",
+      "sodium channel, nonvoltage-gated 1 alpha"
+    ]
+  },
+  "SFTPA1": {
+    "symbols": [
+      "SFTP1",
+      "SP-A",
+      "SP-A1",
+      "COLEC4",
+      "ILD1",
+      "PSP-A",
+      "PSPA",
+      "SFTPA1B",
+      "SP-A1 beta",
+      "SP-A1 delta",
+      "SP-A1 epsilon",
+      "SP-A1 gamma",
+      "SPA",
+      "SPA1"
+    ],
+    "names": [
+      "surfactant, pulmonary-associated protein A1",
+      "surfactant, pulmonary-associated protein A1A",
+      "pulmonary surfactant-associated protein A1",
+      "35 kDa pulmonary surfactant-associated protein",
+      "alveolar proteinosis protein",
+      "collectin-4",
+      "surfactant protein A1B",
+      "surfactant, pulmonary-associated protein A1B"
+    ]
+  },
+  "SFTPB": {
+    "symbols": [
+      "SFTP3",
+      "SP-B",
+      "PSP-B",
+      "SFTB3",
+      "SMDP1"
+    ],
+    "names": [
+      "surfactant, pulmonary-associated protein B",
+      "pulmonary surfactant-associated protein B",
+      "pulmonary surfactant-associated proteolipid SPL(Phe)"
+    ]
+  },
+  "SFTPC": {
+    "symbols": [
+      "SFTP2",
+      "SP-C",
+      "PSP-C",
+      "SMDP2",
+      "BRICD6"
+    ],
+    "names": [
+      "surfactant, pulmonary-associated protein C",
+      "BRICHOS domain containing 6",
+      "pulmonary surfactant apoprotein-2 SP-C",
+      "pulmonary surfactant-associated proteolipid SPL(Val)"
+    ]
+  },
+  "SGK1": {
+    "symbols": [
+      "SGK"
+    ],
+    "names": [
+      "serum/glucocorticoid regulated kinase",
+      "serine/threonine-protein kinase Sgk1",
+      "serine/threonine protein kinase SGK"
+    ]
+  },
+  "SI": {
+    "symbols": [],
+    "names": [
+      "sucrase-isomaltase (alpha-glucosidase)",
+      "Oligosaccharide alpha-1,6-glucosidase",
+      "Oligo-1,6-glucosidase",
+      "alpha-glucosidase",
+      "Alpha-methylglucosidase",
+      "sucrase-isomaltase, intestinal"
+    ]
+  },
+  "SLC10A1": {
+    "symbols": [
+      "NTCP",
+      "NTCP1",
+      "FHCA2"
+    ],
+    "names": [
+      "solute carrier family 10 (sodium/bile acid cotransporter), member 1",
+      "Na+/taurocholate cotransporting polypeptide",
+      "hepatic sodium/bile acid cotransporter",
+      "Na(+)/bile acid cotransporter",
+      "Na(+)/taurocholate transport protein",
+      "Na/taurocholate cotransporting polypeptide",
+      "cell growth-inhibiting gene 29 protein",
+      "growth-inhibiting protein 29",
+      "sodium/bile acid cotransporter",
+      "sodium/taurocholate cotransporter",
+      "sodium/taurocholate cotransporting polypeptide",
+      "solute carrier family 10 (sodium/bile acid cotransporter family), member 1"
+    ]
+  },
+  "SLC15A1": {
+    "symbols": [
+      "PEPT1",
+      "HPECT1",
+      "HPEPT1"
+    ],
+    "names": [
+      "solute carrier family 15 (oligopeptide transporter), member 1",
+      "peptide transporter HPEPT1",
+      "bA551M18.1.1 (solute carrier family 15 (oligopeptide transporter) member 1)",
+      "solute carrier family 15 oligopeptide transporter member 1",
+      "Caco-2 oligopeptide transporter",
+      "intestinal H+/peptide cotransporter",
+      "macrophage oligopeptide transporter PEPT1",
+      "peptide transporter 1"
+    ]
+  },
+  "SLC2A2": {
+    "symbols": [
+      "GLUT2",
+      "GLUT-2"
+    ],
+    "names": [
+      "solute carrier family 2 (facilitated glucose transporter), member 2",
+      "solute carrier family 2, facilitated glucose transporter member 2",
+      "glucose transporter type 2, liver"
+    ]
+  },
+  "SLC5A1": {
+    "symbols": [
+      "SGLT1",
+      "D22S675",
+      "NAGT",
+      "SGLT-1"
+    ],
+    "names": [
+      "solute carrier family 5 (sodium/glucose cotransporter), member 1",
+      "sodium/glucose cotransporter 1",
+      "Na+/glucose cotransporter 1",
+      "high affinity sodium-glucose cotransporter"
+    ]
+  },
+  "SREBF1": {
+    "symbols": [
+      "SREBP1",
+      "bHLHd1",
+      "SREBP-1c",
+      "SREBP1a",
+      "HMD",
+      "IFAP2"
+    ],
+    "names": [
+      "Sterol regulatory element-binding protein 1",
+      "class D basic helix-loop-helix protein 1"
+    ]
+  },
+  "TCF7L2": {
+    "symbols": [
+      "TCF4",
+      "TCF-4"
+    ],
+    "names": [
+      "transcription factor 7-like 2 (T-cell specific, HMG-box)",
+      "transcription factor 7-like 2",
+      "HMG box transcription factor 4",
+      "T-cell factor 4",
+      "T-cell-specific transcription factor 4",
+      "hTCF-4"
+    ]
+  },
+  "TNNT2": {
+    "symbols": [
+      "CMH2",
+      "CMD1D",
+      "CMPD2",
+      "LVNC6",
+      "RCM3",
+      "TnTC",
+      "cTnT"
+    ],
+    "names": [
+      "cardiomyopathy, hypertrophic 2",
+      "cardiomyopathy, dilated 1D (autosomal dominant)",
+      "troponin T type 2 (cardiac)",
+      "troponin T, cardiac muscle"
+    ]
+  },
+  "TP53": {
+    "symbols": [
+      "p53",
+      "LFS1",
+      "BCC7",
+      "BMFS5",
+      "TRP53"
+    ],
+    "names": [
+      "Li-Fraumeni syndrome",
+      "cellular tumor antigen p53",
+      "antigen NY-CO-13",
+      "mutant tumor protein 53",
+      "phosphoprotein p53",
+      "transformation-related protein 53",
+      "tumor protein 53",
+      "tumor supressor p53"
+    ]
+  },
+  "TPM1": {
+    "symbols": [
+      "C15orf13",
+      "CMH3",
+      "CMD1Y",
+      "HEL-S-265",
+      "HTM-alpha",
+      "LVNC9",
+      "TMSA"
+    ],
+    "names": [
+      "chromosome 15 open reading frame 13",
+      "cardiomyopathy, hypertrophic 3",
+      "tropomyosin 1 (alpha)",
+      "tropomyosin alpha-1 chain",
+      "epididymis secretory protein Li 265",
+      "sarcomeric tropomyosin kappa"
+    ]
+  },
+  "VEGFA": {
+    "symbols": [
+      "VEGF",
+      "VEGF-A",
+      "VPF",
+      "L-VEGF",
+      "MVCD1"
+    ],
+    "names": [
+      "vascular endothelial growth factor",
+      "vascular endothelial growth factor A, long form",
+      "vascular endothelial growth factor A121",
+      "vascular endothelial growth factor A165",
+      "vascular permeability factor"
+    ]
+  },
+  "VHL": {
+    "symbols": [
+      "VHL1",
+      "HRCA1",
+      "RCA1",
+      "pVHL"
+    ],
+    "names": [
+      "von Hippel-Lindau syndrome",
+      "von Hippel-Lindau tumor suppressor, E3 ubiquitin protein ligase",
+      "von Hippel-Lindau disease tumor suppressor",
+      "elongin binding protein",
+      "protein G7"
+    ]
+  },
+  "WNT3": {
+    "symbols": [
+      "INT4",
+      "MGC131950",
+      "MGC138321",
+      "MGC138323",
+      "TETAMS"
+    ],
+    "names": [
+      "wingless-type MMTV integration site family, member 3",
+      "WNT-3 proto-oncogene protein",
+      "proto-oncogene Wnt-3",
+      "proto-oncogene Int-4 homolog"
+    ]
+  }
+}

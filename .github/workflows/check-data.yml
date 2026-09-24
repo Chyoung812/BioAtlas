@@ -1,0 +1,41 @@
+name: 데이터 검사
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # 매주 월요일 09:00 (KST)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check:data -- --report report.md
+      - name: 결과 요약
+        if: always()
+        run: |
+          [ -f report.md ] || echo "검사 스크립트가 결과를 남기지 못했습니다. 실행 로그를 확인하세요." > report.md
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 실패 시 이슈 알림
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "" >> report.md
+          echo "실행 기록: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> report.md
+          title="데이터 검사 실패"
+          num=$(gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file report.md
+          else
+            gh issue create --title "$title" --body-file report.md
+          fi

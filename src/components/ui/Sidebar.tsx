@@ -11,6 +11,7 @@ import {
   getPathwaysForTissue,
 } from "@/lib/atlas";
 import { Pathway } from "@/lib/types";
+import { GuideCard } from "@/components/GuideCard";
 
 export function Sidebar() {
   const {
@@ -149,6 +150,10 @@ export function Sidebar() {
                   <p className="mt-1 text-xs leading-relaxed text-fg-muted">
                     {pathway.summary}
                   </p>
+                  {pathway.guide && (
+                    <GuideCard guide={pathway.guide} compact />
+                  )}
+                  <PathwayMembers pathway={pathway} />
                   <div className="mt-2 text-[11px] text-fg-faint">
                     출처: {pathway.source} · {pathway.sourceId}
                   </div>
@@ -185,6 +190,26 @@ export function Sidebar() {
         )}
       </div>
     </aside>
+  );
+}
+
+// 출처 DB가 정한 경로 유전자와, 교육용으로 함께 보여주는 맥락 유전자를 나눠 보여준다.
+function PathwayMembers({ pathway }: { pathway: Pathway }) {
+  const nodes = pathway.network.nodes;
+  const context = nodes.filter((n) => n.membership === "contextual");
+  if (context.length === 0) return null;
+  const members = nodes.filter((n) => n.membership !== "contextual");
+  return (
+    <div className="mt-2 space-y-0.5 text-[11px] leading-relaxed text-fg-faint">
+      <div>
+        <span className="text-fg-muted">{pathway.source} 경로 유전자: </span>
+        {members.map((n) => n.id).join(" · ")}
+      </div>
+      <div>
+        <span className="text-fg-muted">관련 맥락 (경로 밖): </span>
+        {context.map((n) => n.id).join(" · ")}
+      </div>
+    </div>
   );
 }
 
