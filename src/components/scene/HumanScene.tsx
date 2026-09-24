@@ -317,7 +317,7 @@ function OrganHotspot({
 }
 
 // glb 로딩 실패(404·네트워크·손상 등) 시 fallback(BodyMap)을 렌더하는 런타임 안전망
-class GLBErrorBoundary extends Component<
+export class GLBErrorBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },
   { failed: boolean }
 > {

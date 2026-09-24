@@ -1,19 +1,24 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html, Line } from "@react-three/drei";
+import { Html, Line, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { getOrgan } from "@/lib/atlas";
 import { useAtlas } from "@/store/useAtlas";
+import { GLBErrorBoundary } from "./HumanScene";
 
 /**
  * 장기 내부 탐색용 3D 모델.
- * 중앙에 장기 형태(뇌·심장·간·폐·신장·위·췌장·장)를 절차적으로 그리고,
+ * 중앙에 장기 형태(HRA 해부학 메시, 없거나 로드 실패 시 절차적 형태)를 그리고,
  * 그 주위로 조직 레이어 노드를 띄워 클릭하면 조직 단계로 진입합니다.
  * 모든 조직 노드/연결선은 atlas 데이터(organ.tissues)에서 그대로 구동됩니다.
  */
-export function OrganModel() {
+export function OrganModel({
+  onHraShown,
+}: {
+  onHraShown?: (shown: boolean) => void;
+}) {
   const group = useRef<THREE.Group>(null);
   const organId = useAtlas((s) => s.organId);
   const tissueId = useAtlas((s) => s.tissueId);
@@ -29,8 +34,12 @@ export function OrganModel() {
 
   return (
     <group ref={group}>
-      {/* 장기 본체 (장기별 절차적 형태) */}
-      <OrganCentralMesh organId={organ.id} color={organ.color} />
+      {/* 장기 본체 (HRA 해부학 메시 또는 절차적 형태) */}
+      <OrganCentralMesh
+        organId={organ.id}
+        color={organ.color}
+        onHraShown={onHraShown}
+      />
 
       {/* 조직 레이어 + 중심 연결선 */}
       {organ.tissues.map((tissue) => {
@@ -67,7 +76,102 @@ export function OrganModel() {
 }
 
 // ── 장기별 중앙 메시 선택 ───────────────────────────────────
+// Human Reference Atlas(HuBMAP) 3D Reference Object Library, CC BY 4.0.
+// 위는 HRA 레코드가 없어 절차적 형태를 유지한다.
+const HRA_MODELS: Record<string, string[]> = {
+  brain: ["/models/hra/brain.glb"],
+  heart: ["/models/hra/heart.glb"],
+  lung: ["/models/hra/lung.glb"],
+  liver: ["/models/hra/liver.glb"],
+  pancreas: ["/models/hra/pancreas.glb"],
+  intestine: ["/models/hra/intestine.glb"],
+  kidney: ["/models/hra/kidney-l.glb", "/models/hra/kidney-r.glb"],
+};
+const HRA_FIT_SIZE = 1.8;
+
 function OrganCentralMesh({
+  organId,
+  color,
+  onHraShown,
+}: {
+  organId: string;
+  color: string;
+  onHraShown?: (shown: boolean) => void;
+}) {
+  const urls = HRA_MODELS[organId];
+  if (!urls) return <ProceduralOrgan organId={organId} color={color} />;
+  const fallback = <ProceduralOrgan organId={organId} color={color} />;
+  return (
+    <GLBErrorBoundary key={organId} fallback={fallback}>
+      <Suspense fallback={fallback}>
+        <HraOrgan
+          urls={urls}
+          color={organId === "brain" ? "#d78f88" : color}
+          onShown={onHraShown}
+        />
+      </Suspense>
+    </GLBErrorBoundary>
+  );
+}
+
+/** 여러 GLB(좌·우 신장 등)를 한 그룹으로 합친 뒤 중심·크기를 맞춘다. */
+function HraOrgan({
+  urls,
+  color,
+  onShown,
+}: {
+  urls: string[];
+  color: string;
+  onShown?: (shown: boolean) => void;
+}) {
+  const gltfs = useGLTF(urls);
+  useEffect(() => {
+    onShown?.(true);
+    return () => onShown?.(false);
+  }, [onShown]);
+  const model = useMemo(() => {
+    const root = new THREE.Group();
+    const base = new THREE.Color(color);
+    const clones = gltfs.map((g) => g.scene.clone(true));
+    let meshCount = 0;
+    clones.forEach((c) =>
+      c.traverse((o) => o instanceof THREE.Mesh && meshCount++)
+    );
+    // 뇌처럼 영역 메시가 수백 개 겹치면 반투명이 누적돼 불투명해지므로 낮춘다
+    const opacity = meshCount > 50 ? 0.16 : 0.5;
+    let i = 0;
+    for (const clone of clones) {
+      clone.traverse((obj) => {
+        if (!(obj instanceof THREE.Mesh)) return;
+        // 하위 구조(판막·엽·뇌 영역)가 구분되도록 명도만 조금씩 흔든다
+        const tint = base.clone().offsetHSL(0, 0, ((i++ % 5) - 2) * 0.04);
+        obj.material = new THREE.MeshStandardMaterial({
+          color: tint,
+          emissive: tint,
+          emissiveIntensity: 0.12,
+          roughness: 0.6,
+          metalness: 0.05,
+          transparent: true,
+          opacity,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        });
+      });
+      root.add(clone);
+    }
+    const box = new THREE.Box3().setFromObject(root);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const scale = HRA_FIT_SIZE / Math.max(size.x, size.y, size.z, 1e-6);
+    root.position.copy(center).multiplyScalar(-scale);
+    root.scale.setScalar(scale);
+    return root;
+  }, [gltfs, color]);
+
+  return <primitive object={model} />;
+}
+
+function ProceduralOrgan({
   organId,
   color,
 }: {

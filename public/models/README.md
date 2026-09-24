@@ -5,12 +5,35 @@
 | 파일 이름 | 쓰이는 곳 | 없을 때 대체 |
 |---|---|---|
 | `human.glb` | 진입 화면(전신 인체) | 2D 바디맵 |
-| `brain.glb` | 뇌 장기 탐색 화면 | 절차적(코드) 뇌 |
+| `hra/*.glb` | 장기 탐색 화면(뇌·심장·폐·간·췌장·장·신장) | 절차적(코드) 장기 |
 
 `human.glb`는 그냥 넣기만 하면 됩니다. 코드는 이미 `/models/human.glb`를
 읽도록 되어 있고, **파일이 없으면 자동으로 2D 바디맵으로 대체**되므로
-앱이 깨지지 않습니다. `brain.glb`는 `src/components/scene/BrainModel.tsx`의
-`BRAIN_GLB_URL`을 `"/models/brain.glb"`로 바꿔야 켜집니다.
+앱이 깨지지 않습니다.
+
+## 장기 해부학 모델 (HRA, CC BY 4.0)
+
+장기 화면은 Human Reference Atlas(HuBMAP) 3D Reference Object Library의
+장기 모델을 씁니다. 용량 때문에 `hra/`는 git에 올리지 않으니, 새로 받은
+환경에서는 아래를 한 번 실행하세요. 파일이 없으면 절차적 장기로 대체됩니다.
+위(stomach)는 HRA 모델이 없어 항상 절차적 형태입니다.
+CC BY 4.0이라 장기 화면 왼쪽 아래의 출처 표기를 지우면 안 됩니다.
+
+```bash
+cd public/models && mkdir -p hra && cd hra
+C=https://cdn.humanatlas.io/digital-objects/ref-organ
+G=https://raw.githubusercontent.com/hubmapconsortium/ccf-3d-reference-object-library/main/VH_Male/v1.2
+curl -fL -o heart.glb     $C/heart-male/v1.3/assets/3d-vh-m-heart.glb
+curl -fL -o lung.glb      $C/lung-male/v1.1/assets/VH_M_Lung.glb
+curl -fL -o liver.glb     $C/liver-male/v1.2/assets/3d-vh-m-liver.glb
+curl -fL -o pancreas.glb  $C/pancreas-male/v1.3/assets/3d-vh-m-pancreas.glb
+curl -fL -o intestine.glb $C/small-intestine-male/v1.2/assets/3d-vh-m-small-intestine.glb
+curl -fL -o kidney-l.glb  $G/VH_M_Kidney_L.glb
+curl -fL -o kidney-r.glb  $G/VH_M_Kidney_R.glb
+curl -fL -o brain.glb     $G/Allen_M_Brain.glb
+# 원본 약 29MB → meshopt 압축 후 약 7MB
+for f in *.glb; do npx @gltf-transform/cli optimize $f $f --compress meshopt --texture-compress false --flatten false --join false --instance false; done
+```
 
 ---
 

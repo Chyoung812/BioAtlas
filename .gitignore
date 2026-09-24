@@ -8,3 +8,6 @@ next-env.d.ts
 .DS_Store
 npm-debug.log*
 .claude/settings.local.json
+
+# HRA 장기 모델 (public/models/README.md 참고)
+public/models/hra/
