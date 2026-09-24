@@ -49,18 +49,22 @@ export async function fetchNcbiGene(geneId: string) {
   };
 }
 
-/** esearch + esummary db=pubmed → 최신 관련 논문 상위 N건 */
-export async function fetchPubmed(symbol: string, retmax = 5) {
-  const search = await getJson(
-    url("esearch.fcgi", {
+/** elink gene→pubmed(GeneRIF) + esummary → 이 유전자 기능을 다룬 최신 논문 상위 N건 */
+export async function fetchPubmed(geneId: string, retmax = 5) {
+  // 심볼 텍스트 검색은 SI·INS·APC 같은 일반 약어와 겹치고, 유전자를 목록에서 언급만 한 논문까지 잡힌다.
+  // GeneRIF는 NCBI가 해당 geneId(사람)의 기능을 다룬다고 큐레이션한 논문이며, PMID 내림차순으로 온다.
+  const link = await getJson(
+    url("elink.fcgi", {
+      dbfrom: "gene",
       db: "pubmed",
-      term: `${symbol}[Gene Name]`,
-      sort: "date",
-      retmax: String(retmax),
+      id: geneId,
+      linkname: "gene_pubmed_rif",
       retmode: "json",
     })
   );
-  const ids: string[] = search?.esearchresult?.idlist ?? [];
+  const ids: string[] = (
+    link?.linksets?.[0]?.linksetdbs?.[0]?.links ?? []
+  ).slice(0, retmax);
   if (ids.length === 0) return [];
 
   const sum = await getJson(

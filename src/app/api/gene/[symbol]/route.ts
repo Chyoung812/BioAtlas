@@ -18,7 +18,7 @@ export async function GET(
   try {
     const [ncbi, pubmed] = await Promise.all([
       fetchNcbiGene(base.geneId),
-      fetchPubmed(base.symbol),
+      fetchPubmed(base.geneId),
     ]);
     return Response.json(mergeGene(base, { ncbi, pubmed }));
   } catch {
