@@ -85,3 +85,27 @@ export function checkGeneRecord(
   }
   return { errors, warnings };
 }
+
+const sameTitle = (a: string, b: string) => {
+  const norm = (t: string) => t.toLowerCase().replace(/\s+/g, " ").replace(/\.$/, "").trim();
+  return norm(a) === norm(b);
+};
+
+/** 폴백 논문 검사 — papers는 PMID별 PubMed 요약, rif는 이 유전자의 GeneRIF PMID */
+export function checkPapers(
+  g: GeneDetail,
+  papers: Record<string, { title?: string; error?: string } | undefined>,
+  rif: Set<string>
+): Issues {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  for (const p of g.pubmed) {
+    const rec = papers[p.pmid];
+    if (!rec || rec.error || !rec.title) errors.push(`${g.symbol}: PubMed에 PMID ${p.pmid}가 없습니다.`);
+    else if (!sameTitle(rec.title, p.title))
+      errors.push(`${g.symbol}: PMID ${p.pmid}의 실제 제목은 "${rec.title}"입니다 (데이터: "${p.title}").`);
+    else if (!rif.has(p.pmid))
+      warnings.push(`${g.symbol}: PMID ${p.pmid}는 NCBI GeneRIF에 이 유전자 논문으로 연결돼 있지 않습니다.`);
+  }
+  return { errors, warnings };
+}

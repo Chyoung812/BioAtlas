@@ -5,7 +5,7 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { ORGANS, PATHWAYS } from "@/lib/atlas";
 import { GENES } from "@/lib/genes";
-import { checkContext, checkGeneRecord, checkMembership, isContextual, parseEvidence } from "./check-rules";
+import { checkContext, checkGeneRecord, checkMembership, checkPapers, isContextual, parseEvidence } from "./check-rules";
 
 type Synonyms = Record<string, { symbols: string[]; names: string[] }>;
 
@@ -169,6 +169,28 @@ async function verifyEvidence(ref: string, symbol: string) {
   return !!rec && !rec.error;
 }
 
+async function checkGenePapers() {
+  const genes = Object.values(GENES);
+  const pmids = genes.flatMap((g) => g.pubmed.map((p) => p.pmid));
+  const papers: Record<string, any> = {};
+  for (let i = 0; i < pmids.length; i += 100) {
+    const res = await get(
+      `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&tool=bioatlas&id=${pmids.slice(i, i + 100).join(",")}`
+    );
+    Object.assign(papers, res?.result ?? {});
+    await sleep(400);
+  }
+  for (const g of genes) {
+    const res = await get(
+      `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=gene&db=pubmed&linkname=gene_pubmed_rif&retmode=json&tool=bioatlas&id=${g.geneId}`
+    );
+    await sleep(400);
+    const issues = checkPapers(g, papers, new Set(res?.linksets?.[0]?.linksetdbs?.[0]?.links ?? []));
+    errors.push(...issues.errors);
+    warnings.push(...issues.warnings);
+  }
+}
+
 async function checkPathways() {
   for (const p of Object.values(PATHWAYS)) {
     if (p.source !== "KEGG" && p.source !== "Reactome") continue;
@@ -229,6 +251,7 @@ function report() {
 (async () => {
   checkReferences();
   const synonyms = await checkGenes();
+  await checkGenePapers();
   await checkPathways();
   checkSynonyms(synonyms);
   report();

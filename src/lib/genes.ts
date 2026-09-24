@@ -28,8 +28,8 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1TUP",
     expression: ["대뇌피질", "해마", "전신 대부분 조직"],
     pubmed: [
-      { title: "p53 in neuronal apoptosis", pmid: "12042762" },
-      { title: "Guardian of the genome revisited", pmid: "31802989" },
+      { title: "The role of p53 in male infertility.", pmid: "39469578" },
+      { title: "Temporal regulation of gene expression through integration of p53 dynamics and modifications.", pmid: "39454005" },
     ],
     relatedPathwayIds: ["hsa04210", "hsa04115"],
   },
@@ -50,7 +50,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "4q35.1",
     proteinPdbId: "1CP3",
     expression: ["해마", "소뇌", "면역세포"],
-    pubmed: [{ title: "Caspase-3 in neuronal death", pmid: "18097445" }],
+    pubmed: [
+      { title: "HIV-1 Vpu induces neurotoxicity by promoting Caspase 3-dependent cleavage of TDP-43.", pmid: "39242776" },
+      { title: "PPARγ regulates osteoarthritis chondrocytes apoptosis through caspase-3 dependent mitochondrial pathway.", pmid: "38755283" },
+    ],
     relatedPathwayIds: ["hsa04210"],
   },
   BAX: {
@@ -70,7 +73,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "19q13.33",
     proteinPdbId: "1F16",
     expression: ["해마", "신경세포 전반"],
-    pubmed: [{ title: "BAX pore formation in apoptosis", pmid: "27050454" }],
+    pubmed: [
+      { title: "Lipid unsaturation promotes BAX and BAK pore activity during apoptosis.", pmid: "38830851" },
+      { title: "Endogenous BAX and BAK form mosaic rings of variable size and composition on apoptotic mitochondria.", pmid: "38503846" },
+    ],
     relatedPathwayIds: ["hsa04210"],
   },
   BCL2: {
@@ -90,7 +96,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "18q21.33",
     proteinPdbId: "1GJH",
     expression: ["해마", "장수 신경세포"],
-    pubmed: [{ title: "BCL2 family and survival", pmid: "30310093" }],
+    pubmed: [
+      { title: "ETFDH mutation involves excessive apoptosis and neurite outgrowth defect via Bcl2 pathway.", pmid: "39455656" },
+      { title: "BCL2 expression is enriched in advanced prostate cancer with features of lineage plasticity.", pmid: "39286979" },
+    ],
     relatedPathwayIds: ["hsa04210"],
   },
   CYCS: {
@@ -110,7 +119,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "7p15.3",
     proteinPdbId: "3ZCF",
     expression: ["전신 세포의 미토콘드리아"],
-    pubmed: [{ title: "Cytochrome c release and apoptosome", pmid: "12042762" }],
+    pubmed: [
+      { title: "MicroRNA miR-20a-5p targets CYCS to inhibit apoptosis in hepatocellular carcinoma.", pmid: "38937450" },
+      { title: "The Y49H cytochrome c variant enhances megakaryocytic maturation of K-562 cells.", pmid: "38531481" },
+    ],
     relatedPathwayIds: ["hsa04210"],
   },
   APAF1: {
@@ -130,7 +142,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12q23.1",
     proteinPdbId: "1Z6T",
     expression: ["해마", "신경세포"],
-    pubmed: [{ title: "Apoptosome assembly", pmid: "15694340" }],
+    pubmed: [
+      { title: "Exosomal circ_0037104 derived from Hu-MSCs inhibits cholangiocarcinoma progression by sponging miR-620 and targeting AFAP1.", pmid: "38348717" },
+      { title: "Upregulation of APAF1 and CSF1R in Peripheral Blood Mononuclear Cells of Parkinson's Disease.", pmid: "37108258" },
+    ],
     relatedPathwayIds: ["hsa04210"],
   },
   DRD2: {
@@ -150,7 +165,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11q23.2",
     proteinPdbId: "6CM4",
     expression: ["선조체", "해마", "전두엽"],
-    pubmed: [{ title: "Dopamine D2 receptor signaling", pmid: "29051383" }],
+    pubmed: [
+      { title: "Exploring the influence of the DRD2 gene on mathematical ability: perspectives of gene association and gene-environment interaction.", pmid: "39425204" },
+      { title: "A shared spatial topography links the functional connectome correlates of cocaine use disorder and dopamine D(2/3) receptor densities.", pmid: "39300138" },
+    ],
     relatedPathwayIds: ["hsa04728"],
   },
   GNAI2: {
@@ -171,7 +189,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "7YK7",
     proteinPdbChain: "I",
     expression: ["신경세포 전반"],
-    pubmed: [{ title: "Gi protein signaling", pmid: "28733458" }],
+    pubmed: [
+      { title: "MiR-30c-5p-Targeted Regulation of GNAI2 Improves Neural Function Injury and Inflammation in Cerebral Ischemia-Reperfusion Injury.", pmid: "38153649" },
+      { title: "Gαi2-induced conductin/axin2 condensates inhibit Wnt/β-catenin signaling and suppress cancer growth.", pmid: "35115535" },
+    ],
     relatedPathwayIds: ["hsa04728"],
   },
   CREB1: {
@@ -191,7 +212,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "2q33.3",
     proteinPdbId: "1DH3",
     expression: ["해마", "대뇌피질"],
-    pubmed: [{ title: "CREB in memory and survival", pmid: "21228167" }],
+    pubmed: [
+      { title: "CREB activates the MafA promoter through proximal E-boxes and a CCAAT motif in pancreatic β-cells.", pmid: "39189982" },
+      { title: "Silencing of CircTRIM25/miR-138-5p/CREB1 axis promotes chondrogenesis in osteoarthritis.", pmid: "39007896" },
+    ],
     relatedPathwayIds: ["hsa04728", "hsa04210"],
   },
 
@@ -213,7 +237,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12p13.33",
     proteinPdbId: "5GJV",
     expression: ["심근", "전도계", "혈관 평활근"],
-    pubmed: [{ title: "L-type Ca2+ channels in the heart", pmid: "25620733" }],
+    pubmed: [
+      { title: "[CACNA1C rs58619945 genotype influences the cortical thickness of attention network among patients with Bipolar Ⅰ disorder].", pmid: "39217481" },
+      { title: "NRN1 epistasis with BDNF and CACNA1C: mediation effects on symptom severity through neuroanatomical changes in schizophrenia.", pmid: "38720004" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa04261"],
   },
   RYR2: {
@@ -233,7 +260,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "1q43",
     proteinPdbId: "4JKQ",
     expression: ["심근", "푸르키녜 섬유"],
-    pubmed: [{ title: "RyR2 and calcium-induced calcium release", pmid: "28212727" }],
+    pubmed: [
+      { title: "The Role of Ryanodine Receptor 2 Polymorphisms in Oral Squamous Cell Carcinoma Susceptibility and Clinicopathological Features.", pmid: "39408657" },
+      { title: "Loss-of-function W4645R mutation in the RyR2-caffeine binding site: implications for synchrony and arrhythmogenesis.", pmid: "38908063" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa04261"],
   },
   ATP2A2: {
@@ -253,7 +283,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12q24.11",
     proteinPdbId: "1SU4",
     expression: ["심근", "골격근"],
-    pubmed: [{ title: "SERCA2a in cardiac relaxation", pmid: "22064430" }],
+    pubmed: [
+      { title: "Persistent Cutaneous Lesions of Darier Disease and Second-Hit Somatic Variants in ATP2A2 Gene.", pmid: "38536168" },
+      { title: "IL-37 Modulates Myocardial Calcium Handling via the p-STAT3/SERCA2a Axis in HF-Related Engineered Human Heart Tissue.", pmid: "38339835" },
+    ],
     relatedPathwayIds: ["hsa04260"],
   },
   PLN: {
@@ -273,7 +306,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "6q22.31",
     proteinPdbId: "2KYV",
     expression: ["심근"],
-    pubmed: [{ title: "Phospholamban regulation of SERCA", pmid: "12763848" }],
+    pubmed: [
+      { title: "Missense variants in phospholamban and cardiac myosin binding protein identified in patients with a family history and clinical diagnosis of dilated cardiomyopathy.", pmid: "38387507" },
+      { title: "Phenotypic and Genetic Factors Associated with Absence of Cardiomyopathy Symptoms in PLN:c.40_42delAGA Carriers.", pmid: "36622581" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa04261"],
   },
   TNNT2: {
@@ -294,7 +330,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1J1E",
     proteinPdbChain: "B",
     expression: ["심근"],
-    pubmed: [{ title: "Cardiac troponin T in contraction", pmid: "18006816" }],
+    pubmed: [
+      { title: "Cardiac troponin T N-domain variant destabilizes the actin interface resulting in disturbed myofilament function.", pmid: "37252999" },
+      { title: "De Novo Asp219Val Mutation in Cardiac Tropomyosin Associated with Hypertrophic Cardiomyopathy.", pmid: "36613463" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa05410"],
   },
   MYH7: {
@@ -314,7 +353,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "14q11.2",
     proteinPdbId: "4P7H",
     expression: ["심실 심근", "지근 골격근"],
-    pubmed: [{ title: "β-cardiac myosin and cardiomyopathy", pmid: "27247418" }],
+    pubmed: [
+      { title: "Exploring novel MYH7 gene variants using in silico analyses in Korean patients with cardiomyopathy.", pmid: "39237976" },
+      { title: "Incomplete-penetrant hypertrophic cardiomyopathy MYH7 G256E mutation causes hypercontractility and elevated mitochondrial respiration.", pmid: "38683993" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa05410"],
   },
   ACTC1: {
@@ -334,7 +376,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "15q14",
     proteinPdbId: "5JLH",
     expression: ["심근"],
-    pubmed: [{ title: "Cardiac actin in the sarcomere", pmid: "9736778" }],
+    pubmed: [
+      { title: "Variants in ACTC1 underlie distal arthrogryposis accompanied by congenital heart defects.", pmid: "37457373" },
+      { title: "Cardiac troponin T N-domain variant destabilizes the actin interface resulting in disturbed myofilament function.", pmid: "37252999" },
+    ],
     relatedPathwayIds: ["hsa04260", "hsa05410"],
   },
   ADRB1: {
@@ -354,7 +399,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "10q25.3",
     proteinPdbId: "2VT4",
     expression: ["심근", "전도계", "신장"],
-    pubmed: [{ title: "β1-adrenergic receptor in heart", pmid: "22300973" }],
+    pubmed: [
+      { title: "G protein-coupled estrogen receptor (GPER)/GPR30 forms a complex with the β(1)-adrenergic receptor, a membrane-associated guanylate kinase (MAGUK) scaffold protein, and protein kinase A anchoring protein (AKAP) 5 in MCF7 breast cancer cells.", pmid: "38211639" },
+      { title: "Associations between Selected ADRB1 and CYP2D6 Gene Polymorphisms in Children with Ventricular and Supraventricular Arrhythmias.", pmid: "38138160" },
+    ],
     relatedPathwayIds: ["hsa04261"],
   },
   GNAS: {
@@ -374,7 +422,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "20q13.32",
     proteinPdbId: "7BPH",
     expression: ["심근", "신장 집합관", "내분비 조직"],
-    pubmed: [{ title: "Gs alpha signaling", pmid: "23325230" }],
+    pubmed: [
+      { title: "GNAS, not a Highly Mutated Gene, Has Prognostic Significance and Carcinogenic Effects in Osteosarcoma.", pmid: "39305132" },
+      { title: "Molecular mechanism of the endothelin receptor type B interactions with Gs, Gi, and Gq.", pmid: "39043181" },
+    ],
     relatedPathwayIds: ["hsa04261", "hsa04962"],
   },
   PRKACA: {
@@ -394,7 +445,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "19p13.12",
     proteinPdbId: "1ATP",
     expression: ["심근", "신장 집합관", "전신"],
-    pubmed: [{ title: "PKA catalytic subunit signaling", pmid: "22482984" }],
+    pubmed: [
+      { title: "Increased Protein Kinase A Activity Induces Fibrolamellar Hepatocellular Carcinoma Features Independent of DNAJB1.", pmid: "38888469" },
+      { title: "PRKACA/PRKACB Fusions in Pancreatobiliary Intraductal Oncocytic Papillary Neoplasms Including Those With Atypical Morphology: An Analysis of 22 Cases Expanding Morphologic Spectrum.", pmid: "38841868" },
+    ],
     relatedPathwayIds: ["hsa04261", "hsa04962"],
   },
   MYBPC3: {
@@ -414,7 +468,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11p11.2",
     proteinPdbId: "5K6P",
     expression: ["심근"],
-    pubmed: [{ title: "MYBPC3 mutations in hypertrophic cardiomyopathy", pmid: "26914223" }],
+    pubmed: [
+      { title: "Cardiac myosin binding protein-C phosphorylation as a function of multiple protein kinase and phosphatase activities.", pmid: "38877002" },
+      { title: "Genetic Testing Yield and Clinical Characteristics of Hypertrophic Cardiomyopathy in Understudied Ethnic Groups: Insights From a New Zealand National Registry.", pmid: "38456273" },
+    ],
     relatedPathwayIds: ["hsa05410"],
   },
   TPM1: {
@@ -434,7 +491,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "15q22.2",
     proteinPdbId: "1C1G",
     expression: ["심근", "골격근"],
-    pubmed: [{ title: "Tropomyosin in muscle regulation", pmid: "18348937" }],
+    pubmed: [
+      { title: "Impact of Troponin in Cardiomyopathy Development Caused by Mutations in Tropomyosin.", pmid: "36555368" },
+      { title: "MYC-Induced Upregulation of Lncrna ELFN1-AS1 Contributes to Tumor Growth in Colorectal Cancer via Epigenetically Silencing TPM1.", pmid: "35857351" },
+    ],
     relatedPathwayIds: ["hsa05410"],
   },
 
@@ -456,7 +516,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12q23.1",
     proteinPdbId: "1OSH",
     expression: ["간세포", "장", "신장"],
-    pubmed: [{ title: "FXR as a bile acid sensor", pmid: "10334992" }],
+    pubmed: [
+      { title: "Modulatory Roles of AHR, FFAR2, FXR, and TGR5 Gene Expression in Metabolic-Associated Fatty Liver Disease and COVID-19 Outcomes.", pmid: "38932276" },
+      { title: "NR1H4 disease: rapidly progressing neonatal intrahepatic cholestasis and early death.", pmid: "38641832" },
+    ],
     relatedPathwayIds: ["hsa04976"],
   },
   ABCB11: {
@@ -476,7 +539,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "2q31.1",
     proteinPdbId: "9EGE",
     expression: ["간세포 담관측 세포막"],
-    pubmed: [{ title: "BSEP and bile salt export", pmid: "17998273" }],
+    pubmed: [
+      { title: "Cav-1 regulates the bile salt export pump on the canalicular membrane of hepatocytes by PKCα-associated signalling under cholesterol stimulation.", pmid: "38164042" },
+      { title: "Molecular and computational characterization of ABCB11 and ABCG5 variants in Tunisian patients with neonatal/infantile low-GGT intrahepatic cholestasis: Genetic diagnosis and genotype-phenotype correlation assessment.", pmid: "38108658" },
+    ],
     relatedPathwayIds: ["hsa04976"],
   },
   CYP7A1: {
@@ -496,7 +562,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "8q12.1",
     proteinPdbId: "3V8D",
     expression: ["간세포"],
-    pubmed: [{ title: "CYP7A1 and bile acid synthesis", pmid: "19965590" }],
+    pubmed: [
+      { title: "CYP7A1 Gene Induction via SHP-Dependent or Independent Mechanisms can Increase the Risk of Drug-Induced Liver Injury Independently or in Synergy with BSEP Inhibition.", pmid: "38485279" },
+      { title: "Pharmacological modulation of cholesterol 7α-hydroxylase (CYP7A1) as a therapeutic strategy for hypercholesterolemia.", pmid: "38154545" },
+    ],
     relatedPathwayIds: ["hsa04976"],
   },
   SLC10A1: {
@@ -516,7 +585,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "14q24.1",
     proteinPdbId: "7ZYI",
     expression: ["간세포 혈액측 세포막"],
-    pubmed: [{ title: "NTCP in bile acid uptake", pmid: "24140062" }],
+    pubmed: [
+      { title: "The loss of hepatitis B virus receptor NTCP/SLC10A1 in human liver cancer cells is due to epigenetic silencing.", pmid: "39297647" },
+      { title: "SLC10A1 rs2296651 variant (S267F mutation) predicts biochemical traits, hepatitis B virus infection susceptibility and the risk of gallstone disease.", pmid: "38869622" },
+    ],
     relatedPathwayIds: ["hsa04976"],
   },
   SREBF1: {
@@ -536,7 +608,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "17p11.2",
     proteinPdbId: "1AM9",
     expression: ["간세포", "지방조직"],
-    pubmed: [{ title: "SREBP-1 in lipogenesis", pmid: "12208414" }],
+    pubmed: [
+      { title: "FUT2 promotes colorectal cancer metastasis by reprogramming fatty acid metabolism via YAP/TAZ signaling and SREBP-1.", pmid: "39390072" },
+      { title: "CTBP1 links metabolic syndrome to polycystic ovary syndrome through interruption of aromatase and SREBP1.", pmid: "39294274" },
+    ],
     relatedPathwayIds: ["R-HSA-2426168"],
   },
   FASN: {
@@ -556,7 +631,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "17q25.3",
     proteinPdbId: "2VZ8",
     expression: ["간세포", "지방조직"],
-    pubmed: [{ title: "Fatty acid synthase in metabolism", pmid: "17882480" }],
+    pubmed: [
+      { title: "A complex multisystem disorder including hypopituitarism and hypoparathyroidism, associated with mutation in the gene encoding fatty acid synthase (FASN).", pmid: "40185395" },
+      { title: "FASN contributes to ADM resistance of diffuse large B-cell lymphoma by inhibiting ferroptosis via nf-κB/STAT3/GPX4 axis.", pmid: "39345091" },
+    ],
     relatedPathwayIds: ["R-HSA-2426168"],
   },
   HMGCR: {
@@ -576,7 +654,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "5q13.3",
     proteinPdbId: "1HW9",
     expression: ["간세포", "전신"],
-    pubmed: [{ title: "HMG-CoA reductase and statins", pmid: "11413485" }],
+    pubmed: [
+      { title: "Genetic Polymorphisms in the HMGCR Gene and Associations with Cognitive Decline in Parkinson's Disease Patients.", pmid: "39201649" },
+      { title: "Peroxisomal Localization of a Truncated HMG-CoA Reductase under Low Cholesterol Conditions.", pmid: "38397481" },
+    ],
     relatedPathwayIds: ["R-HSA-2426168"],
   },
   LDLR: {
@@ -596,7 +677,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "19p13.2",
     proteinPdbId: "1N7D",
     expression: ["간세포", "전신"],
-    pubmed: [{ title: "LDL receptor and cholesterol clearance", pmid: "3513311" }],
+    pubmed: [
+      { title: "Methylation status of LDLR, PCSK9 and LDLRAP1 is associated with cardiovascular events in familial hypercholesterolemia.", pmid: "38884343" },
+      { title: "Association between Apo B, LDL-R and PCSK9 gene polymorphisms with coronary artery diseases in Egyptians.", pmid: "38874786" },
+    ],
     relatedPathwayIds: ["R-HSA-2426168"],
   },
   PPARA: {
@@ -616,7 +700,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "22q13.31",
     proteinPdbId: "2P54",
     expression: ["간세포", "심근", "신장"],
-    pubmed: [{ title: "PPARα in fatty acid oxidation", pmid: "16601267" }],
+    pubmed: [
+      { title: "Weighted gene co-expression network analysis identified GBP2 connected to PPARα activity and liver cancer.", pmid: "39251636" },
+      { title: "Current View on PPAR-α and Its Relation to Neurosteroids in Alzheimer's Disease and Other Neuropsychiatric Disorders: Promising Targets in a Therapeutic Strategy.", pmid: "39000217" },
+    ],
     relatedPathwayIds: ["R-HSA-2426168"],
   },
   NR1I2: {
@@ -636,7 +723,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "3q13.33",
     proteinPdbId: "1ILG",
     expression: ["간세포", "장"],
-    pubmed: [{ title: "PXR as a xenobiotic sensor", pmid: "11248085" }],
+    pubmed: [
+      { title: "NEAT1_2 and DAZAP1, Paraspeckle Components, Interact with PXR to Negatively Regulate CYP3A4 Induction.", pmid: "37349114" },
+      { title: "Effect of pregnane X receptor and cytochrome P450 oxidoreductase gene polymorphisms on trough concentrations of rivaroxaban and edoxaban in patients with nonvalvular atrial fibrillation.", pmid: "36951964" },
+    ],
     relatedPathwayIds: ["hsa00982"],
   },
   CYP3A4: {
@@ -656,7 +746,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "7q22.1",
     proteinPdbId: "1TQN",
     expression: ["간세포", "소장"],
-    pubmed: [{ title: "CYP3A4 in drug metabolism", pmid: "18004205" }],
+    pubmed: [
+      { title: "Genetic variation present in the CYP3A4 gene in Ni-Vanuatu and Kenyan populations in malaria endemicity.", pmid: "39079373" },
+      { title: "Effects of CYP3A4 genetic polymorphisms on the pharmacokinetics and efficacy of perampanel in Chinese pediatric patients with epilepsy.", pmid: "38996572" },
+    ],
     relatedPathwayIds: ["hsa00982"],
   },
   CYP2E1: {
@@ -676,7 +769,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "10q26.3",
     proteinPdbId: "3E4E",
     expression: ["간세포"],
-    pubmed: [{ title: "CYP2E1 and oxidative stress", pmid: "18095055" }],
+    pubmed: [
+      { title: "CYP2D6, CYP2E1 Gene Polymorphisms and Gastrointestinal Cancer Risk in Rural Maharashtra: A Hospital Based Case-Control Study.", pmid: "39342583" },
+      { title: "Genetic polymorphisms in FABP2, CYP2E1, and TP53 genes are potentially associated with colorectal cancer susceptibility.", pmid: "39242607" },
+    ],
     relatedPathwayIds: ["hsa00982"],
   },
 
@@ -698,7 +794,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "16p13.3",
     proteinPdbId: "7W01",
     expression: ["폐포 제2형 상피세포"],
-    pubmed: [{ title: "ABCA3 in surfactant lipid transport", pmid: "15044640" }],
+    pubmed: [
+      { title: "Evaluation of the Copy Number Variants and Single-Nucleotide Polymorphisms of ABCA3 in Newborns with Respiratory Distress Syndrome-A Pilot Study.", pmid: "38541145" },
+      { title: "Similarities and differences of interstitial lung disease associated with pathogenic variants in SFTPC and ABCA3 in adults.", pmid: "38345107" },
+    ],
     relatedPathwayIds: ["R-HSA-5683826"],
   },
   SFTPB: {
@@ -718,7 +817,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "2p11.2",
     proteinPdbId: "1SSZ",
     expression: ["폐포 제2형 상피세포"],
-    pubmed: [{ title: "Surfactant protein B function", pmid: "12554627" }],
+    pubmed: [
+      { title: "SFTPB (rs11130866) and NR3C1 (rs41423247) gene variants as potential clinical biomarkers for personalized treatment strategy selection in patients with severe COVID-19 pneumonia.", pmid: "36460583" },
+      { title: "Silica nanoparticle exposure inhibits surfactant protein A and B in A549 cells through ROS-mediated JNK/c-Jun signaling pathway.", pmid: "35689653" },
+    ],
     relatedPathwayIds: ["R-HSA-5683826"],
   },
   SFTPC: {
@@ -738,7 +840,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "8p21.3",
     proteinPdbId: "2YAD",
     expression: ["폐포 제2형 상피세포"],
-    pubmed: [{ title: "Surfactant protein C in lung", pmid: "12554628" }],
+    pubmed: [
+      { title: "Similarities and differences of interstitial lung disease associated with pathogenic variants in SFTPC and ABCA3 in adults.", pmid: "38345107" },
+      { title: "Decreased expression of surfactant Protein-C and CD74 in alveolar epithelial cells during influenza virus A(H1N1)pdm09 and H3N2 infection.", pmid: "36736545" },
+    ],
     relatedPathwayIds: ["R-HSA-5683826"],
   },
   SFTPA1: {
@@ -757,7 +862,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "sentry",
     chromosome: "10q22.3",
     expression: ["폐포 제2형 상피세포"],
-    pubmed: [{ title: "Surfactant protein A in innate immunity", pmid: "16337921" }],
+    pubmed: [
+      { title: "Human surfactant protein A inhibits SARS-CoV-2 infectivity and alleviates lung injury in a mouse infection model.", pmid: "38596675" },
+      { title: "Multivalent, calcium-independent binding of surfactant protein A and D to sulfated glycosaminoglycans of the alveolar epithelial glycocalyx.", pmid: "38375572" },
+    ],
     relatedPathwayIds: ["R-HSA-5683826"],
   },
   HIF1A: {
@@ -777,7 +885,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "14q23.2",
     proteinPdbId: "4ZPK",
     expression: ["폐혈관", "전신 (저산소 조건)"],
-    pubmed: [{ title: "HIF-1α and the hypoxic response", pmid: "22673617" }],
+    pubmed: [
+      { title: "β(2)-integrins control HIF1α activation in human neutrophils.", pmid: "39469705" },
+      { title: "Impact of Hypoxia and the Levels of Transcription Factor HIF-1α and JMJD1A on Epithelial-Mesenchymal Transition in Head and Neck Squamous Cell Carcinoma Cell Lines.", pmid: "39467631" },
+    ],
     relatedPathwayIds: ["hsa04066"],
   },
   VHL: {
@@ -798,7 +909,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1LM8",
     proteinPdbChain: "V",
     expression: ["폐", "신장", "전신"],
-    pubmed: [{ title: "VHL and HIF degradation", pmid: "11742060" }],
+    pubmed: [
+      { title: "Clinical implications of activation of the LIMD1-VHL-HIF1α pathway during head-&-neck squamous cell carcinoma development.", pmid: "39382421" },
+      { title: "Network modeling links kidney developmental programs and the cancer type-specificity of VHL mutations.", pmid: "39362887" },
+    ],
     relatedPathwayIds: ["hsa04066"],
   },
   VEGFA: {
@@ -818,7 +932,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "6p21.1",
     proteinPdbId: "1VPF",
     expression: ["폐혈관 내피", "전신"],
-    pubmed: [{ title: "VEGF-A in angiogenesis", pmid: "12778130" }],
+    pubmed: [
+      { title: "Association of the VEGF 2578C>A Polymorphism With Metabolic Syndrome and Erectile Dysfunction.", pmid: "39397482" },
+      { title: "Association of VEGFA polymorphisms with the risk of oesophageal cancer in Punjab, India: A case-control study.", pmid: "39382410" },
+    ],
     relatedPathwayIds: ["hsa04066"],
   },
   IL4: {
@@ -838,7 +955,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "5q31.1",
     proteinPdbId: "2B8U",
     expression: ["Th2 세포", "비만세포", "기도 점막"],
-    pubmed: [{ title: "IL-4 in type 2 immunity and asthma", pmid: "26192136" }],
+    pubmed: [
+      { title: "The aryl hydrocarbon receptor shapes monocyte transcriptional responses to interleukin-4 by prolonging STAT6 binding to promoters.", pmid: "39405377" },
+      { title: "A call for clinical trials in glioblastoma multiforme for interleukin 4, interleukin 6, interleukin 13 and CD40.", pmid: "39242402" },
+    ],
     relatedPathwayIds: ["hsa05310"],
   },
   IL13: {
@@ -858,7 +978,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "5q31.1",
     proteinPdbId: "3L5X",
     expression: ["Th2 세포", "기도 점막"],
-    pubmed: [{ title: "IL-13 as central mediator of asthma", pmid: "26550069" }],
+    pubmed: [
+      { title: "Seasonal distribution and correlation between IL-10 and IL-13 gene polymorphism and their expression in scabies-infected patients.", pmid: "39380276" },
+      { title: "A call for clinical trials in glioblastoma multiforme for interleukin 4, interleukin 6, interleukin 13 and CD40.", pmid: "39242402" },
+    ],
     relatedPathwayIds: ["hsa05310"],
   },
   MUC5AC: {
@@ -878,7 +1001,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11p15.5",
     proteinPdbId: "9GVJ",
     expression: ["기도 배상세포", "섬모 상피"],
-    pubmed: [{ title: "MUC5AC in airway mucus", pmid: "24337157" }],
+    pubmed: [
+      { title: "KDELR2 is necessary for chronic obstructive pulmonary disease airway Mucin5AC hypersecretion via an IRE1α/XBP-1s-dependent mechanism.", pmid: "39365189" },
+      { title: "Predictive Value of MUC5AC Signature in Pancreatic Ductal Adenocarcinoma: A Hypothesis Based on Preclinical Evidence.", pmid: "37175794" },
+    ],
     relatedPathwayIds: ["hsa05310"],
   },
 
@@ -900,7 +1026,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "1q32.1",
     proteinPdbId: "2REN",
     expression: ["신장 사구체옆세포"],
-    pubmed: [{ title: "Renin and blood pressure regulation", pmid: "20948526" }],
+    pubmed: [
+      { title: "Glaucoma and the ocular renin-angiotensin-aldosterone system: Update on molecular signalling and treatment perspectives.", pmid: "39127136" },
+      { title: "The role of the brain renin-angiotensin system in Parkinson´s disease.", pmid: "38622720" },
+    ],
     relatedPathwayIds: ["hsa04614"],
   },
   AGT: {
@@ -920,7 +1049,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "1q42.2",
     proteinPdbId: "5M3Y",
     expression: ["간세포 (혈중 분비)", "신장"],
-    pubmed: [{ title: "Angiotensinogen in the renin-angiotensin system", pmid: "22733876" }],
+    pubmed: [
+      { title: "Glaucoma and the ocular renin-angiotensin-aldosterone system: Update on molecular signalling and treatment perspectives.", pmid: "39127136" },
+      { title: "The role of the brain renin-angiotensin system in Parkinson´s disease.", pmid: "38622720" },
+    ],
     relatedPathwayIds: ["hsa04614"],
   },
   ACE: {
@@ -940,7 +1072,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "17q23.3",
     proteinPdbId: "1O86",
     expression: ["폐혈관 내피", "신장", "전신 혈관"],
-    pubmed: [{ title: "ACE and blood pressure control", pmid: "12045255" }],
+    pubmed: [
+      { title: "Association between Complex ACTN3 and ACE Gene Polymorphisms and Elite Endurance Sports in Koreans: A Case-Control Study.", pmid: "39336701" },
+      { title: "Interaction between angiotensin-converting enzyme gene rs4343 polymorphism, environment factors, and angiotensin II level on susceptibility to knee osteoarthritis.", pmid: "39160009" },
+    ],
     relatedPathwayIds: ["hsa04614"],
   },
   AGTR1: {
@@ -960,7 +1095,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "3q24",
     proteinPdbId: "6OS2",
     expression: ["신장 세뇨관", "혈관 평활근", "부신"],
-    pubmed: [{ title: "AT1 receptor signaling", pmid: "17994052" }],
+    pubmed: [
+      { title: "AGTR1 variant rs2638355 is associated with increased salt sensitivity of blood pressure: a female-specific effect in individuals from the HyperPath cohort.", pmid: "39288250" },
+      { title: "Associations of ACE I/D and AGTR1 rs5182 polymorphisms with diabetes and their effects on lipids in an elderly Chinese population.", pmid: "39080710" },
+    ],
     relatedPathwayIds: ["hsa04614", "hsa04960"],
   },
   NR3C2: {
@@ -980,7 +1118,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "4q31.23",
     proteinPdbId: "2AA2",
     expression: ["신장 원위세뇨관·집합관"],
-    pubmed: [{ title: "Mineralocorticoid receptor in sodium balance", pmid: "23411553" }],
+    pubmed: [
+      { title: "First Evidence of Mineralocorticoid Receptor Gene and Protein Expression in Rat and Human Thyroid Tissues and Cell Cultures.", pmid: "38255827" },
+      { title: "Mineralocorticoid receptor overactivation: targeting systemic impact with non-steroidal mineralocorticoid receptor antagonists.", pmid: "38127122" },
+    ],
     relatedPathwayIds: ["hsa04960"],
   },
   SGK1: {
@@ -1000,7 +1141,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "6q23.2",
     proteinPdbId: "2R5T",
     expression: ["신장 세뇨관"],
-    pubmed: [{ title: "SGK1 in renal sodium transport", pmid: "16887046" }],
+    pubmed: [
+      { title: "Cholesterol promotes IFNG mRNA expression in CD4(+) effector/memory cells by SGK1 activation.", pmid: "39366761" },
+      { title: "MicroRNA-223-3p Targeting SGK1 Regulates Apoptosis and Inflammation in Sepsis-Associated Acute Kidney Injury.", pmid: "39025049" },
+    ],
     relatedPathwayIds: ["hsa04960"],
   },
   SCNN1A: {
@@ -1020,7 +1164,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12p13.31",
     proteinPdbId: "6WTH",
     expression: ["신장 집합관", "원위세뇨관"],
-    pubmed: [{ title: "ENaC in sodium reabsorption", pmid: "19587288" }],
+    pubmed: [
+      { title: "Association between low-sodium salt intervention and long-term blood pressure changes is modified by ENaC genetic variation: a gene-diet interaction analysis in a randomized controlled trial.", pmid: "37843257" },
+      { title: "Activation of SGK1/ENaC Signaling Pathway Improves the Level of Decidualization in Unexplained Recurrent Spontaneous Abortion.", pmid: "37280474" },
+    ],
     relatedPathwayIds: ["hsa04960"],
   },
   AVPR2: {
@@ -1041,7 +1188,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "9HB3",
     proteinPdbChain: "R",
     expression: ["신장 집합관"],
-    pubmed: [{ title: "V2 receptor and water reabsorption", pmid: "18305125" }],
+    pubmed: [
+      { title: "Role of the V2R-βarrestin-Gβγ complex in promoting G protein translocation to endosomes.", pmid: "38972875" },
+      { title: "Gαs and Gαq/11 protein coupling bias of two AVPR2 mutants (R68W and V162A) that cause nephrogenic diabetes insipidus.", pmid: "35901021" },
+    ],
     relatedPathwayIds: ["hsa04962"],
   },
   AQP2: {
@@ -1061,7 +1211,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12q13.12",
     proteinPdbId: "4NEF",
     expression: ["신장 집합관"],
-    pubmed: [{ title: "Aquaporin-2 in urine concentration", pmid: "18431593" }],
+    pubmed: [
+      { title: "Diurnal rhythm of urinary aquaporin-2 in children with primary monosymptomatic nocturnal enuresis.", pmid: "38812639" },
+      { title: "Ionic Liquid Gating Induces Anomalous Permeation through Membrane Channel Proteins.", pmid: "38695646" },
+    ],
     relatedPathwayIds: ["hsa04962"],
   },
   NPHS1: {
@@ -1080,7 +1233,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "zipper",
     chromosome: "19q13.12",
     expression: ["신장 사구체 족세포"],
-    pubmed: [{ title: "Nephrin and the slit diaphragm", pmid: "11562357" }],
+    pubmed: [
+      { title: "Anti-nephrin antibodies in steroid-sensitive nephrotic syndrome in Japanese children.", pmid: "37495741" },
+      { title: "Loss of S1P Lyase Expression in Human Podocytes Causes a Reduction in Nephrin Expression That Involves PKCδ Activation.", pmid: "36834691" },
+    ],
     relatedPathwayIds: ["R-HSA-373753"],
   },
   NPHS2: {
@@ -1099,7 +1255,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "anchor",
     chromosome: "1q25.2",
     expression: ["신장 사구체 족세포"],
-    pubmed: [{ title: "Podocin in the podocyte slit diaphragm", pmid: "10742096" }],
+    pubmed: [
+      { title: "A small molecule chaperone rescues keratin-8 mediated trafficking of misfolded podocin to correct genetic Nephrotic Syndrome.", pmid: "37995908" },
+      { title: "Copy number variation analysis in 138 families with steroid-resistant nephrotic syndrome identifies causal homozygous deletions in PLCE1 and NPHS2 in two families.", pmid: "37670083" },
+    ],
     relatedPathwayIds: ["R-HSA-373753"],
   },
   PODXL: {
@@ -1118,7 +1277,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "repel",
     chromosome: "7q32.3",
     expression: ["신장 사구체 족세포", "혈관 내피"],
-    pubmed: [{ title: "Podocalyxin maintains podocyte architecture", pmid: "11724794" }],
+    pubmed: [
+      { title: "Podocalyxin promotes the formation of compact and chemoresistant cancer spheroids in high grade serous carcinoma.", pmid: "38553472" },
+      { title: "Podocalyxin molecular characteristics and endometrial expression: high conservation between humans and macaques but divergence in mice†.", pmid: "35284933" },
+    ],
     relatedPathwayIds: ["R-HSA-373753"],
   },
 
@@ -1140,7 +1302,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "7p13",
     proteinPdbId: "1V4S",
     expression: ["췌장 베타세포", "간세포"],
-    pubmed: [{ title: "Glucokinase mutations and MODY", pmid: "1303265" }],
+    pubmed: [
+      { title: "G-quadruplex forming regions in GCK and TM6SF2 are targets for differential DNA methylation in metabolic disease and hepatocellular carcinoma patients.", pmid: "39215018" },
+      { title: "Characterizing glucokinase variant mechanisms using a multiplexed abundance assay.", pmid: "38627865" },
+    ],
     relatedPathwayIds: ["hsa04911"],
   },
   ABCC8: {
@@ -1161,7 +1326,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "7S5V",
     proteinPdbChain: "E",
     expression: ["췌장 베타세포"],
-    pubmed: [{ title: "SUR1 in insulin secretion and neonatal diabetes", pmid: "15115830" }],
+    pubmed: [
+      { title: "Congenital Hyperinsulinism Caused by Mutations in ABCC8 Gene Associated with Early-Onset Neonatal Hypoglycemia: Genetic Heterogeneity Correlated with Phenotypic Variability.", pmid: "38791571" },
+      { title: "Dynamic duo: Kir6 and SUR in K(ATP) channel structure and function.", pmid: "38489043" },
+    ],
     relatedPathwayIds: ["hsa04911"],
   },
   KCNJ11: {
@@ -1181,7 +1349,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11p15.1",
     proteinPdbId: "9KGL",
     expression: ["췌장 베타세포", "신경세포"],
-    pubmed: [{ title: "Kir6.2 mutations causing neonatal diabetes", pmid: "15115830" }],
+    pubmed: [
+      { title: "Potassium inwardly-rectifying channel subfamily J member 11 (KCNJ11) gene polymorphism in Egyptian type 2 diabetic patients: a single-center study.", pmid: "39508922" },
+      { title: "Molecular Dynamics Simulation of Kir6.2 Variants Reveals Potential Association with Diabetes Mellitus.", pmid: "38675722" },
+    ],
     relatedPathwayIds: ["hsa04911"],
   },
   GLP1R: {
@@ -1201,7 +1372,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "6p21.2",
     proteinPdbId: "5VEW",
     expression: ["췌장 베타세포", "뇌", "위장관"],
-    pubmed: [{ title: "GLP-1 receptor agonists in diabetes", pmid: "28578789" }],
+    pubmed: [
+      { title: "Glucagon-like peptide 1 receptor is a T cell-negative costimulatory molecule.", pmid: "38838642" },
+      { title: "Glucagon-like-peptide 1 receptor agonism and attempted suicide: A Mendelian randomisation study to assess a potential causal association.", pmid: "38778795" },
+    ],
     relatedPathwayIds: ["hsa04911"],
   },
   INS: {
@@ -1221,7 +1395,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11p15.5",
     proteinPdbId: "4INS",
     expression: ["췌장 베타세포"],
-    pubmed: [{ title: "Insulin biosynthesis, secretion and action", pmid: "24892635" }],
+    pubmed: [
+      { title: "Association of polymorphism of NLRP3, ICAM-1, PTPN22, INS genes in childhood onset type 1 diabetes in a Pakistani population.", pmid: "39425874" },
+      { title: "Insulin regulation of regional lipolysis in upper-body obese and lean humans.", pmid: "38602778" },
+    ],
     relatedPathwayIds: ["hsa04911"],
   },
   PRSS1: {
@@ -1241,7 +1418,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "7q34",
     proteinPdbId: "1TRN",
     expression: ["췌장 선포세포"],
-    pubmed: [{ title: "PRSS1 mutations in hereditary pancreatitis", pmid: "8841182" }],
+    pubmed: [
+      { title: "[Influence of environmental factors and polymorphic loci rs6580502 of the SPINK1 gene, rs10273639 of the PRSS1 gene, rs213950 of the CFTR gene on the risk of developing acute alcoholic-alimentary pancreatitis].", pmid: "36883543" },
+      { title: "A rare PRSS1 p.S127C mutation is associated with chronic pancreatitis and causes misfolding-induced ER-stress.", pmid: "36369231" },
+    ],
     relatedPathwayIds: ["hsa04972", "hsa04974"],
   },
   PNLIP: {
@@ -1262,7 +1442,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1LPA",
     proteinPdbChain: "B",
     expression: ["췌장 선포세포"],
-    pubmed: [{ title: "Pancreatic lipase in fat digestion", pmid: "10079068" }],
+    pubmed: [
+      { title: "Exploring the enigmatic association between PNLIP variants and risk of chronic pancreatitis in a large Chinese cohort.", pmid: "38485544" },
+      { title: "Pancreatic lipase and its related proteins: where are we now?", pmid: "38081381" },
+    ],
     relatedPathwayIds: ["hsa04972"],
   },
   AMY2A: {
@@ -1282,7 +1465,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "1p21.1",
     proteinPdbId: "5U3A",
     expression: ["췌장 선포세포"],
-    pubmed: [{ title: "Pancreatic amylase and starch digestion", pmid: "8672487" }],
+    pubmed: [
+      { title: "Recurrent evolution and selection shape structural diversity at the amylase locus.", pmid: "39232174" },
+      { title: "In silico assessment of potential leads identified from Bauhinia rufescens Lam. as α-glucosidase and α-amylase inhibitors.", pmid: "32718219" },
+    ],
     relatedPathwayIds: ["hsa04972"],
   },
   CFTR: {
@@ -1302,7 +1488,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "7q31.2",
     proteinPdbId: "5UAK",
     expression: ["췌관", "기도 상피", "장 상피"],
-    pubmed: [{ title: "Identification of the cystic fibrosis gene", pmid: "2475911" }],
+    pubmed: [
+      { title: "Mutation accumulation in H. sapiens F508del CFTR countermands dN/dS type genomic analysis.", pmid: "39024311" },
+      { title: "Loss of CFTR Reverses Senescence Hallmarks in SARS-CoV-2 Infected Bronchial Epithelial Cells.", pmid: "38892373" },
+    ],
     relatedPathwayIds: ["hsa04972"],
   },
 
@@ -1323,7 +1512,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "hormone",
     chromosome: "17q21.2",
     expression: ["위 유문부 G세포"],
-    pubmed: [{ title: "Gastrin and the regulation of gastric acid secretion", pmid: "16460276" }],
+    pubmed: [
+      { title: "Elevated Serum Gastrin Is Associated with Melanoma Progression: Putative Role in Increased Migration and Invasion of Melanoma Cells.", pmid: "38069171" },
+      { title: "Anatomical basis of gastrin- and CCK-secreting cells and their functions. A review.", pmid: "37258205" },
+    ],
     relatedPathwayIds: ["hsa04971", "hsa04974"],
   },
   HRH2: {
@@ -1344,7 +1536,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "9IXJ",
     proteinPdbChain: "R",
     expression: ["위 벽세포", "심장", "면역세포"],
-    pubmed: [{ title: "Histamine H2 receptor and acid secretion", pmid: "1352935" }],
+    pubmed: [
+      { title: "Cryo-EM structure of cell-free synthesized human histamine 2 receptor/G(s) complex in nanodisc environment.", pmid: "38418462" },
+      { title: "The mRNA expression and secretion of granzyme B are up-regulated via the histamine H2 receptor in human CD4(+) T cells.", pmid: "37470818" },
+    ],
     relatedPathwayIds: ["hsa04971"],
   },
   ATP4A: {
@@ -1363,7 +1558,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "protonpump",
     chromosome: "19q13.12",
     expression: ["위 벽세포"],
-    pubmed: [{ title: "Gastric H,K-ATPase and proton pump inhibitors", pmid: "17170415" }],
+    pubmed: [
+      { title: "Type IV Gastric Carcinoids in the Stomach Caused by ATP4A Gene Mutations.", pmid: "31401365" },
+      { title: "A cumulative effect involving malfunction of the PTH1R and ATP4A genes explains a familial gastric neuroendocrine tumor with hypothyroidism and arthritis.", pmid: "28474257" },
+    ],
     relatedPathwayIds: ["hsa04971"],
   },
   KCNQ1: {
@@ -1383,7 +1581,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "11p15.5",
     proteinPdbId: "6V00",
     expression: ["위 벽세포", "심근", "내이"],
-    pubmed: [{ title: "KCNQ1 in gastric acid secretion and cardiac rhythm", pmid: "12805558" }],
+    pubmed: [
+      { title: "Novel associations between KCNQ1 rs231840 polymorphism and preeclampsia in Chinese gestational women: A case-control candidate genetic study.", pmid: "39465874" },
+      { title: "Genetic characterization of KCNQ1 variants improves risk stratification in type 1 long QT syndrome patients.", pmid: "38825991" },
+    ],
     relatedPathwayIds: ["hsa04971"],
   },
   PGC: {
@@ -1404,7 +1605,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1HTR",
     proteinPdbChain: "B",
     expression: ["위 주세포"],
-    pubmed: [{ title: "Pepsinogen C activation and protein digestion", pmid: "3902838" }],
+    pubmed: [
+      { title: "Medium and large alleles of the PGC gene are risk factors for gastric cancer.", pmid: "37038800" },
+      { title: "Pepsinogen II in gastritis and Helicobacter pylori infection.", pmid: "34997989" },
+    ],
     relatedPathwayIds: ["hsa04974"],
   },
   SLC15A1: {
@@ -1424,7 +1628,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "13q33.1",
     proteinPdbId: "7PMX",
     expression: ["소장 상피"],
-    pubmed: [{ title: "PEPT1 in intestinal peptide absorption", pmid: "24188634" }],
+    pubmed: [
+      { title: "Expression, Regulation, and Role of an Oligopeptide Transporter: PEPT1 in Tumors.", pmid: "35546503" },
+      { title: "Expression, purification and characterization of human proton-coupled oligopeptide transporter 1 hPEPT1.", pmid: "34637915" },
+    ],
     relatedPathwayIds: ["hsa04974"],
   },
 
@@ -1446,7 +1653,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "3q26.1",
     proteinPdbId: "3LPP",
     expression: ["소장 융모 상피"],
-    pubmed: [{ title: "Sucrase-isomaltase deficiency", pmid: "11340299" }],
+    pubmed: [
+      { title: "Congenital Sucrase-Isomaltase Deficiency: Same Mutation with Different Clinical Presentations.", pmid: "39128102" },
+      { title: "Prevalence of congenital sucrase-isomaltase deficiency in Turkey may be much higher than the estimates.", pmid: "37349966" },
+    ],
     relatedPathwayIds: ["hsa04973"],
   },
   SLC5A1: {
@@ -1466,7 +1676,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "22q12.3",
     proteinPdbId: "7SLA",
     expression: ["소장 융모 상피", "신장 세뇨관"],
-    pubmed: [{ title: "SGLT1 and intestinal glucose absorption", pmid: "21527736" }],
+    pubmed: [
+      { title: "SLC5A1 Variants in Turkish Patients with Congenital Glucose-Galactose Malabsorption.", pmid: "37510265" },
+      { title: "Obesity and overweight are linked to increased sodium-glucose cotransporter 1 and glucose transporter 5 levels in duodenum.", pmid: "36746764" },
+    ],
     relatedPathwayIds: ["hsa04973"],
   },
   SLC2A2: {
@@ -1485,7 +1698,10 @@ export const GENES: Record<string, GeneDetail> = {
     microMapAsset: "exit",
     chromosome: "3q26.2",
     expression: ["소장 상피", "간세포", "췌장 베타세포"],
-    pubmed: [{ title: "GLUT2 in glucose transport and sensing", pmid: "18400146" }],
+    pubmed: [
+      { title: "The glucose transporter 2 regulates CD8(+) T cell function via environment sensing.", pmid: "37884694" },
+      { title: "Association Between the SLC2A2 Gene rs1499821 Polymorphism and Caries Susceptibility.", pmid: "37257183" },
+    ],
     relatedPathwayIds: ["hsa04973"],
   },
   WNT3: {
@@ -1506,7 +1722,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "6AHY",
     proteinPdbChain: "B",
     expression: ["장샘 니치", "발생기 조직"],
-    pubmed: [{ title: "Wnt signaling in intestinal stem cells", pmid: "24412651" }],
+    pubmed: [
+      { title: "LINC01023 Promotes the Hepatoblastoma Tumorigenesis via miR-378a-5p/WNT3 Axis.", pmid: "36576714" },
+      { title: "Four Genes Predictive for the Severity of Hematological Damage Reveal a Similar Response after X Irradiation and Chemotherapy.", pmid: "36480042" },
+    ],
     relatedPathwayIds: ["hsa04310"],
   },
   APC: {
@@ -1526,7 +1745,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "5q22.2",
     proteinPdbId: "3NMZ",
     expression: ["장 상피", "전신"],
-    pubmed: [{ title: "APC mutations initiate colorectal tumorigenesis", pmid: "1651174" }],
+    pubmed: [
+      { title: "APC and ZBTB2 May Mediate M2 Macrophage Infiltration to Promote the Development of Renal Fibrosis: A Bioinformatics Analysis.", pmid: "39328595" },
+      { title: "Plasma-Derived Extracellular Vesicles and Non-Extracellular Vesicle Components from APC(Min/+) Mice Promote Pro-Tumorigenic Activities and Activate Human Colonic Fibroblasts via the NF-κB Signaling Pathway.", pmid: "39056778" },
+    ],
     relatedPathwayIds: ["hsa04310", "hsa05210"],
   },
   CTNNB1: {
@@ -1546,7 +1768,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "3p22.1",
     proteinPdbId: "1G3J",
     expression: ["장 상피", "전신"],
-    pubmed: [{ title: "β-catenin in Wnt signaling and cancer", pmid: "22682243" }],
+    pubmed: [
+      { title: "BRCC36 regulates β-catenin ubiquitination to alleviate vascular calcification in chronic kidney disease.", pmid: "39227917" },
+      { title: "SLC13A3 is a major effector downstream of activated β-catenin in liver cancer pathogenesis.", pmid: "39215042" },
+    ],
     relatedPathwayIds: ["hsa04310", "hsa05210"],
   },
   TCF7L2: {
@@ -1567,7 +1792,10 @@ export const GENES: Record<string, GeneDetail> = {
     proteinPdbId: "1JDH",
     proteinPdbChain: "B",
     expression: ["장 상피", "췌장", "전신"],
-    pubmed: [{ title: "TCF7L2 variants and type 2 diabetes risk", pmid: "16415884" }],
+    pubmed: [
+      { title: "Circ_0004674 regulation of glycolysis and proliferation mechanism of osteosarcoma through miR-140-3p/TCF4 pathway.", pmid: "39243204" },
+      { title: "Transcription factor 7 like 2 promotes metastasis in hepatocellular carcinoma via NEDD9-mediated activation of AKT/mTOR signaling pathway.", pmid: "39060928" },
+    ],
     relatedPathwayIds: ["hsa04310"],
   },
   MYC: {
@@ -1587,7 +1815,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "8q24.21",
     proteinPdbId: "1NKP",
     expression: ["증식 조직", "장샘", "전신"],
-    pubmed: [{ title: "MYC as a target of Wnt signaling in colon cancer", pmid: "9727977" }],
+    pubmed: [
+      { title: "WDR20 prevents hepatocellular carcinoma senescence by orchestrating the simultaneous USP12/46-mediated deubiquitination of c-Myc.", pmid: "39432777" },
+      { title: "ADAMTS4 exacerbates lung cancer progression via regulating c-Myc protein stability and activating MAPK signaling pathway.", pmid: "39415271" },
+    ],
     relatedPathwayIds: ["hsa04310", "hsa05210"],
   },
   KRAS: {
@@ -1607,7 +1838,10 @@ export const GENES: Record<string, GeneDetail> = {
     chromosome: "12p12.1",
     proteinPdbId: "4OBE",
     expression: ["장 상피", "전신"],
-    pubmed: [{ title: "KRAS mutations in colorectal cancer", pmid: "18316791" }],
+    pubmed: [
+      { title: "Association between KRAS mutation and alcohol consumption in Brazilian patients with colorectal cancer.", pmid: "39488539" },
+      { title: "KRAS mutation promotes the colonization of Fusobacterium nucleatum in colorectal cancer by down-regulating SERTAD4.", pmid: "39462261" },
+    ],
     relatedPathwayIds: ["hsa05210"],
   },
 };

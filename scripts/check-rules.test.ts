@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { GeneDetail, GeneNode, Pathway } from "@/lib/types";
-import { checkContext, checkGeneRecord, checkMembership } from "./check-rules";
+import { checkContext, checkGeneRecord, checkMembership, checkPapers } from "./check-rules";
 
 const node = (id: string, extra: Partial<GeneNode> = {}): GeneNode => ({ id, label: id, geneId: id, ...extra });
 const pathway = (nodes: GeneNode[]): Pathway => ({
@@ -61,4 +61,19 @@ test("gene record errors apply regardless of pathway role", () => {
     { hgnc_id: "HGNC:4164", entrez_id: "2520", uniprot_ids: ["P01350"] }
   );
   assert.deepEqual(errors, ["GAST: HGNC ID가 HGNC:4164입니다 (데이터: HGNC:9999)."]);
+});
+
+test("fallback papers must match PubMed titles", () => {
+  const gene = {
+    symbol: "SI",
+    pubmed: [
+      { title: "Sucrase-isomaltase deficiency", pmid: "1" },
+      { title: "Made-up title", pmid: "2" },
+      { title: "Missing paper", pmid: "3" },
+    ],
+  } as GeneDetail;
+  const papers = { "1": { title: "Sucrase-Isomaltase  deficiency." }, "2": { title: "SI units." } };
+  const { errors, warnings } = checkPapers(gene, papers, new Set(["2"]));
+  assert.equal(errors.length, 2);
+  assert.equal(warnings.length, 1);
 });
