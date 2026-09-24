@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAtlas } from "@/store/useAtlas";
+import { bindAtlasToUrl, useAtlas } from "@/store/useAtlas";
 import { TopBar } from "@/components/ui/TopBar";
 import { Sidebar } from "@/components/ui/Sidebar";
 import { Minimap } from "@/components/ui/Minimap";
@@ -26,6 +27,7 @@ const NetworkView = dynamic(
 
 export default function Home() {
   const level = useAtlas((s) => s.level);
+  useEffect(() => bindAtlasToUrl(), []);
 
   // 탐색 깊이에 따라 중앙 뷰 전환:
   //  body        → 2D 인체 바디맵 (누구나 알아보는 진입 화면)

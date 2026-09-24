@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { NavLevel } from "@/lib/types";
-import { findPathwayLocation } from "@/lib/atlas";
+import {
+  findPathwayLocation,
+  getOrgan,
+  getPathway,
+  getTissue,
+} from "@/lib/atlas";
+import { GENES } from "@/lib/genes";
 
 interface AtlasState {
   // ── 탐색 상태 ──
@@ -158,3 +164,75 @@ export const useAtlas = create<AtlasState>((set) => ({
   toggleMinimap: () => set((s) => ({ minimapOpen: !s.minimapOpen })),
   setPathwaySort: (pathwaySort) => set({ pathwaySort }),
 }));
+
+// ── URL 딥링크 ──────────────────────────────────────────────
+// ?organ=&tissue=&pathway=&gene=&focus= 로 탐색 위치를 공유·복원한다.
+function toQuery(s: AtlasState) {
+  const q = new URLSearchParams();
+  if (s.organId) q.set("organ", s.organId);
+  if (s.tissueId) q.set("tissue", s.tissueId);
+  if (s.pathwayId) q.set("pathway", s.pathwayId);
+  if (s.activeGene) q.set("gene", s.activeGene);
+  if (s.geneFocus) q.set("focus", s.geneFocus);
+  const str = q.toString();
+  return str ? `?${str}` : "";
+}
+
+function applyQuery(search: string) {
+  const q = new URLSearchParams(search);
+  const { jumpTo, focusGene, reset } = useAtlas.getState();
+  const organ = q.get("organ");
+  const tissue = q.get("tissue");
+  const pathway = q.get("pathway");
+  const gene = q.get("gene");
+  const focus = q.get("focus");
+
+  const validOrgan = organ && getOrgan(organ) ? organ : undefined;
+  const validTissue =
+    validOrgan && tissue && getTissue(validOrgan, tissue) ? tissue : undefined;
+  if (pathway && getPathway(pathway)) {
+    // 조직과 맞지 않는 패스웨이면 조직 정보를 버리고 소속 위치를 역추적한다
+    const fits = validTissue
+      ? getTissue(validOrgan!, validTissue)!.pathwayIds.includes(pathway)
+      : false;
+    jumpTo(
+      fits
+        ? { organId: validOrgan, tissueId: validTissue, pathwayId: pathway }
+        : { pathwayId: pathway }
+    );
+  } else if (validOrgan) {
+    jumpTo({ organId: validOrgan, tissueId: validTissue });
+  } else if (focus && GENES[focus]) {
+    focusGene(focus);
+  } else {
+    reset();
+  }
+  useAtlas.setState({ activeGene: gene && GENES[gene] ? gene : null });
+}
+
+/** 첫 진입 시 URL을 읽어 상태를 복원하고, 이후 상태 변화를 URL에 반영한다. */
+export function bindAtlasToUrl() {
+  applyQuery(window.location.search);
+  let last = toQuery(useAtlas.getState());
+  history.replaceState(null, "", window.location.pathname + last);
+
+  let restoring = false;
+  const unsubscribe = useAtlas.subscribe((s) => {
+    if (restoring) return;
+    const next = toQuery(s);
+    if (next === last) return;
+    last = next;
+    history.pushState(null, "", window.location.pathname + next);
+  });
+  const onPop = () => {
+    restoring = true;
+    applyQuery(window.location.search);
+    restoring = false;
+    last = toQuery(useAtlas.getState());
+  };
+  window.addEventListener("popstate", onPop);
+  return () => {
+    unsubscribe();
+    window.removeEventListener("popstate", onPop);
+  };
+}
