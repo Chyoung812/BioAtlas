@@ -34,6 +34,16 @@ export function TopBar() {
     return items;
   }, [organId, tissueId, pathwayId, goTo, reset]);
 
+  // 좁은 화면에서는 현재 위치(마지막 항목)가 잘리지 않도록 그 시작점까지 스크롤한다
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = navRef.current;
+    const last = nav?.lastElementChild;
+    if (!nav || !last) return;
+    nav.scrollLeft +=
+      last.getBoundingClientRect().left - nav.getBoundingClientRect().left;
+  }, [crumbs]);
+
   return (
     <header className="panel absolute left-0 right-0 top-0 z-30 flex items-center gap-2 px-3 py-2.5 sm:gap-4 sm:px-4">
       <button
@@ -48,7 +58,10 @@ export function TopBar() {
       </button>
 
       {/* 브레드크럼 */}
-      <nav className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-sm">
+      <nav
+        ref={navRef}
+        className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-sm"
+      >
         {crumbs.map((c, i) => (
           <div key={i} className="flex items-center gap-1 whitespace-nowrap">
             {i > 0 && <span className="text-fg-faint">›</span>}

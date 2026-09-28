@@ -212,6 +212,7 @@ function HumanModelFit({ url }: { url: string }) {
             // 분포 뷰가 켜져 있을 때만 강조/약화. 꺼져 있으면 둘 다 false.
             highlighted={hitOrgans?.has(organ.id) ?? false}
             dimmed={hitOrgans ? !hitOrgans.has(organ.id) : false}
+            labeled={!hitOrgans}
           />
         );
       })}
@@ -220,8 +221,8 @@ function HumanModelFit({ url }: { url: string }) {
 }
 
 /**
- * 장기 핫스팟: 기본은 장기색 점만 표시하고, 마우스를 올리면 이름표가 나타난다.
- * (여러 장기가 몸통에 몰려 있어 이름표를 항상 띄우면 서로 겹치므로 호버 시에만 노출)
+ * 장기 핫스팟: 장기색 점 + 이름표. 이름표는 labelOffset으로 좌우에 벌려 겹치지 않게 하고,
+ * 터치 기기에는 호버가 없으므로 이름표 자체도 누를 수 있게 한다.
  */
 function OrganHotspot({
   position,
@@ -231,6 +232,7 @@ function OrganHotspot({
   onClick,
   highlighted = false,
   dimmed = false,
+  labeled = false,
 }: {
   position: [number, number, number];
   /** 이름표만 밀어내는 오프셋 — 복부 이름표 겹침 방지 */
@@ -242,6 +244,8 @@ function OrganHotspot({
   highlighted?: boolean;
   /** 분포 뷰에서 발현되지 않는 장기 */
   dimmed?: boolean;
+  /** 평소 진입 화면 — 이름표 상시 노출 */
+  labeled?: boolean;
 }) {
   const dot = useRef<THREE.Mesh>(null);
   const halo = useRef<THREE.Mesh>(null);
@@ -310,7 +314,7 @@ function OrganHotspot({
 
       {/* 이름표를 옆으로 밀었을 때 어느 점의 것인지 모호해지므로 지시선으로 잇는다.
           (R3F의 raw <line>은 TS가 SVG line으로 해석하므로 drei의 Line을 쓴다) */}
-      {highlighted && (labelOffset[0] !== 0 || labelOffset[1] !== 0) && (
+      {(highlighted || labeled) && (labelOffset[0] !== 0 || labelOffset[1] !== 0) && (
         <Line
           points={[[0, 0, 0], labelOffset]}
           color={color}
@@ -320,20 +324,29 @@ function OrganHotspot({
         />
       )}
 
-      {/* 강조 장기는 이름표를 상시 노출 (한 화면에서 바로 읽혀야 하므로).
-          평소에는 겹침을 피해 호버 시에만 띄운다.
-          drei Html 기본 z-index는 수백만이라 상단 바·시트 위로 올라오므로 범위를 낮춘다. */}
-      {(hovered || highlighted) && (
-        <Html center distanceFactor={11} position={labelOffset} zIndexRange={[9, 0]}>
-          <div
-            className={`pointer-events-none whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium shadow-lg ring-1 ${
+      {/* drei Html 기본 z-index는 수백만이라 상단 바·시트 위로 올라오므로 범위를 낮춘다.
+          distanceFactor는 캔버스가 큰 데스크톱에서 이름표를 2배 넘게 키우므로 강조 장기에만 쓴다. */}
+      {(hovered || highlighted || labeled) && (
+        <Html
+          center
+          distanceFactor={highlighted ? 11 : undefined}
+          position={labelOffset}
+          zIndexRange={[9, 0]}
+        >
+          <button
+            onClick={onClick}
+            onPointerOver={over}
+            onPointerOut={out}
+            className={`whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium shadow-lg ring-1 ${
               highlighted
                 ? "bg-brand-500 text-white ring-brand-300/50"
-                : "bg-raised/95 text-fg ring-white/10"
+                : hovered
+                  ? "bg-brand-500/90 text-white ring-brand-300/50"
+                  : "bg-raised/95 text-fg ring-white/10"
             }`}
           >
             {label}
-          </div>
+          </button>
         </Html>
       )}
     </group>

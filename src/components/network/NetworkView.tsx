@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import cytoscape, { Core } from "cytoscape";
 import { useTheme } from "next-themes";
 import { getPathway } from "@/lib/atlas";
@@ -178,36 +178,47 @@ function NetworkLegend({
   hasContextual: boolean;
   roles: string[];
 }) {
+  // 모바일에서는 범례가 네트워크를 가리므로 접어 두고, 데스크톱은 항상 펼친다
+  const [open, setOpen] = useState(false);
   return (
-    <div className="panel pointer-events-none absolute left-3 top-[100px] rounded-xl px-3 py-2 text-[11px] leading-relaxed md:bottom-4 md:left-4 md:top-auto">
-      <div className="mb-1 font-semibold text-brand-400">범례</div>
-      <div className="mb-1 flex flex-wrap gap-x-3">
-        {roles.map((r) => (
-          <span key={r} className="flex items-center gap-1.5">
-            <span
-              className="h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: ROLE_COLOR[r] }}
-            />
-            {ROLE_LABEL[r]}
-          </span>
-        ))}
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-fg-muted">━▸</span> Activation (촉진)
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-red-400">━⊣</span> Inhibition (억제)
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-fg-faint">┈┈</span> Interaction (상호작용)
-      </div>
-      {hasContextual && (
-        <div className="flex items-center gap-2">
-          <span className="text-fg-faint">◌</span> 관련 맥락 ({source} 경로 밖)
+    <div className="panel absolute left-3 top-[100px] rounded-xl px-3 py-2 text-[11px] leading-relaxed md:pointer-events-none md:bottom-4 md:left-4 md:top-auto">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 font-semibold text-brand-400 md:mb-1"
+        aria-expanded={open}
+      >
+        범례
+        <span className="text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
+      </button>
+      <div className={open ? "mt-1 md:mt-0" : "max-md:hidden"}>
+        <div className="mb-1 flex flex-wrap gap-x-3">
+          {roles.map((r) => (
+            <span key={r} className="flex items-center gap-1.5">
+              <span
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ backgroundColor: ROLE_COLOR[r] }}
+              />
+              {ROLE_LABEL[r]}
+            </span>
+          ))}
         </div>
-      )}
-      <div className="mt-1 text-[10px] text-fg-faint">
-        연결선은 이해를 돕기 위해 단순화한 흐름이에요
+        <div className="flex items-center gap-2">
+          <span className="text-fg-muted">━▸</span> Activation (촉진)
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-red-400">━⊣</span> Inhibition (억제)
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-fg-faint">┈┈</span> Interaction (상호작용)
+        </div>
+        {hasContextual && (
+          <div className="flex items-center gap-2">
+            <span className="text-fg-faint">◌</span> 관련 맥락 ({source} 경로 밖)
+          </div>
+        )}
+        <div className="mt-1 text-[10px] text-fg-faint">
+          연결선은 이해를 돕기 위해 단순화한 흐름이에요
+        </div>
       </div>
     </div>
   );
