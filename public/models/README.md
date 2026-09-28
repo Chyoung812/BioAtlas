@@ -5,17 +5,23 @@
 | 파일 이름 | 쓰이는 곳 | 없을 때 대체 |
 |---|---|---|
 | `human.glb` | 진입 화면(전신 인체) | 2D 바디맵 |
-| `hra/*.glb` | 장기 탐색 화면(뇌·심장·폐·간·췌장·장·신장) | 절차적(코드) 장기 |
+| `hra/*.glb` | 장기 탐색 화면(뇌·심장·폐·간·췌장·장·신장·흉선·비장) | 절차적(코드) 장기 |
 
 `human.glb`는 그냥 넣기만 하면 됩니다. 코드는 이미 `/models/human.glb`를
 읽도록 되어 있고, **파일이 없으면 자동으로 2D 바디맵으로 대체**되므로
 앱이 깨지지 않습니다.
 
+## 인체 모델 (CC BY 3.0)
+
+`human.glb`는 Poly Pizza의 ["Male base"](https://poly.pizza/m/eWGDnQ0jzmH)
+(제작: Артур Мигранов, CC BY 3.0)입니다. 진입 화면 왼쪽 아래의 출처 표기를
+지우면 안 됩니다. 다른 모델로 바꾸면 그 표기도 함께 바꾸세요.
+
 ## 장기 해부학 모델 (HRA, CC BY 4.0)
 
 장기 화면은 Human Reference Atlas(HuBMAP) 3D Reference Object Library의
-장기 모델을 씁니다. 용량 때문에 `hra/`는 git에 올리지 않으니, 새로 받은
-환경에서는 아래를 한 번 실행하세요. 파일이 없으면 절차적 장기로 대체됩니다.
+장기 모델을 씁니다. 압축한 `hra/`(약 7MB)는 배포에 필요해서 저장소에 포함합니다.
+모델을 새 버전으로 바꿀 때만 아래를 실행하세요. 파일이 없으면 절차적 장기로 대체됩니다.
 위(stomach)는 HRA 모델이 없어 항상 절차적 형태입니다.
 CC BY 4.0이라 장기 화면 왼쪽 아래의 출처 표기를 지우면 안 됩니다.
 
@@ -31,6 +37,8 @@ curl -fL -o intestine.glb $C/small-intestine-male/v1.2/assets/3d-vh-m-small-inte
 curl -fL -o kidney-l.glb  $G/VH_M_Kidney_L.glb
 curl -fL -o kidney-r.glb  $G/VH_M_Kidney_R.glb
 curl -fL -o brain.glb     $G/Allen_M_Brain.glb
+curl -fL -o thymus.glb    $G/VH_M_Thymus.glb
+curl -fL -o spleen.glb    $G/VH_M_Spleen.glb
 # 원본 약 29MB → meshopt 압축 후 약 7MB
 for f in *.glb; do npx @gltf-transform/cli optimize $f $f --compress meshopt --texture-compress false --flatten false --join false --instance false; done
 ```
