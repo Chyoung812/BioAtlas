@@ -216,7 +216,8 @@ function GeneBody({ symbol }: { symbol: string }) {
 
 // 도감에 없는 유전자 — NCBI 기본 정보만 보여주고, 쉬운 설명이 없다는 사실을 밝힌다
 function ExternalGeneBody({ symbol }: { symbol: string }) {
-  const result = useExternalGene(symbol);
+  const [attempt, setAttempt] = useState(0);
+  const result = useExternalGene(`${symbol}#${attempt}`);
   const closeGene = useAtlas((s) => s.closeGene);
   const openGene = useAtlas((s) => s.openGene);
   const curated = typeof result === "object" && GENES[result.symbol];
@@ -245,6 +246,14 @@ function ExternalGeneBody({ symbol }: { symbol: string }) {
             ? `‘${symbol}’라는 사람 유전자를 NCBI에서 찾지 못했어요. 공식 유전자 기호(예: TP53, BRCA1)로 다시 검색해 보세요.`
             : "NCBI 응답을 받지 못했어요. 잠시 뒤 다시 시도해 주세요."}
         </p>
+        {result === "error" && (
+          <button
+            onClick={() => setAttempt((a) => a + 1)}
+            className="mt-3 rounded-lg border border-line px-3 py-1.5 text-xs text-fg-muted hover:border-brand-500 hover:text-fg"
+          >
+            다시 시도
+          </button>
+        )}
       </div>
     );
   }

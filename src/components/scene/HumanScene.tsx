@@ -62,7 +62,7 @@ const TARGET_HEIGHT = 3.2; // 씬 안에서 모델을 이 키(높이)로 자동 
 // 모듈 로드 시점부터 glb를 미리 받아 스피너 노출 시간을 최소화한다.
 useGLTF.preload(HUMAN_GLB_URL);
 
-function hasWebGL() {
+export function hasWebGL() {
   try {
     const c = document.createElement("canvas");
     return !!(c.getContext("webgl2") ?? c.getContext("webgl"));
