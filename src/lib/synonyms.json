@@ -296,6 +296,61 @@
       "apoptosis regulator Bcl-2"
     ]
   },
+  "BLNK": {
+    "symbols": [
+      "SLP65",
+      "Ly57",
+      "SLP-65",
+      "BLNK-s",
+      "BASH",
+      "bca",
+      "AGM4"
+    ],
+    "names": [
+      "B-cell adapter containing a SH2 domain protein",
+      "B-cell activation",
+      "Src homology [SH2] domain-containing leukocyte protein of 65 kD",
+      "B cell adaptor containing SH2 domain",
+      "B-cell linker protein",
+      "B-cell adapter containing a Src homology 2 domain protein",
+      "Src homology 2 domain-containing leukocyte protein of 65 kDa",
+      "cytoplasmic adapter protein"
+    ]
+  },
+  "BLVRA": {
+    "symbols": [
+      "BLVR",
+      "BVRA",
+      "BVRalpha",
+      "BVR"
+    ],
+    "names": [
+      "biliverdin reductase IXalpha",
+      "BVR A",
+      "biliverdin-IX alpha-reductase",
+      "testis tissue sperm-binding protein Li 61n"
+    ]
+  },
+  "BTK": {
+    "symbols": [
+      "AGMX1",
+      "IMD1",
+      "ATK",
+      "XLA",
+      "PSCTK1",
+      "AT",
+      "BPK",
+      "IGHD3"
+    ],
+    "names": [
+      "Bruton agammaglobulinemia tyrosine kinase",
+      "Bruton's tyrosine kinase",
+      "tyrosine-protein kinase BTK",
+      "B-cell progenitor kinase",
+      "agammaglobulinaemia tyrosine kinase",
+      "dominant-negative kinase-deficient Brutons tyrosine kinase"
+    ]
+  },
   "CACNA1C": {
     "symbols": [
       "CCHL1A1",
@@ -341,6 +396,86 @@
       "protein Yama"
     ]
   },
+  "CD163": {
+    "symbols": [
+      "M130",
+      "MM130",
+      "SCARI1"
+    ],
+    "names": [
+      "CD163 antigen",
+      "scavenger receptor cysteine-rich type 1 protein M130",
+      "hemoglobin scavenger receptor",
+      "macrophage-associated antigen"
+    ]
+  },
+  "CD28": {
+    "symbols": [
+      "IMD123",
+      "Tp44"
+    ],
+    "names": [
+      "CD28 antigen (Tp44)",
+      "T-cell-specific surface glycoprotein",
+      "T-cell-specific surface glycoprotein CD28"
+    ]
+  },
+  "CD3E": {
+    "symbols": [
+      "CD3epsilon",
+      "CD3-epsilon",
+      "IMD18",
+      "T3E",
+      "TCRE"
+    ],
+    "names": [
+      "CD3e antigen, epsilon polypeptide (TiT3 complex)",
+      "CD3e molecule, epsilon (CD3-TCR complex)",
+      "CD3e molecule",
+      "T-cell surface glycoprotein CD3 epsilon chain",
+      "CD3-epsilon",
+      "T-cell antigen receptor complex, epsilon subunit of T3",
+      "T-cell surface antigen T3/Leu-4 epsilon chain"
+    ]
+  },
+  "CD79A": {
+    "symbols": [
+      "IGA",
+      "MB-1",
+      "Ig-alpha",
+      "MB1",
+      "IGAlpha"
+    ],
+    "names": [
+      "CD79A antigen (immunoglobulin-associated alpha)",
+      "CD79a molecule, immunoglobulin-associated alpha",
+      "B-cell antigen receptor complex-associated protein alpha chain",
+      "MB-1 membrane glycoprotein",
+      "ig-alpha",
+      "membrane-bound immunoglobulin-associated protein",
+      "surface IgM-associated protein"
+    ]
+  },
+  "CD80": {
+    "symbols": [
+      "CD28LG",
+      "CD28LG1",
+      "B7.1",
+      "B7-1",
+      "B7",
+      "BB1",
+      "LAB7"
+    ],
+    "names": [
+      "CD80 antigen (CD28 antigen ligand 1, B7-1 antigen)",
+      "B-lymphocyte activation antigen B7",
+      "T-lymphocyte activation antigen CD80",
+      "CTLA-4 counter-receptor B7.1",
+      "activation B7-1 antigen",
+      "costimulatory factor CD80",
+      "costimulatory molecule variant IgV-CD80"
+    ]
+  },
   "CFTR": {
     "symbols": [
       "CF",
@@ -373,6 +508,28 @@
       "cyclic adenosine 3',5'-monophosphate response element binding protein",
       "cyclic adenosine 3',5'-monophosphate response element-binding protein CREB",
       "transactivator protein"
+    ]
+  },
+  "CTLA4": {
+    "symbols": [
+      "CELIAC3",
+      "IDDM12",
+      "CD152",
+      "CD",
+      "GSE",
+      "CTLA-4",
+      "ALPS5",
+      "GRD4"
+    ],
+    "names": [
+      "celiac disease 3",
+      "insulin-dependent diabetes mellitus 12",
+      "gluten-sensitive enteropathy",
+      "celiac disease",
+      "cytotoxic T-lymphocyte protein 4",
+      "cytotoxic T lymphocyte associated antigen 4 short spliced form",
+      "cytotoxic T-lymphocyte-associated serine esterase-4",
+      "ligand and transmembrane spliced cytotoxic T lymphocyte associated antigen 4"
     ]
   },
   "CTNNB1": {
@@ -632,6 +789,18 @@
       "HMG-CoA reductase"
     ]
   },
+  "HMOX1": {
+    "symbols": [
+      "bK286B10",
+      "HO-1",
+      "HMOX1D",
+      "HSP32"
+    ],
+    "names": [
+      "heme oxygenase (decycling) 1",
+      "heat shock protein, 32-kD"
+    ]
+  },
   "HRH2": {
     "symbols": [
       "H2R",
@@ -784,6 +953,40 @@
       "oncogene KRAS2",
       "proto-oncogene GTPase",
       "transforming protein p21"
+    ]
+  },
+  "LAT": {
+    "symbols": [
+      "LAT1",
+      "IMD52",
+      "pp36"
+    ],
+    "names": [
+      "linker for activation of T cells, transmembrane adaptor",
+      "linker for activation of T-cells family member 1",
+      "36 kDa phospho-tyrosine adapter protein",
+      "36 kDa phospho-tyrosine adaptor protein",
+      "36 kDa phosphotyrosine adapter protein",
+      "p36-38"
+    ]
+  },
+  "LCK": {
+    "symbols": [
+      "IMD22",
+      "LSK",
+      "YT16",
+      "p56lck",
+      "pp58lck"
+    ],
+    "names": [
+      "lymphocyte-specific protein tyrosine kinase",
+      "tyrosine-protein kinase Lck",
+      "T-lymphocyte specific protein tyrosine kinase p56lck",
+      "leukocyte C-terminal Src kinase",
+      "lymphocyte cell-specific protein-tyrosine kinase",
+      "p56(LSTRA) protein-tyrosine kinase",
+      "proto-oncogene tyrosine-protein kinase LCK",
+      "t cell-specific protein-tyrosine kinase"
     ]
   },
   "LDLR": {
@@ -1267,6 +1470,16 @@
       "class D basic helix-loop-helix protein 1"
     ]
   },
+  "SYK": {
+    "symbols": [
+      "IMD82",
+      "p72-Syk"
+    ],
+    "names": [
+      "spleen tyrosine kinase",
+      "tyrosine-protein kinase SYK"
+    ]
+  },
   "TCF7L2": {
     "symbols": [
       "TCF4",
@@ -1380,6 +1593,27 @@
       "WNT-3 proto-oncogene protein",
       "proto-oncogene Wnt-3",
       "proto-oncogene Int-4 homolog"
+    ]
+  },
+  "ZAP70": {
+    "symbols": [
+      "SRK",
+      "ZAP-70",
+      "STD",
+      "ADMIO2",
+      "IMD48",
+      "STCD",
+      "TZK"
+    ],
+    "names": [
+      "SRK",
+      "tyrosine-protein kinase ZAP-70",
+      "70 kDa zeta-associated protein",
+      "70 kDa zeta-chain associated protein",
+      "syk-related tyrosine kinase",
+      "zeta chain of T cell receptor associated protein kinase 70kDa",
+      "zeta-chain (TCR) associated protein kinase 70kDa",
+      "zeta-chain associated protein kinase, 70kD"
     ]
   }
 }

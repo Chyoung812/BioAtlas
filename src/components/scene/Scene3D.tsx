@@ -17,7 +17,8 @@ export function Scene3D() {
   return (
     <div className="relative h-full w-full">
       <Canvas
-        camera={{ position: [0, 0.2, 3.6], fov: 45 }}
+        // 앞쪽 위 조직 이름표(y≈1.1)와 조작 안내(y=1.5)가 상단 바에 가리지 않을 거리
+        camera={{ position: [0, 0.1, 4.4], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: true }}
       >
@@ -49,7 +50,7 @@ export function Scene3D() {
           href="https://humanatlas.io/3d-reference-library"
           target="_blank"
           rel="noreferrer"
-          className="absolute bottom-4 left-4 z-10 text-[10px] text-fg-faint hover:text-fg-muted"
+          className="absolute left-3 top-1 z-10 text-[10px] text-fg-faint hover:text-fg-muted md:bottom-4 md:left-4 md:top-auto"
         >
           3D 장기 모델: Human Reference Atlas (HuBMAP) · CC BY 4.0
         </a>
@@ -57,3 +58,4 @@ export function Scene3D() {
     </div>
   );
 }
+

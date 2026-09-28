@@ -1,5 +1,5 @@
 // BioAtlas 도메인 타입 정의
-// 데이터 출처(NCBI/KEGG/Reactome)는 추후 API 연동 시 이 형태로 매핑됩니다.
+// 데이터 출처(NCBI/Reactome)는 추후 API 연동 시 이 형태로 매핑됩니다.
 
 export type NavLevel = "body" | "organ" | "tissue" | "pathway";
 
@@ -32,7 +32,7 @@ export type PathwayCategory =
   | "면역"
   | "발달";
 
-/** 세 줄 설명 — NCBI·KEGG·Reactome 원문을 근거로 큐레이션 */
+/** 세 줄 설명 — NCBI·Reactome 원문을 근거로 큐레이션 */
 export interface Guide {
   role: string; // 하는 일
   how: string; // 작동 방식
@@ -43,7 +43,7 @@ export interface Pathway {
   id: string;
   name: string;
   nameEn: string;
-  source: "KEGG" | "Reactome" | "NCBI";
+  source: "Reactome" | "NCBI";
   sourceId: string;
   category: PathwayCategory;
   /** 연관도/중요도 (정렬 기본값) */
@@ -53,7 +53,7 @@ export interface Pathway {
   network: GeneNetwork;
   /** 연관 패스웨이 (탐색 연결) */
   relatedPathwayIds: string[];
-  /** KEGG/Reactome 원문 설명(영문) — 큐레이션 summary 보강용, 실 API로 채워짐 */
+  /** Reactome 원문 설명(영문) — 큐레이션 summary 보강용, 실 API로 채워짐 */
   sourceDescription?: string;
   /** 데이터 출처 — 실 API 확인 시 "live", 큐레이션 폴백이면 "fallback" */
   _meta?: { source: "live" | "fallback"; fetchedAt?: string };
@@ -75,7 +75,7 @@ export interface GeneNode {
   /** contextual일 때 필수 — 함께 보여주는 이유와 검증 가능한 근거 */
   context?: {
     reason: string;
-    /** "KEGG:hsa04971" · "Reactome:R-HSA-…" · "NCBI:<Gene ID>" · "PMID:<id>" */
+    /** "Reactome:R-HSA-…" · "NCBI:<Gene ID>" · "PMID:<id>" */
     evidence: string[];
   };
 }
@@ -93,6 +93,21 @@ export interface GeneEdge {
   target: string;
   /** activation: → / inhibition: ⊣ / interaction: 점선 */
   mechanism: EdgeMechanism;
+}
+
+/** 사람 유전자 공식 기호 형태 (TP53, HLA-DRB1 등) — 도감 밖 유전자 조회의 입력 검증용 */
+export const GENE_SYMBOL = /^[A-Za-z][A-Za-z0-9-]{1,14}$/;
+
+/** 큐레이션되지 않은 유전자 — NCBI에서 받은 기본 정보만 있다 */
+export interface ExternalGene {
+  symbol: string;
+  geneId: string;
+  fullName: string;
+  chromosome?: string;
+  summary?: string;
+  aliases: string[];
+  pubmed: { title: string; pmid: string }[];
+  fetchedAt: string;
 }
 
 export interface GeneDetail {

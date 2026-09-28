@@ -45,6 +45,9 @@ const ORGAN_HOTSPOTS: Record<
   heart: { x: -0.07, yFactor: 0.47, z: 0.16, labelDx: -0.34 },
   liver: { x: -0.2, yFactor: 0.34, z: 0.15, labelDx: -0.46 },
   kidney: { x: -0.26, yFactor: 0.28, z: -0.02, labelDx: -0.6, labelDy: -0.12 },
+  // 가운데·뒤쪽 — 흉선은 폐·심장 이름표 위로, 비장은 위(stomach) 뒤 바깥쪽으로 민다.
+  thymus: { x: 0.0, yFactor: 0.63, z: 0.14, labelDx: -0.3, labelDy: 0.12 },
+  spleen: { x: 0.25, yFactor: 0.36, z: 0.02, labelDx: 0.62, labelDy: 0.24 },
 };
 
 /**
@@ -59,7 +62,19 @@ const TARGET_HEIGHT = 3.2; // 씬 안에서 모델을 이 키(높이)로 자동 
 // 모듈 로드 시점부터 glb를 미리 받아 스피너 노출 시간을 최소화한다.
 useGLTF.preload(HUMAN_GLB_URL);
 
+function hasWebGL() {
+  try {
+    const c = document.createElement("canvas");
+    return !!(c.getContext("webgl2") ?? c.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
 export function HumanScene() {
+  // 캔버스 생성 실패는 에러 경계로 잡히지 않아 빈 화면이 된다 → 미리 확인한다
+  const [webgl] = useState(hasWebGL);
+
   return (
     <div
       className="relative h-full w-full"
@@ -72,7 +87,7 @@ export function HumanScene() {
 
       {/* glb 로딩에 실패했을 때만 BodyMap(2D)으로 영구 대체(런타임 안전망).
           로딩 중에는 중립 스피너를 보여줘 2D 졸라맨이 깜빡이지 않게 한다. */}
-      <GLBErrorBoundary fallback={<BodyMap />}>
+      {!webgl ? <BodyMap /> : <GLBErrorBoundary fallback={<BodyMap />}>
         <Suspense fallback={<SceneLoading />}>
           <Canvas
             camera={{ position: [0, 0.2, 6], fov: 42 }}
@@ -109,8 +124,16 @@ export function HumanScene() {
               makeDefault
             />
           </Canvas>
+          <a
+            href="https://poly.pizza/m/eWGDnQ0jzmH"
+            target="_blank"
+            rel="noreferrer"
+            className="absolute bottom-[76px] left-3 z-10 text-[10px] text-fg-faint hover:text-fg-muted md:bottom-4 md:left-4"
+          >
+            인체 모델: &quot;Male base&quot; by Артур Мигранов · CC BY 3.0
+          </a>
         </Suspense>
-      </GLBErrorBoundary>
+      </GLBErrorBoundary>}
     </div>
   );
 }
@@ -298,9 +321,10 @@ function OrganHotspot({
       )}
 
       {/* 강조 장기는 이름표를 상시 노출 (한 화면에서 바로 읽혀야 하므로).
-          평소에는 겹침을 피해 호버 시에만 띄운다. */}
+          평소에는 겹침을 피해 호버 시에만 띄운다.
+          drei Html 기본 z-index는 수백만이라 상단 바·시트 위로 올라오므로 범위를 낮춘다. */}
       {(hovered || highlighted) && (
-        <Html center distanceFactor={11} position={labelOffset}>
+        <Html center distanceFactor={11} position={labelOffset} zIndexRange={[9, 0]}>
           <div
             className={`pointer-events-none whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium shadow-lg ring-1 ${
               highlighted

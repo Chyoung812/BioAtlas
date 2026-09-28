@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtlas } from "@/store/useAtlas";
 import { getOrgan } from "@/lib/atlas";
@@ -30,7 +31,7 @@ export function GeneBodyPanel() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -24 }}
           transition={{ duration: 0.25 }}
-          className="panel absolute left-4 top-20 z-30 w-72 rounded-xl p-4"
+          className="panel absolute bottom-[76px] left-3 right-3 z-30 max-h-[50dvh] overflow-y-auto rounded-xl p-4 md:bottom-auto md:left-4 md:right-auto md:top-20 md:max-h-none md:w-72"
         >
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
@@ -116,6 +117,7 @@ export function MultiOrganHint() {
   const geneFocus = useAtlas((s) => s.geneFocus);
   const level = useAtlas((s) => s.level);
   const focusGene = useAtlas((s) => s.focusGene);
+  const [open, setOpen] = useState(false); // 모바일에서만 의미 있음 (데스크톱은 항상 펼침)
 
   if (geneFocus || level !== "body") return null;
 
@@ -123,30 +125,43 @@ export function MultiOrganHint() {
   if (picks.length === 0) return null;
 
   return (
-    <div className="panel absolute left-4 top-20 z-20 w-72 rounded-xl p-4">
-      <div className="text-sm font-medium text-fg">여러 장기에 걸친 유전자</div>
-      <p className="mt-1 text-xs leading-relaxed text-fg-muted">
-        장기를 하나씩 파고들면 절대 보이지 않는 것들입니다. 몸 전체에 한 번에
-        띄워 보세요.
-      </p>
-      <ul className="mt-3 space-y-1">
-        {picks.map((d) => (
-          <li key={d.symbol}>
-            <button
-              onClick={() => focusGene(d.symbol)}
-              className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm hover:bg-subtle"
-            >
-              <span className="font-medium text-fg">{d.symbol}</span>
-              <span className="ml-auto text-[11px] text-fg-faint">
-                {d.organIds
-                  .map((id) => getOrgan(id)?.name)
-                  .filter(Boolean)
-                  .join(" · ")}
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div
+      className={`panel absolute left-3 top-[104px] z-20 rounded-xl md:left-4 md:right-auto md:top-20 md:w-72 md:p-4 ${
+        open ? "right-3 p-4" : "px-3 py-1.5"
+      }`}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center justify-between gap-2 text-left text-sm font-medium text-fg md:pointer-events-none"
+        aria-expanded={open}
+      >
+        여러 장기에 걸친 유전자
+        <span className="text-xs text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
+      </button>
+      <div className={open ? "" : "max-md:hidden"}>
+        <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+          장기를 하나씩 파고들면 절대 보이지 않는 것들입니다. 몸 전체에 한 번에
+          띄워 보세요.
+        </p>
+        <ul className="mt-3 space-y-1">
+          {picks.map((d) => (
+            <li key={d.symbol}>
+              <button
+                onClick={() => focusGene(d.symbol)}
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm hover:bg-subtle"
+              >
+                <span className="font-medium text-fg">{d.symbol}</span>
+                <span className="ml-auto text-[11px] text-fg-faint">
+                  {d.organIds
+                    .map((id) => getOrgan(id)?.name)
+                    .filter(Boolean)
+                    .join(" · ")}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -14,6 +14,13 @@ const ROLE_COLOR: Record<string, string> = {
   structural: "#a855f7",
 };
 
+const ROLE_LABEL: Record<string, string> = {
+  oncogene: "종양 유전자",
+  tumor_suppressor: "종양 억제 유전자",
+  signaling: "신호 전달",
+  structural: "구조 단백질",
+};
+
 // 유전자 네트워크 ("별자리" 느낌의 force-directed 시각화)
 export function NetworkView() {
   const pathwayId = useAtlas((s) => s.pathwayId);
@@ -60,9 +67,14 @@ export function NetworkView() {
             "font-size": "13px",
             "font-weight": 600,
             "text-valign": "bottom",
-            "text-margin-y": 6,
-            width: 34,
-            height: 34,
+            "text-margin-y": 5,
+            // 라벨이 이웃 노드 위에 겹쳐도 읽히도록 배경을 깐다
+            "text-background-color": dark ? "#0a0e1a" : "#ffffff",
+            "text-background-opacity": 0.75,
+            "text-background-padding": "2px",
+            "text-background-shape": "roundrectangle",
+            width: 28,
+            height: 28,
             "border-width": 2,
             "border-color": dark ? "#0a0e1a" : "#ffffff",
             "transition-property": "width height border-width",
@@ -80,7 +92,7 @@ export function NetworkView() {
         },
         {
           selector: "node:active, node.hover",
-          style: { width: 44, height: 44, "border-width": 4 },
+          style: { width: 38, height: 38, "border-width": 4 },
         },
         // Activation: 실선 + 화살표 →
         {
@@ -121,11 +133,13 @@ export function NetworkView() {
         animate: true,
         animationDuration: 600,
         idealEdgeLength: () => 110,
-        nodeRepulsion: () => 9000,
+        nodeRepulsion: () => 12000,
+        nodeDimensionsIncludeLabels: true,
         padding: 50,
       } as cytoscape.LayoutOptions,
       minZoom: 0.4,
-      maxZoom: 2.5,
+      // 노드가 적은 경로는 화면 맞춤 때 과하게 확대돼 라벨이 겹친다
+      maxZoom: 1.6,
     });
 
     cy.on("tap", "node", (evt) => openGene(evt.target.id()));
@@ -142,16 +156,14 @@ export function NetworkView() {
     return () => cy.destroy();
   }, [pathwayId, dark, openGene]);
 
+  const nodes = getPathway(pathwayId ?? "")?.network.nodes ?? [];
   return (
     <div className="relative h-full w-full">
       <div ref={containerRef} className="h-full w-full" />
       <NetworkLegend
         source={getPathway(pathwayId ?? "")?.source}
-        hasContextual={
-          !!getPathway(pathwayId ?? "")?.network.nodes.some(
-            (n) => n.membership === "contextual"
-          )
-        }
+        hasContextual={nodes.some((n) => n.membership === "contextual")}
+        roles={[...new Set(nodes.map((n) => n.role ?? "signaling"))]}
       />
     </div>
   );
@@ -160,13 +172,26 @@ export function NetworkView() {
 function NetworkLegend({
   source,
   hasContextual,
+  roles,
 }: {
   source?: string;
   hasContextual: boolean;
+  roles: string[];
 }) {
   return (
-    <div className="panel pointer-events-none absolute bottom-4 left-4 rounded-xl px-3 py-2 text-[11px] leading-relaxed">
+    <div className="panel pointer-events-none absolute left-3 top-[100px] rounded-xl px-3 py-2 text-[11px] leading-relaxed md:bottom-4 md:left-4 md:top-auto">
       <div className="mb-1 font-semibold text-brand-400">범례</div>
+      <div className="mb-1 flex flex-wrap gap-x-3">
+        {roles.map((r) => (
+          <span key={r} className="flex items-center gap-1.5">
+            <span
+              className="h-2.5 w-2.5 rounded-full"
+              style={{ backgroundColor: ROLE_COLOR[r] }}
+            />
+            {ROLE_LABEL[r]}
+          </span>
+        ))}
+      </div>
       <div className="flex items-center gap-2">
         <span className="text-fg-muted">━▸</span> Activation (촉진)
       </div>

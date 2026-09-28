@@ -27,6 +27,7 @@ const NetworkView = dynamic(
 
 export default function Home() {
   const level = useAtlas((s) => s.level);
+  const sheetOpen = useAtlas((s) => s.sheetOpen);
   useEffect(() => bindAtlasToUrl(), []);
 
   // 탐색 깊이에 따라 중앙 뷰 전환:
@@ -38,8 +39,13 @@ export default function Home() {
 
   return (
     <main className="relative h-screen w-screen overflow-hidden">
-      {/* 중앙 뷰 (탐색 깊이에 따라 전환) */}
-      <div className="absolute inset-0">
+      {/* 중앙 뷰 (탐색 깊이에 따라 전환). 모바일에서 시트가 열리면 3D는 시트 위 공간에 맞춘다.
+          네트워크(Cytoscape)는 컨테이너 크기 변화를 따라가지 않아 제외. */}
+      <div
+        className={`absolute inset-0 ${
+          sheetOpen && view !== "network" ? "max-md:bottom-[55dvh]" : ""
+        } ${view === "scene" ? "max-md:top-24" : ""}`}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={view}

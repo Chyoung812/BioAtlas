@@ -87,6 +87,18 @@ const EXPRESSION_TO_ORGANS: Record<string, string[]> = {
   장샘: ["intestine"],
   "장샘 니치": ["intestine"],
 
+  // ── 흉선 ──
+  흉선: ["thymus"],
+  "흉선 수질": ["thymus"],
+
+  // ── 비장 ──
+  비장: ["spleen"],
+  "비장 B세포": ["spleen"],
+  "비장 대식세포": ["spleen"],
+
+  // ── 간 (추가) ──
+  간: ["liver"],
+
   // ── 두 장기에 걸침 ──
   위장관: ["stomach", "intestine"],
 
@@ -99,6 +111,11 @@ const EXPRESSION_TO_ORGANS: Record<string, string[]> = {
   "혈관 내피": [SYSTEMIC],
   "혈관 평활근": [SYSTEMIC],
   면역세포: [SYSTEMIC],
+  T세포: [SYSTEMIC],
+  "조절 T세포": [SYSTEMIC],
+  B세포: [SYSTEMIC],
+  대식세포: [SYSTEMIC],
+  "항원 제시 세포": [SYSTEMIC],
   비만세포: [SYSTEMIC],
   "Th2 세포": [SYSTEMIC],
   "내분비 조직": [SYSTEMIC],

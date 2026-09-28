@@ -26,6 +26,8 @@ const ORGAN_SPOTS: Record<
   pancreas: { x: 121, y: 214, r: 11 },
   kidney: { x: 100, y: 226, r: 11 },
   intestine: { x: 123, y: 246, r: 14 },
+  thymus: { x: 120, y: 134, r: 9 },
+  spleen: { x: 158, y: 204, r: 9 },
 };
 
 export function BodyMap() {
@@ -65,7 +67,7 @@ export function BodyMap() {
         </h1>
         <p className="mt-1 text-sm text-fg-muted">
           탐색할 장기를 선택하세요 ·{" "}
-          <b className="text-brand-400">뇌·심장·폐·간·위·췌장·장·신장</b>을 탐험할 수 있어요
+          <b className="text-brand-400">{ORGANS.map((o) => o.name).join("·")}</b>을 탐험할 수 있어요
         </p>
       </div>
 

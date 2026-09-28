@@ -25,7 +25,7 @@ export function ThemeControls() {
         }`}
         title="분자 애니메이션 (Interactive Micro-Map) 켜기/끄기"
       >
-        {easyMode ? "🎬 애니메이션 ON" : "🎬 애니메이션"}
+        🎬<span className="hidden sm:inline">{easyMode ? " 애니메이션 ON" : " 애니메이션"}</span>
       </button>
 
       {mounted && (

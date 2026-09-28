@@ -16,6 +16,8 @@
   --c-fg-faint: 100 116 139; /* slate-500 */
   --scene-from: #0a0e1a;
   --scene-to: #0e1322;
+  /* 정의하지 않으면 font-sans 선언 전체가 무효가 되어 브라우저 기본 글꼴(명조)로 떨어진다 */
+  --font-sans: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR";
 }
 
 html.light {
@@ -56,4 +58,22 @@ body {
 /* 패널 공통 스타일 */
 .panel {
   @apply bg-surface/80 border border-line backdrop-blur-md;
+}
+
+/* 다크 배경에 맞춘 -400 계열 강조 글씨는 흰 배경에서 대비가 모자라 한 단계 진하게 바꾼다 */
+html.light .text-brand-300,
+html.light .text-brand-400 {
+  color: #4f46e5; /* brand-600 */
+}
+html.light .text-emerald-400 {
+  color: #047857; /* emerald-700 */
+}
+html.light .text-amber-400 {
+  color: #b45309; /* amber-700 */
+}
+html.light .text-sky-400 {
+  color: #0369a1; /* sky-700 */
+}
+html.light .text-red-400 {
+  color: #dc2626; /* red-600 */
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { GENES, SYNONYMS } from "@/lib/genes";
 import { getPathway } from "@/lib/atlas";
 import { useAtlas } from "@/store/useAtlas";
-import { useGeneDetail } from "@/hooks/useGeneDetail";
+import { useExternalGene, useGeneDetail } from "@/hooks/useGeneDetail";
 import { MicroMap } from "./MicroMap";
 import { GuideCard } from "./GuideCard";
 
@@ -20,6 +20,15 @@ const ProteinViewer = dynamic(
 export function GeneModal() {
   const activeGene = useAtlas((s) => s.activeGene);
   const closeGene = useAtlas((s) => s.closeGene);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!activeGene) return;
+    dialogRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeGene();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeGene, closeGene]);
 
   return (
     <AnimatePresence>
@@ -35,7 +44,12 @@ export function GeneModal() {
             onClick={closeGene}
           />
           <motion.div
-            className="panel relative z-10 max-h-[88vh] w-full max-w-lg overflow-y-auto rounded-2xl shadow-2xl"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${activeGene} 유전자 도감`}
+            tabIndex={-1}
+            className="panel relative z-10 max-h-[88vh] w-full max-w-lg overflow-y-auto rounded-2xl !bg-surface shadow-2xl focus:outline-none"
             initial={{ scale: 0.92, y: 16, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.92, y: 16, opacity: 0 }}
@@ -43,7 +57,11 @@ export function GeneModal() {
           >
             {/* 실데이터 페칭 중에는 스켈레톤. 그동안 배경 클릭으로 닫기 가능. */}
             <Suspense fallback={<GeneSkeleton />}>
-              <GeneBody symbol={activeGene} />
+              {GENES[activeGene] ? (
+                <GeneBody symbol={activeGene} />
+              ) : (
+                <ExternalGeneBody symbol={activeGene} />
+              )}
             </Suspense>
           </motion.div>
         </motion.div>
@@ -85,9 +103,10 @@ function GeneBody({ symbol }: { symbol: string }) {
             ) : (
               <span
                 className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[11px] text-emerald-400 ring-1 ring-emerald-500/30"
-                title="NCBI E-utilities 실시간 데이터"
+                title="NCBI E-utilities에서 받아온 데이터"
               >
                 NCBI 실데이터
+                {gene._meta?.fetchedAt && ` · ${formatDate(gene._meta.fetchedAt)} 확인`}
               </span>
             )}
           </div>
@@ -100,10 +119,10 @@ function GeneBody({ symbol }: { symbol: string }) {
           )}
         </div>
         <div className="flex items-center gap-2">
-          <BookmarkButton />
+          <BookmarkButton symbol={gene.symbol} />
           <button
             onClick={closeGene}
-            className="rounded-full p-1.5 text-fg-muted hover:bg-subtle hover:text-white"
+            className="rounded-full p-1.5 text-fg-muted hover:bg-subtle hover:text-fg"
             aria-label="닫기"
           >
             ✕
@@ -180,8 +199,207 @@ function GeneBody({ symbol }: { symbol: string }) {
           gene={gene}
           onJumpPathway={(id) => jumpTo({ pathwayId: id })}
         />
+
+        <CopyActions
+          sharePath={`/gene/${gene.symbol}`}
+          citation={citeGene(gene, pathwayOfGene)}
+        />
+
+        <p className="mt-4 text-[11px] leading-relaxed text-fg-faint">
+          학습·연구 참고용 정보입니다. 의학적 진단이나 치료 판단에 쓸 수 없으며,
+          건강 문제는 의료진과 상담하세요.
+        </p>
       </div>
     </>
+  );
+}
+
+// 도감에 없는 유전자 — NCBI 기본 정보만 보여주고, 쉬운 설명이 없다는 사실을 밝힌다
+function ExternalGeneBody({ symbol }: { symbol: string }) {
+  const result = useExternalGene(symbol);
+  const closeGene = useAtlas((s) => s.closeGene);
+  const openGene = useAtlas((s) => s.openGene);
+  const curated = typeof result === "object" && GENES[result.symbol];
+
+  // 별칭으로 찾았는데 공식 기호가 도감에 있으면(예: P53 → TP53) 도감으로 넘긴다
+  useEffect(() => {
+    if (curated) openGene(curated.symbol);
+  }, [curated, openGene]);
+  if (curated) return <GeneSkeleton />;
+
+  if (typeof result === "string") {
+    return (
+      <div className="p-5">
+        <div className="flex items-start justify-between">
+          <h2 className="text-xl font-bold text-brand-400">{symbol}</h2>
+          <button
+            onClick={closeGene}
+            className="rounded-full p-1.5 text-fg-muted hover:bg-subtle hover:text-fg"
+            aria-label="닫기"
+          >
+            ✕
+          </button>
+        </div>
+        <p className="mt-3 text-sm leading-relaxed text-fg-muted">
+          {result === "notfound"
+            ? `‘${symbol}’라는 사람 유전자를 NCBI에서 찾지 못했어요. 공식 유전자 기호(예: TP53, BRCA1)로 다시 검색해 보세요.`
+            : "NCBI 응답을 받지 못했어요. 잠시 뒤 다시 시도해 주세요."}
+        </p>
+      </div>
+    );
+  }
+
+  const gene = result;
+  return (
+    <>
+      <div className="flex items-start justify-between border-b border-line p-5">
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-xl font-bold text-brand-400">{gene.symbol}</h2>
+            <span className="rounded-full bg-subtle px-2 py-0.5 text-[11px] text-fg-muted">
+              Gene ID {gene.geneId}
+            </span>
+            <span className="rounded-full bg-sky-500/15 px-2 py-0.5 text-[11px] text-sky-400 ring-1 ring-sky-500/30">
+              도감 밖 유전자 · NCBI {formatDate(gene.fetchedAt)} 확인
+            </span>
+          </div>
+          <p className="mt-0.5 text-sm text-fg-muted">{gene.fullName}</p>
+          {gene.aliases.length > 0 && (
+            <p className="mt-0.5 text-xs text-fg-faint">
+              다른 이름: {gene.aliases.slice(0, 4).join(" · ")}
+              {gene.aliases.length > 4 && " …"}
+            </p>
+          )}
+        </div>
+        <button
+          onClick={closeGene}
+          className="rounded-full p-1.5 text-fg-muted hover:bg-subtle hover:text-fg"
+          aria-label="닫기"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="space-y-3 p-5 text-sm">
+        <p className="rounded-lg bg-subtle/60 px-3 py-2 text-xs leading-relaxed text-fg-muted">
+          BioAtlas가 아직 쉬운 설명과 인체 지도를 만들지 않은 유전자예요. NCBI에서
+          받은 기본 정보만 보여드려요.
+        </p>
+        {gene.chromosome && <Row label="크로모좀 위치">{gene.chromosome}</Row>}
+        {gene.summary && (
+          <Row label="NCBI 요약 (영문)">
+            <p className="text-xs leading-relaxed text-fg-muted">{gene.summary}</p>
+          </Row>
+        )}
+        {gene.pubmed.length > 0 && (
+          <Row label="관련 논문 (PubMed)">
+            <ul className="space-y-1">
+              {gene.pubmed.map((p) => (
+                <li key={p.pmid}>
+                  <a
+                    href={`https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-brand-400 hover:underline"
+                  >
+                    {p.title} (PMID:{p.pmid}) ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Row>
+        )}
+        <Row label="원본 보기">
+          <div className="flex flex-wrap gap-x-3 gap-y-1">
+            <a
+              href={`https://www.ncbi.nlm.nih.gov/gene/${gene.geneId}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand-400 hover:underline"
+            >
+              NCBI Gene ↗
+            </a>
+            <a
+              href={`https://www.uniprot.org/uniprotkb?query=gene_exact:${gene.symbol}+AND+organism_id:9606`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand-400 hover:underline"
+            >
+              UniProt ↗
+            </a>
+            <a
+              href={`https://reactome.org/content/query?q=${gene.symbol}&species=Homo+sapiens`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand-400 hover:underline"
+            >
+              Reactome 경로 ↗
+            </a>
+          </div>
+        </Row>
+        <CopyActions citation={citeNcbi(gene.symbol, gene.fullName, gene.geneId, gene.fetchedAt)} />
+      </div>
+    </>
+  );
+}
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("ko-KR", { dateStyle: "medium" });
+
+function citeNcbi(symbol: string, fullName: string, geneId: string, checkedAt?: string) {
+  const date = formatDate(checkedAt ?? new Date().toISOString());
+  return `${symbol} (${fullName}). NCBI Gene ID ${geneId}. https://www.ncbi.nlm.nih.gov/gene/${geneId} (확인일 ${date})`;
+}
+
+// 지금 보고 있는 패스웨이에 속한 유전자면 Reactome 출처도 함께 적는다
+function citeGene(
+  gene: (typeof GENES)[string],
+  pathway: ReturnType<typeof getPathway> | undefined
+) {
+  const lines = [citeNcbi(gene.symbol, gene.fullName, gene.geneId, gene._meta?.fetchedAt)];
+  if (pathway?.network.nodes.some((n) => n.id === gene.symbol)) {
+    lines.push(
+      `${pathway.nameEn}. ${pathway.source} ${pathway.sourceId}. https://reactome.org/content/detail/${pathway.sourceId}`
+    );
+  }
+  return lines.join("\n");
+}
+
+function CopyActions({
+  sharePath,
+  citation,
+}: {
+  sharePath?: string;
+  citation: string;
+}) {
+  const [copied, setCopied] = useState<string | null>(null);
+  const copy = (label: string, text: string) =>
+    navigator.clipboard.writeText(text).then(
+      () => {
+        setCopied(label);
+        setTimeout(() => setCopied(null), 2000);
+      },
+      () => setCopied("복사하지 못했어요")
+    );
+  const btn =
+    "rounded-lg border border-line px-3 py-1.5 text-xs text-fg-muted hover:border-brand-500 hover:text-fg";
+  return (
+    <div className="mt-4 flex flex-wrap items-center gap-2">
+      {sharePath && (
+        <button
+          onClick={() => copy("링크를 복사했어요", window.location.origin + sharePath)}
+          className={btn}
+        >
+          링크 복사
+        </button>
+      )}
+      <button onClick={() => copy("인용 정보를 복사했어요", citation)} className={btn}>
+        인용 정보 복사
+      </button>
+      <span role="status" className="text-[11px] text-fg-faint">
+        {copied}
+      </span>
+    </div>
   );
 }
 
@@ -213,23 +431,24 @@ function ViewerSkeleton() {
   );
 }
 
-function BookmarkButton() {
-  const [saved, setSaved] = useState(false);
+function BookmarkButton({ symbol }: { symbol: string }) {
+  const saved = useAtlas((s) => s.bookmarks.includes(symbol));
+  const toggleBookmark = useAtlas((s) => s.toggleBookmark);
   const [toast, setToast] = useState(false);
   return (
     <div className="relative">
       <button
         onClick={() => {
-          // 비로그인 상태: 로그인 유도 (Phase 2 인증 연동 자리)
+          toggleBookmark(symbol);
           setToast(true);
-          setSaved((s) => !s);
           setTimeout(() => setToast(false), 2200);
         }}
         className={`rounded-full p-1.5 ${
           saved ? "text-brand-400" : "text-fg-muted hover:text-brand-400"
         } hover:bg-subtle`}
-        aria-label="북마크"
-        title="북마크"
+        aria-label={saved ? "북마크 해제" : "북마크"}
+        aria-pressed={saved}
+        title={saved ? "북마크 해제" : "북마크"}
       >
         {saved ? "★" : "☆"}
       </button>
@@ -241,7 +460,9 @@ function BookmarkButton() {
             exit={{ opacity: 0 }}
             className="panel absolute right-0 top-9 z-20 w-48 rounded-lg p-2 text-[11px] text-fg-muted"
           >
-            로그인이 필요합니다. (Phase 2: 로그인/마이페이지 연동)
+            {saved
+              ? "북마크에 저장했어요. 상단 ★ 메뉴에서 다시 볼 수 있어요."
+              : "북마크에서 뺐어요."}
           </motion.div>
         )}
       </AnimatePresence>

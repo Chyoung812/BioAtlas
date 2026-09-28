@@ -10,7 +10,12 @@ const ORGAN_MARKERS: { id: string; x: number; y: number }[] = [
   { id: "lung", x: 52, y: 58 },
   { id: "heart", x: 64, y: 62 },
   { id: "liver", x: 54, y: 76 },
-  { id: "kidney", x: 66, y: 86 },
+  { id: "stomach", x: 68, y: 72 },
+  { id: "pancreas", x: 60, y: 80 },
+  { id: "kidney", x: 67, y: 87 },
+  { id: "intestine", x: 58, y: 92 },
+  { id: "thymus", x: 60, y: 50 },
+  { id: "spleen", x: 74, y: 77 },
 ];
 
 // 미니맵 (PRD ⑥): 축소된 전체 인체 + 현재 위치 하이라이트, 열기/닫기 토글
@@ -20,8 +25,11 @@ export function Minimap() {
   const organName = organId ? getOrgan(organId)?.name : null;
   const activeMarker = ORGAN_MARKERS.find((m) => m.id === organId) ?? null;
 
+  // 인체 화면은 그 자체가 전체 지도라 미니맵이 필요 없고, 다장기 패널과 자리가 겹친다
+  if (level === "body") return null;
+
   return (
-    <div className="absolute left-4 top-16 z-20">
+    <div className="absolute left-4 top-16 z-20 hidden md:block">
       <AnimatePresence>
         {minimapOpen ? (
           <motion.div
@@ -107,9 +115,7 @@ export function Minimap() {
             </button>
 
             <div className="mt-1 text-center text-[11px] text-fg-muted">
-              {level === "body"
-                ? "전체 인체"
-                : `${organName ?? ""}${tissueId ? " · 조직" : ""}`}
+              {`${organName ?? ""}${tissueId ? " · 조직" : ""}`}
             </div>
           </motion.div>
         ) : (

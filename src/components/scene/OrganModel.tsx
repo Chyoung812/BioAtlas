@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html, Line, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { getOrgan } from "@/lib/atlas";
@@ -24,6 +24,8 @@ export function OrganModel({
   const tissueId = useAtlas((s) => s.tissueId);
   const enterTissue = useAtlas((s) => s.enterTissue);
   const organ = organId ? getOrgan(organId) : null;
+  // Html 이름표는 캔버스 크기와 무관하게 그려져, 모바일의 작은 캔버스에서는 서로 겹친다 → 높이에 비례해 줄인다
+  const labelScale = Math.min(1, Math.max(0.55, useThree((s) => s.size.height) / 700));
 
   // 조직을 아직 고르지 않았을 때만 아주 천천히 회전 (클릭 방해 최소화)
   useFrame((_, delta) => {
@@ -57,6 +59,7 @@ export function OrganModel({
               position={tissue.position}
               name={tissue.name}
               active={active}
+              labelScale={labelScale}
               onSelect={() => enterTissue(tissue.id)}
             />
           </group>
@@ -65,7 +68,7 @@ export function OrganModel({
 
       {/* 조작 안내 (조직 미선택 시) */}
       {!tissueId && (
-        <Html center position={[0, 1.5, 0]} distanceFactor={7}>
+        <Html center position={[0, 1.5, 0]} distanceFactor={7 * labelScale} zIndexRange={[9, 0]}>
           <div className="pointer-events-none whitespace-nowrap rounded-full bg-raised/90 px-3 py-1 text-xs text-fg shadow-lg">
             💡 조직 이름표를 클릭하세요 · 드래그로 회전
           </div>
@@ -77,7 +80,7 @@ export function OrganModel({
 
 // ── 장기별 중앙 메시 선택 ───────────────────────────────────
 // Human Reference Atlas(HuBMAP) 3D Reference Object Library, CC BY 4.0.
-// 위는 HRA 레코드가 없어 절차적 형태를 유지한다.
+// 위는 HRA 레코드가 없어 절차적 형태를 유지한다. 흉선·비장은 HRA 모델만 있고 절차적 대체는 공용 형태.
 const HRA_MODELS: Record<string, string[]> = {
   brain: ["/models/hra/brain.glb"],
   heart: ["/models/hra/heart.glb"],
@@ -86,6 +89,8 @@ const HRA_MODELS: Record<string, string[]> = {
   pancreas: ["/models/hra/pancreas.glb"],
   intestine: ["/models/hra/intestine.glb"],
   kidney: ["/models/hra/kidney-l.glb", "/models/hra/kidney-r.glb"],
+  thymus: ["/models/hra/thymus.glb"],
+  spleen: ["/models/hra/spleen.glb"],
 };
 const HRA_FIT_SIZE = 1.8;
 
@@ -485,18 +490,20 @@ function TissueLayer({
   position,
   name,
   active,
+  labelScale,
   onSelect,
 }: {
   position: [number, number, number];
   name: string;
   active: boolean;
+  labelScale: number;
   onSelect: () => void;
 }) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.position.y =
-        position[1] + Math.sin(state.clock.elapsedTime * 1.5) * 0.04;
+      // 그룹이 이미 position에 있으므로 여기서는 흔들림만 더한다
+      ref.current.position.y = Math.sin(state.clock.elapsedTime * 1.5) * 0.04;
     }
   });
 
@@ -527,7 +534,7 @@ function TissueLayer({
           toneMapped={false}
         />
       </mesh>
-      <Html center distanceFactor={6} position={[0, 0.38, 0]}>
+      <Html center distanceFactor={6 * labelScale} position={[0, 0.38, 0]} zIndexRange={[9, 0]}>
         <div
           onClick={(e) => {
             e.stopPropagation();

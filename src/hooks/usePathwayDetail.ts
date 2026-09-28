@@ -4,7 +4,7 @@ import { getPathway } from "@/lib/atlas";
 import { Pathway } from "@/lib/types";
 import { makeResourceHook } from "@/lib/resource";
 
-/** Suspense 경계 안에서 호출 — KEGG/Reactome 확인, 실패 시 큐레이션 폴백. */
+/** Suspense 경계 안에서 호출 — Reactome 확인, 실패 시 큐레이션 폴백. */
 export const usePathwayDetail = makeResourceHook<Pathway>((id) =>
   fetch(`/api/pathway/${id}`)
     .then((r) => {

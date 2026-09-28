@@ -1,4 +1,4 @@
-// 큐레이션 데이터를 NCBI·HGNC·KEGG·Reactome 원본과 대조하고, 유전자 동의어 목록을 만든다.
+// 큐레이션 데이터를 NCBI·HGNC·Reactome 원본과 대조하고, 유전자 동의어 목록을 만든다.
 //   npm run check:data                 검사만 (오류가 있으면 exit 1)
 //   npm run check:data -- --write      동의어 목록(src/lib/synonyms.json)도 갱신
 //   npm run check:data -- --report r.md  결과를 마크다운 파일로도 저장
@@ -123,26 +123,17 @@ async function checkGenes(): Promise<Synonyms> {
 
 const sourceCache: Record<string, { name: string; members: Set<string> } | null> = {};
 
-/** "KEGG:hsa04974" 같은 출처 경로의 이름과 소속 유전자(Gene ID·기호·UniProt) */
-async function sourcePathway(kind: "KEGG" | "Reactome", id: string) {
+/** "Reactome:R-HSA-881907" 같은 출처 경로의 이름과 소속 유전자(Gene ID·기호·UniProt) */
+async function sourcePathway(kind: "Reactome", id: string) {
   const key = `${kind}:${id}`;
   if (key in sourceCache) return sourceCache[key];
   let result: { name: string; members: Set<string> } | null = null;
-  if (kind === "KEGG") {
-    const text = (await get(`https://rest.kegg.jp/get/${id}`, false)) as string | null;
-    if (text) {
-      const name = /^NAME\s+(.+)$/m.exec(text)?.[1]?.replace(/\s*-\s*Homo sapiens.*$/i, "").trim() ?? "";
-      const links = (await get(`https://rest.kegg.jp/link/hsa/${id}`, false)) as string;
-      result = { name, members: new Set(links.trim().split("\n").map((l) => l.split("\t")[1]?.replace("hsa:", ""))) };
-    }
-  } else {
-    const info = await get(`https://reactome.org/ContentService/data/query/${id}`);
-    if (info) {
-      if (info.speciesName && info.speciesName !== "Homo sapiens")
-        errors.push(`${key}: Reactome 경로가 사람 경로가 아닙니다 (${info.speciesName}).`);
-      const refs = (await get(`https://reactome.org/ContentService/data/participants/${id}/referenceEntities`)) as any[];
-      result = { name: info.displayName, members: new Set(refs.flatMap((r) => [r.identifier, ...(r.geneName ?? [])])) };
-    }
+  const info = await get(`https://reactome.org/ContentService/data/query/${id}`);
+  if (info) {
+    if (info.speciesName && info.speciesName !== "Homo sapiens")
+      errors.push(`${key}: Reactome 경로가 사람 경로가 아닙니다 (${info.speciesName}).`);
+    const refs = (await get(`https://reactome.org/ContentService/data/participants/${id}/referenceEntities`)) as any[];
+    result = { name: info.displayName, members: new Set(refs.flatMap((r) => [r.identifier, ...(r.geneName ?? [])])) };
   }
   await sleep(300);
   sourceCache[key] = result;
@@ -158,7 +149,7 @@ async function verifyEvidence(ref: string, symbol: string) {
   const e = parseEvidence(ref);
   const g = GENES[symbol];
   if (!e || !g) return false;
-  if (e.kind === "KEGG" || e.kind === "Reactome") {
+  if (e.kind === "Reactome") {
     const src = await sourcePathway(e.kind, e.id);
     return !!src && inSet(src.members, symbol);
   }
@@ -193,7 +184,7 @@ async function checkGenePapers() {
 
 async function checkPathways() {
   for (const p of Object.values(PATHWAYS)) {
-    if (p.source !== "KEGG" && p.source !== "Reactome") continue;
+    if (p.source !== "Reactome") continue;
     const src = await sourcePathway(p.source, p.sourceId);
     if (!src) {
       errors.push(`${p.id}: ${p.source}에서 ${p.sourceId} 경로를 찾을 수 없습니다.`);

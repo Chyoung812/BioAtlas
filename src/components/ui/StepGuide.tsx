@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtlas } from "@/store/useAtlas";
+import { ORGANS } from "@/lib/atlas";
 
 /**
  * 5단계 탐색 여정을 항상 보여주는 가이드.
@@ -10,9 +11,9 @@ import { useAtlas } from "@/store/useAtlas";
 const STEPS = ["인체", "장기", "조직", "패스웨이", "유전자"] as const;
 
 const NEXT_HINT: Record<string, string> = {
-  body: "빛나는 장기(뇌·심장·폐·간·위·췌장·장·신장)를 클릭해 탐색을 시작하세요",
+  body: `빛나는 장기(${ORGANS.map((o) => o.name).join("·")})를 클릭해 탐색을 시작하세요`,
   organ: "장기 속 조직을 선택하세요",
-  tissue: "오른쪽 목록에서 패스웨이를 선택하세요",
+  tissue: "목록에서 패스웨이를 선택하세요",
   pathway: "네트워크의 유전자 노드를 클릭해 도감을 여세요",
 };
 
@@ -28,54 +29,64 @@ export function StepGuide() {
   const hint = activeGene ? null : NEXT_HINT[level];
 
   return (
-    <div className="pointer-events-none absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2">
-      {/* 스텝 표시 */}
-      <div className="panel flex items-center gap-1 rounded-full px-3 py-1.5">
-        {STEPS.map((label, i) => {
-          const done = i < stepIndex;
-          const current = i === stepIndex;
-          return (
-            <div key={label} className="flex items-center gap-1">
-              {i > 0 && (
-                <span
-                  className={`h-px w-4 ${
-                    done ? "bg-brand-500" : "bg-subtle"
-                  }`}
-                />
-              )}
-              <span
-                className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors ${
-                  current
-                    ? "bg-brand-500 text-white"
-                    : done
-                      ? "text-brand-400"
-                      : "text-fg-faint"
-                }`}
-              >
-                <span
-                  className={`grid h-4 w-4 place-items-center rounded-full text-[9px] ${
-                    current
-                      ? "bg-white/25"
-                      : done
-                        ? "bg-brand-500/20"
-                        : "bg-subtle"
-                  }`}
-                >
-                  {done ? "✓" : i + 1}
-                </span>
-                {label}
-              </span>
-            </div>
-          );
-        })}
+    <>
+      {/* 모바일: 하단은 시트가 차지하므로 상단에 한 줄로 */}
+      <div className="panel pointer-events-none absolute left-3 right-3 top-[60px] z-10 flex items-center gap-2 rounded-full px-3 py-1.5 text-xs md:hidden">
+        <span className="shrink-0 rounded-full bg-brand-500 px-2 py-0.5 text-[11px] font-medium text-white">
+          {stepIndex + 1}/{STEPS.length} {STEPS[stepIndex]}
+        </span>
+        {hint && <span className="truncate text-fg-muted">{hint}</span>}
       </div>
 
-      {/* 다음 할 일 힌트 */}
-      {hint && (
-        <div className="panel animate-fade-in rounded-full px-4 py-1.5 text-xs text-fg-muted">
-          👉 {hint}
+      <div className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex">
+        {/* 스텝 표시 */}
+        <div className="panel flex items-center gap-1 rounded-full px-3 py-1.5">
+          {STEPS.map((label, i) => {
+            const done = i < stepIndex;
+            const current = i === stepIndex;
+            return (
+              <div key={label} className="flex items-center gap-1">
+                {i > 0 && (
+                  <span
+                    className={`h-px w-4 ${
+                      done ? "bg-brand-500" : "bg-subtle"
+                    }`}
+                  />
+                )}
+                <span
+                  className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors ${
+                    current
+                      ? "bg-brand-500 text-white"
+                      : done
+                        ? "text-brand-400"
+                        : "text-fg-faint"
+                  }`}
+                >
+                  <span
+                    className={`grid h-4 w-4 place-items-center rounded-full text-[9px] ${
+                      current
+                        ? "bg-white/25"
+                        : done
+                          ? "bg-brand-500/20"
+                          : "bg-subtle"
+                    }`}
+                  >
+                    {done ? "✓" : i + 1}
+                  </span>
+                  {label}
+                </span>
+              </div>
+            );
+          })}
         </div>
-      )}
-    </div>
+
+        {/* 다음 할 일 힌트 */}
+        {hint && (
+          <div className="panel animate-fade-in rounded-full px-4 py-1.5 text-xs text-fg-muted">
+            👉 {hint}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

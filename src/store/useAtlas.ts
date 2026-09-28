@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { NavLevel } from "@/lib/types";
+import { persist } from "zustand/middleware";
+import { GENE_SYMBOL, NavLevel } from "@/lib/types";
 import {
   findPathwayLocation,
   getOrgan,
@@ -27,7 +28,12 @@ interface AtlasState {
   // ── UI 상태 ──
   easyMode: boolean; // 쉬운 설명 모드
   minimapOpen: boolean;
+  /** 모바일 하단 시트 펼침 여부 (데스크톱에서는 무시) */
+  sheetOpen: boolean;
   pathwaySort: "relevance" | "category" | "name";
+
+  /** 북마크한 유전자 심볼 (이 브라우저에만 저장) */
+  bookmarks: string[];
 
   // ── 액션 ──
   enterOrgan: (organId: string) => void;
@@ -51,119 +57,148 @@ interface AtlasState {
 
   toggleEasyMode: () => void;
   toggleMinimap: () => void;
+  setSheetOpen: (open: boolean) => void;
   setPathwaySort: (sort: "relevance" | "category" | "name") => void;
+  toggleBookmark: (symbol: string) => void;
 }
 
-export const useAtlas = create<AtlasState>((set) => ({
-  level: "body",
-  organId: null,
-  tissueId: null,
-  pathwayId: null,
-  activeGene: null,
-  geneFocus: null,
-
-  easyMode: false,
-  minimapOpen: true,
-  pathwaySort: "relevance",
-
-  // 드릴다운으로 들어가는 순간 유전자 분포 뷰는 역할이 끝난다 → 함께 해제.
-  enterOrgan: (organId) =>
-    set({
-      level: "organ",
-      organId,
-      tissueId: null,
-      pathwayId: null,
-      geneFocus: null,
-    }),
-
-  enterTissue: (tissueId) =>
-    set({ level: "tissue", tissueId, pathwayId: null }),
-
-  enterPathway: (pathwayId) => set({ level: "pathway", pathwayId }),
-
-  openGene: (symbol) => set({ activeGene: symbol }),
-  closeGene: () => set({ activeGene: null }),
-
-  // 인체 위 분포 뷰로. 드릴다운 상태를 비우고 body로 되돌린 뒤 유전자만 얹는다.
-  focusGene: (symbol) =>
-    set({
+export const useAtlas = create<AtlasState>()(
+  persist(
+    (set) => ({
       level: "body",
       organId: null,
       tissueId: null,
       pathwayId: null,
       activeGene: null,
-      geneFocus: symbol,
-    }),
+      geneFocus: null,
 
-  clearGeneFocus: () => set({ geneFocus: null }),
+      easyMode: false,
+      minimapOpen: true,
+      sheetOpen: false,
+      pathwaySort: "relevance",
+      bookmarks: [],
 
-  goTo: (level) =>
-    set((s) => {
-      if (level === "body")
-        return {
-          level,
+      // 드릴다운으로 들어가는 순간 유전자 분포 뷰는 역할이 끝난다 → 함께 해제.
+      enterOrgan: (organId) =>
+        set({
+          level: "organ",
+          organId,
+          tissueId: null,
+          pathwayId: null,
+          geneFocus: null,
+        }),
+
+      // 패스웨이가 하나뿐인 조직은 고를 것이 없으므로 바로 네트워크로 간다
+      enterTissue: (tissueId) =>
+        set((s) => {
+          const only = s.organId
+            ? getTissue(s.organId, tissueId)?.pathwayIds
+            : undefined;
+          return only?.length === 1 && getPathway(only[0])
+            ? { level: "pathway", tissueId, pathwayId: only[0] }
+            : { level: "tissue", tissueId, pathwayId: null };
+        }),
+
+      enterPathway: (pathwayId) => set({ level: "pathway", pathwayId }),
+
+      openGene: (symbol) => set({ activeGene: symbol }),
+      closeGene: () => set({ activeGene: null }),
+
+      // 인체 위 분포 뷰로. 드릴다운 상태를 비우고 body로 되돌린 뒤 유전자만 얹는다.
+      focusGene: (symbol) =>
+        set({
+          level: "body",
+          organId: null,
+          tissueId: null,
+          pathwayId: null,
+          activeGene: null,
+          geneFocus: symbol,
+        }),
+
+      clearGeneFocus: () => set({ geneFocus: null }),
+
+      goTo: (level) =>
+        set((s) => {
+          if (level === "body")
+            return {
+              level,
+              organId: null,
+              tissueId: null,
+              pathwayId: null,
+              activeGene: null,
+              geneFocus: null,
+            };
+          if (level === "organ")
+            return { level, tissueId: null, pathwayId: null, activeGene: null };
+          if (level === "tissue")
+            return { level, pathwayId: null, activeGene: null };
+          return { level, activeGene: null };
+        }),
+
+      reset: () =>
+        set({
+          level: "body",
           organId: null,
           tissueId: null,
           pathwayId: null,
           activeGene: null,
           geneFocus: null,
-        };
-      if (level === "organ")
-        return { level, tissueId: null, pathwayId: null, activeGene: null };
-      if (level === "tissue")
-        return { level, pathwayId: null, activeGene: null };
-      return { level, activeGene: null };
-    }),
+        }),
 
-  reset: () =>
-    set({
-      level: "body",
-      organId: null,
-      tissueId: null,
-      pathwayId: null,
-      activeGene: null,
-      geneFocus: null,
-    }),
+      jumpTo: ({ organId, tissueId, pathwayId }) =>
+        set(() => {
+          if (pathwayId) {
+            // 패스웨이만 주어지면 소속 장기·조직을 역추적해 정확한 위치를 복원한다.
+            const loc = findPathwayLocation(pathwayId);
+            return {
+              level: "pathway" as NavLevel,
+              organId: organId ?? loc?.organId ?? "brain",
+              tissueId: tissueId ?? loc?.tissueId ?? "hippocampus",
+              pathwayId,
+              activeGene: null,
+              geneFocus: null,
+            };
+          }
+          if (tissueId)
+            return {
+              level: "tissue" as NavLevel,
+              organId: organId ?? "brain",
+              tissueId,
+              pathwayId: null,
+              activeGene: null,
+              geneFocus: null,
+            };
+          if (organId)
+            return {
+              level: "organ" as NavLevel,
+              organId,
+              tissueId: null,
+              pathwayId: null,
+              activeGene: null,
+              geneFocus: null,
+            };
+          return {};
+        }),
 
-  jumpTo: ({ organId, tissueId, pathwayId }) =>
-    set(() => {
-      if (pathwayId) {
-        // 패스웨이만 주어지면 소속 장기·조직을 역추적해 정확한 위치를 복원한다.
-        const loc = findPathwayLocation(pathwayId);
-        return {
-          level: "pathway" as NavLevel,
-          organId: organId ?? loc?.organId ?? "brain",
-          tissueId: tissueId ?? loc?.tissueId ?? "hippocampus",
-          pathwayId,
-          activeGene: null,
-          geneFocus: null,
-        };
-      }
-      if (tissueId)
-        return {
-          level: "tissue" as NavLevel,
-          organId: organId ?? "brain",
-          tissueId,
-          pathwayId: null,
-          activeGene: null,
-          geneFocus: null,
-        };
-      if (organId)
-        return {
-          level: "organ" as NavLevel,
-          organId,
-          tissueId: null,
-          pathwayId: null,
-          activeGene: null,
-          geneFocus: null,
-        };
-      return {};
+      toggleEasyMode: () => set((s) => ({ easyMode: !s.easyMode })),
+      toggleMinimap: () => set((s) => ({ minimapOpen: !s.minimapOpen })),
+      setSheetOpen: (sheetOpen) => set({ sheetOpen }),
+      setPathwaySort: (pathwaySort) => set({ pathwaySort }),
+      toggleBookmark: (symbol) =>
+        set((s) => ({
+          bookmarks: s.bookmarks.includes(symbol)
+            ? s.bookmarks.filter((b) => b !== symbol)
+            : [symbol, ...s.bookmarks],
+        })),
     }),
-
-  toggleEasyMode: () => set((s) => ({ easyMode: !s.easyMode })),
-  toggleMinimap: () => set((s) => ({ minimapOpen: !s.minimapOpen })),
-  setPathwaySort: (pathwaySort) => set({ pathwaySort }),
-}));
+    {
+      name: "bioatlas",
+      partialize: (s) => ({ bookmarks: s.bookmarks }),
+      // 정적 HTML과 첫 렌더를 맞추려고 저장값은 마운트 뒤(bindAtlasToUrl)에 읽는다
+      skipHydration: true,
+    }
+  )
+);
 
 // ── URL 딥링크 ──────────────────────────────────────────────
 // ?organ=&tissue=&pathway=&gene=&focus= 로 탐색 위치를 공유·복원한다.
@@ -207,11 +242,14 @@ function applyQuery(search: string) {
   } else {
     reset();
   }
-  useAtlas.setState({ activeGene: gene && GENES[gene] ? gene : null });
+  useAtlas.setState({
+    activeGene: gene && (GENES[gene] || GENE_SYMBOL.test(gene)) ? gene : null,
+  });
 }
 
 /** 첫 진입 시 URL을 읽어 상태를 복원하고, 이후 상태 변화를 URL에 반영한다. */
 export function bindAtlasToUrl() {
+  useAtlas.persist.rehydrate();
   applyQuery(window.location.search);
   let last = toQuery(useAtlas.getState());
   history.replaceState(null, "", window.location.pathname + last);

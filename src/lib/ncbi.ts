@@ -2,7 +2,7 @@
 // 실 API 응답(esummary/esearch)을 기존 GeneDetail 타입으로 매핑하고,
 // 큐레이션 데이터를 base(=폴백)로 삼아 실데이터를 그 위에 덮어씁니다.
 // 서버 전용 모듈 — 클라이언트에서 import 하지 마세요.
-import { GeneDetail } from "./types";
+import { ExternalGene, GeneDetail } from "./types";
 
 // 기본은 NCBI 공식 엔드포인트. 테스트/미러링을 위해 env로 오버라이드 가능.
 const BASE =
@@ -25,8 +25,13 @@ function url(path: string, params: Record<string, string>) {
 }
 
 // upstream 응답을 하루 캐시 → rate limit 사실상 무해화
-async function getJson(u: string) {
+// 키 없이 초당 3회를 넘기면 429 — 한 유전자 조회가 3~4회 호출이라 한 번은 쉬었다 재시도한다
+async function getJson(u: string, retried = false): Promise<any> {
   const res = await fetch(u, { next: { revalidate: DAY } });
+  if (res.status === 429 && !retried) {
+    await new Promise((r) => setTimeout(r, 1000));
+    return getJson(u, true);
+  }
   if (!res.ok) throw new Error(`NCBI ${res.status}`);
   return res.json();
 }
@@ -39,6 +44,7 @@ export async function fetchNcbiGene(geneId: string) {
   const rec = json?.result?.[geneId];
   if (!rec) throw new Error("gene not found");
   return {
+    symbol: (rec.name as string) || undefined,
     fullName: rec.nomenclaturename || rec.description || undefined,
     chromosome: rec.maplocation || undefined,
     summary: (rec.summary as string) || undefined,
@@ -73,6 +79,36 @@ export async function fetchPubmed(geneId: string, retmax = 5) {
   return ids
     .map((pmid) => ({ pmid, title: sum?.result?.[pmid]?.title }))
     .filter((p): p is { pmid: string; title: string } => Boolean(p.title));
+}
+
+/** 도감 밖 유전자: 기호(별칭 포함, 예: HER2→ERBB2)로 사람 유전자를 찾아 기본 정보만 돌려준다. */
+export async function fetchExternalGene(
+  symbol: string
+): Promise<ExternalGene | null> {
+  const search = await getJson(
+    url("esearch.fcgi", {
+      db: "gene",
+      term: `${symbol}[sym] AND 9606[taxid]`,
+      retmode: "json",
+      retmax: "1",
+    })
+  );
+  const geneId: string | undefined = search?.esearchresult?.idlist?.[0];
+  if (!geneId) return null;
+  const [ncbi, pubmed] = await Promise.all([
+    fetchNcbiGene(geneId),
+    fetchPubmed(geneId),
+  ]);
+  return {
+    symbol: ncbi.symbol ?? symbol,
+    geneId,
+    fullName: ncbi.fullName ?? symbol,
+    chromosome: ncbi.chromosome,
+    summary: ncbi.summary,
+    aliases: ncbi.aliases,
+    pubmed,
+    fetchedAt: new Date().toISOString(),
+  };
 }
 
 type LiveParts = {

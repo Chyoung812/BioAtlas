@@ -5,18 +5,18 @@ import { checkContext, checkGeneRecord, checkMembership, checkPapers } from "./c
 
 const node = (id: string, extra: Partial<GeneNode> = {}): GeneNode => ({ id, label: id, geneId: id, ...extra });
 const pathway = (nodes: GeneNode[]): Pathway => ({
-  id: "hsa00000",
+  id: "R-HSA-0000",
   name: "테스트",
   nameEn: "Test",
-  source: "KEGG",
-  sourceId: "hsa00000",
+  source: "Reactome",
+  sourceId: "R-HSA-0000",
   category: "대사",
   relevance: 1,
   summary: "",
   relatedPathwayIds: [],
   network: { nodes, edges: [] },
 });
-const ctx = { reason: "생리 흐름상 앞 단계", evidence: ["KEGG:hsa04971"] };
+const ctx = { reason: "생리 흐름상 앞 단계", evidence: ["Reactome:R-HSA-881907"] };
 const source = (...ids: string[]) => (symbol: string) => ids.includes(symbol);
 
 test("pathway_member is checked against source membership", () => {
@@ -48,7 +48,7 @@ test("contextual genes are excluded from membership ratio but need evidence", ()
   assert.equal(checkContext(p, bare, {}).length, 2);
   assert.equal(checkContext(p, node("X", { membership: "contextual", context: ctx }), {}).length, 1);
   assert.deepEqual(
-    checkContext(p, node("X", { membership: "contextual", context: ctx }), { "KEGG:hsa04971|X": true }),
+    checkContext(p, node("X", { membership: "contextual", context: ctx }), { "Reactome:R-HSA-881907|X": true }),
     []
   );
 });

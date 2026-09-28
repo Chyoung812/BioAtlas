@@ -1,10 +1,11 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAtlas } from "@/store/useAtlas";
 import { usePathwayDetail } from "@/hooks/usePathwayDetail";
 import {
+  ORGANS,
   getOrgan,
   getTissue,
   getPathway,
@@ -21,6 +22,7 @@ export function Sidebar() {
     pathwayId,
     pathwaySort,
     setPathwaySort,
+    enterOrgan,
     enterTissue,
     enterPathway,
     jumpTo,
@@ -42,23 +44,53 @@ export function Sidebar() {
     return sorted;
   }, [organId, tissueId, pathwaySort]);
 
+  // 모바일 하단 시트: 목록에서 골라야 하는 단계(장기·조직)에서만 펼치고,
+  // 인체·네트워크를 직접 눌러야 하는 단계에서는 제목만 남긴다.
+  const sheetOpen = useAtlas((s) => s.sheetOpen);
+  const setSheetOpen = useAtlas((s) => s.setSheetOpen);
+  useEffect(() => {
+    setSheetOpen(level === "organ" || level === "tissue");
+  }, [level, setSheetOpen]);
+
   return (
-    <aside className="panel absolute bottom-4 right-4 top-16 z-20 flex w-80 flex-col overflow-hidden rounded-2xl">
-      <div className="border-b border-line px-4 py-3">
-        <h2 className="text-sm font-semibold text-fg">
-          {level === "body" && "장기를 선택하세요"}
-          {level === "organ" && `${organ?.name} · 조직 선택`}
-          {(level === "tissue" || level === "pathway") &&
-            `${tissue?.name ?? ""} · 패스웨이`}
-        </h2>
+    <aside
+      className={`panel fixed inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-2xl md:absolute md:bottom-4 md:left-auto md:right-4 md:top-16 md:h-auto md:w-80 md:rounded-2xl ${
+        sheetOpen ? "h-[55dvh]" : ""
+      }`}
+    >
+      <div
+        onClick={() => setSheetOpen(!sheetOpen)}
+        className="border-b border-line px-4 py-3 max-md:cursor-pointer"
+      >
+        <div className="mx-auto mb-2 h-1 w-10 rounded-full bg-subtle md:hidden" />
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold text-fg">
+            {level === "body" && "장기를 선택하세요"}
+            {level === "organ" && `${organ?.name} · 조직 선택`}
+            {(level === "tissue" || level === "pathway") &&
+              `${tissue?.name ?? ""} · 패스웨이`}
+          </h2>
+          <button
+            className="shrink-0 text-xs text-fg-faint md:hidden"
+            aria-expanded={sheetOpen}
+          >
+            {sheetOpen ? "접기 ▾" : "펼치기 ▴"}
+          </button>
+        </div>
         {organ && (
-          <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+          <p
+            className={`mt-1 text-xs leading-relaxed text-fg-muted ${
+              sheetOpen ? "" : "max-md:hidden"
+            }`}
+          >
             {tissue?.description ?? organ.description}
           </p>
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3">
+      <div
+        className={`flex-1 overflow-y-auto p-3 ${sheetOpen ? "" : "max-md:hidden"}`}
+      >
         {/* body 레벨: 안내 */}
         {level === "body" && (
           <div className="space-y-3 px-1 py-2 text-sm text-fg-muted">
@@ -71,16 +103,32 @@ export function Sidebar() {
                 탐색 순서
               </div>
               <ol className="list-inside list-decimal space-y-0.5 text-fg-muted">
-                <li>장기 선택 (뇌·심장·폐·간·위·췌장·장·신장)</li>
+                <li>장기 선택 ({ORGANS.map((o) => o.name).join("·")})</li>
                 <li>조직 선택 (해마·심근·간세포 등)</li>
                 <li>패스웨이 선택</li>
                 <li>유전자 클릭 → 도감 열람</li>
               </ol>
             </div>
-            <p className="text-xs">
-              <b className="text-brand-400">8개 장기(뇌·심장·폐·간·위·췌장·장·신장)</b>가
-              조직→패스웨이→유전자 전 구간까지 탐색 가능합니다.
-            </p>
+            <div>
+              <div className="mb-1.5 text-xs font-medium text-fg-muted">
+                바로 가기
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {ORGANS.map((o) => (
+                  <button
+                    key={o.id}
+                    onClick={() => enterOrgan(o.id)}
+                    className="flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-xs text-fg hover:border-brand-500 hover:bg-raised"
+                  >
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: o.color }}
+                    />
+                    {o.name}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -154,8 +202,11 @@ export function Sidebar() {
                     <GuideCard guide={pathway.guide} compact />
                   )}
                   <PathwayMembers pathway={pathway} />
-                  <div className="mt-2 text-[11px] text-fg-faint">
-                    출처: {pathway.source} · {pathway.sourceId}
+                  <div className="mt-2 flex items-center justify-between gap-2 text-[11px] text-fg-faint">
+                    <span>
+                      출처: {pathway.source} · {pathway.sourceId}
+                    </span>
+                    <CopyLinkButton path={`/pathway/${pathway.id}`} />
                   </div>
                   {/* 실 API 확인 배지 + 원문(영문) 설명 — 로딩 동안엔 조용히 없음 */}
                   <Suspense fallback={null}>
@@ -193,6 +244,23 @@ export function Sidebar() {
   );
 }
 
+function CopyLinkButton({ path }: { path: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={() =>
+        navigator.clipboard.writeText(window.location.origin + path).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+      }
+      className="shrink-0 rounded-md border border-line px-2 py-0.5 text-fg-muted hover:border-brand-500 hover:text-fg"
+    >
+      {copied ? "복사했어요" : "링크 복사"}
+    </button>
+  );
+}
+
 // 출처 DB가 정한 경로 유전자와, 교육용으로 함께 보여주는 맥락 유전자를 나눠 보여준다.
 function PathwayMembers({ pathway }: { pathway: Pathway }) {
   const nodes = pathway.network.nodes;
@@ -213,7 +281,7 @@ function PathwayMembers({ pathway }: { pathway: Pathway }) {
   );
 }
 
-// 선택된 패스웨이의 실 API(KEGG/Reactome) 확인 상태 + 원문 설명을 보강 렌더.
+// 선택된 패스웨이의 실 API(Reactome) 확인 상태 + 원문 설명을 보강 렌더.
 // 큐레이션 name/summary는 이미 상위에서 즉시 표시되므로, 이건 순수 부가 정보.
 function PathwayLiveMeta({ id }: { id: string }) {
   const p = usePathwayDetail(id);
@@ -274,16 +342,15 @@ function PathwayItem({
             {pathway.category}
           </span>
         </div>
-        <div className="mt-1 flex items-center gap-2">
-          <div className="h-1 flex-1 overflow-hidden rounded-full bg-subtle">
-            <div
-              className="h-full rounded-full bg-brand-500"
-              style={{ width: `${Math.round(pathway.relevance * 100)}%` }}
-            />
-          </div>
-          <span className="text-[10px] text-fg-faint">
-            {Math.round(pathway.relevance * 100)}%
-          </span>
+        {/* 측정값이 아니라 큐레이션한 정렬 기준이라 숫자는 보여주지 않는다 */}
+        <div
+          className="mt-1.5 h-1 overflow-hidden rounded-full bg-subtle"
+          title="이 조직과의 연관도 (BioAtlas 큐레이션 기준 정렬 순서)"
+        >
+          <div
+            className="h-full rounded-full bg-brand-500"
+            style={{ width: `${Math.round(pathway.relevance * 100)}%` }}
+          />
         </div>
       </button>
     </li>

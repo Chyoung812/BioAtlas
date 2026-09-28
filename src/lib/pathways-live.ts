@@ -1,16 +1,10 @@
-// KEGG REST / Reactome ContentService 어댑터
+// Reactome ContentService 어댑터
 // 실 API의 정식 영문명·원문 설명을 가져와 큐레이션 Pathway를 "보강"한다.
 // (유전자와 달리 한글 summary/network는 큐레이션이 더 좋으므로 덮어쓰지 않음)
 // 서버 전용 모듈 — 클라이언트에서 import 하지 마세요.
 import { Pathway } from "./types";
 
 const DAY = 86400;
-
-async function getText(u: string) {
-  const res = await fetch(u, { next: { revalidate: DAY } });
-  if (!res.ok) throw new Error(`KEGG ${res.status}`);
-  return res.text();
-}
 
 async function getJson(u: string) {
   const res = await fetch(u, { next: { revalidate: DAY } });
@@ -19,22 +13,6 @@ async function getJson(u: string) {
 }
 
 type LivePathway = { name?: string; description?: string };
-
-/** KEGG flat file 파싱 — NAME / DESCRIPTION */
-export async function fetchKegg(sourceId: string): Promise<LivePathway> {
-  const base = process.env.KEGG_BASE ?? "https://rest.kegg.jp";
-  const text = await getText(`${base}/get/${sourceId}`);
-  const name = /^NAME\s+(.+)$/m
-    .exec(text)?.[1]
-    ?.replace(/\s*-\s*Homo sapiens.*$/i, "") // " - Homo sapiens (human)" 꼬리 제거
-    .trim();
-  // DESCRIPTION 다음 top-level 필드(들여쓰기 없는 줄) 전까지가 본문
-  const description = /^DESCRIPTION\s+([\s\S]+?)\n\S/m
-    .exec(text)?.[1]
-    ?.replace(/\s+/g, " ")
-    .trim();
-  return { name, description };
-}
 
 /** Reactome ContentService — displayName / summation[0].text */
 export async function fetchReactome(sourceId: string): Promise<LivePathway> {

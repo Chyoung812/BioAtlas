@@ -5,7 +5,7 @@ export type Issues = { errors: string[]; warnings: string[] };
 
 export const isContextual = (n: GeneNode) => n.membership === "contextual";
 
-const EVIDENCE = /^(KEGG|Reactome|NCBI|PMID):(\S+)$/;
+const EVIDENCE = /^(Reactome|NCBI|PMID):(\S+)$/;
 
 /** 출처 경로 소속 검사 — pathway_member만 대상으로 한다 */
 export function checkMembership(
@@ -53,7 +53,7 @@ export function checkContext(
 
 export function parseEvidence(ref: string) {
   const m = EVIDENCE.exec(ref);
-  return m ? { kind: m[1] as "KEGG" | "Reactome" | "NCBI" | "PMID", id: m[2] } : null;
+  return m ? { kind: m[1] as "Reactome" | "NCBI" | "PMID", id: m[2] } : null;
 }
 
 type NcbiRecord = { name?: string; currentid?: string; maplocation?: string; error?: string };
