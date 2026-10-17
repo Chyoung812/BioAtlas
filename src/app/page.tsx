@@ -42,11 +42,14 @@ export default function Home() {
   return (
     <main className="relative h-screen w-screen overflow-hidden">
       {/* 중앙 뷰 (탐색 깊이에 따라 전환). 모바일에서 시트가 열리면 3D는 시트 위 공간에 맞춘다.
-          네트워크(Cytoscape)는 컨테이너 크기 변화를 따라가지 않아 제외. */}
+          네트워크(Cytoscape)는 컨테이너 크기 변화를 따라가지 않아 제외하고, 대신 데스크톱에서는
+          노드가 사이드바 뒤에 배치되지 않도록 처음부터 사이드바 폭만큼 비운다. */}
       <div
         className={`absolute inset-0 ${
           sheetOpen && view !== "network" ? "max-lg:bottom-[55dvh]" : ""
-        } ${view === "scene" ? "max-lg:top-24" : ""}`}
+        } ${view === "scene" ? "max-lg:top-24" : ""} ${
+          view === "network" ? "lg:right-[21rem]" : ""
+        }`}
       >
         <AnimatePresence mode="wait">
           <motion.div

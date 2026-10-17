@@ -135,7 +135,8 @@ export function NetworkView() {
         idealEdgeLength: () => 110,
         nodeRepulsion: () => 12000,
         nodeDimensionsIncludeLabels: true,
-        padding: 50,
+        // 상단 바·단계 안내가 캔버스 위에 떠 있어 넓은 화면에서는 여백을 더 둔다
+        padding: containerRef.current.clientWidth >= 640 ? 90 : 50,
       } as cytoscape.LayoutOptions,
       minZoom: 0.4,
       // 노드가 적은 경로는 화면 맞춤 때 과하게 확대돼 라벨이 겹친다
