@@ -31,14 +31,14 @@ export function StepGuide() {
   return (
     <>
       {/* 모바일: 하단은 시트가 차지하므로 상단에 한 줄로 */}
-      <div className="panel pointer-events-none absolute left-3 right-3 top-[60px] z-10 flex items-center gap-2 rounded-full px-3 py-1.5 text-xs md:hidden">
+      <div className="panel pointer-events-none absolute left-3 right-3 top-[60px] z-10 flex items-center gap-2 rounded-full px-3 py-1.5 text-xs lg:hidden">
         <span className="shrink-0 rounded-full bg-brand-500 px-2 py-0.5 text-[11px] font-medium text-white">
           {stepIndex + 1}/{STEPS.length} {STEPS[stepIndex]}
         </span>
         {hint && <span className="truncate text-fg-muted">{hint}</span>}
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex">
+      <div className="pointer-events-none absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex">
         {/* 스텝 표시 */}
         <div className="panel flex items-center gap-1 rounded-full px-3 py-1.5">
           {STEPS.map((label, i) => {

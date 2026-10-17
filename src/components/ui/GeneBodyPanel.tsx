@@ -31,7 +31,7 @@ export function GeneBodyPanel() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -24 }}
           transition={{ duration: 0.25 }}
-          className="panel absolute bottom-[76px] left-3 right-3 z-30 max-h-[50dvh] overflow-y-auto rounded-xl p-4 md:bottom-auto md:left-4 md:right-auto md:top-20 md:max-h-none md:w-72"
+          className="panel absolute bottom-[76px] left-3 right-3 z-30 max-h-[50dvh] overflow-y-auto rounded-xl p-4 lg:bottom-auto lg:left-4 lg:right-auto lg:top-20 lg:max-h-none lg:w-72"
         >
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
@@ -128,18 +128,18 @@ export function MultiOrganHint() {
 
   return (
     <div
-      className={`panel absolute left-3 top-[104px] z-20 rounded-xl md:left-4 md:right-auto md:top-20 md:w-72 md:p-4 ${
+      className={`panel absolute left-3 top-[104px] z-20 rounded-xl lg:left-4 lg:right-auto lg:top-20 lg:w-72 lg:p-4 ${
         open ? "right-3 p-4" : "px-3 py-1.5"
       }`}
     >
       <div className="flex items-center gap-1">
         <button
           onClick={() => setOpen((o) => !o)}
-          className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left text-sm font-medium text-fg md:pointer-events-none"
+          className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left text-sm font-medium text-fg lg:pointer-events-none"
           aria-expanded={open}
         >
           여러 장기에서 일하는 유전자 Top 3
-          <span className="text-xs text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
+          <span className="text-xs text-fg-faint lg:hidden">{open ? "▾" : "▸"}</span>
         </button>
         <button
           onClick={hide}
@@ -149,7 +149,7 @@ export function MultiOrganHint() {
           ✕
         </button>
       </div>
-      <div className={open ? "" : "max-md:hidden"}>
+      <div className={open ? "" : "max-lg:hidden"}>
         <p className="mt-1 text-xs leading-relaxed text-fg-muted">
           클릭하면 이 유전자가 발현되는 장기를 인체 지도에 한 번에 표시합니다.
         </p>

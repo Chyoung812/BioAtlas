@@ -181,16 +181,16 @@ function NetworkLegend({
   // 모바일에서는 범례가 네트워크를 가리므로 접어 두고, 데스크톱은 항상 펼친다
   const [open, setOpen] = useState(false);
   return (
-    <div className="panel absolute left-3 top-[100px] rounded-xl px-3 py-2 text-[11px] leading-relaxed md:pointer-events-none md:bottom-4 md:left-4 md:top-auto">
+    <div className="panel absolute left-3 top-[100px] rounded-xl px-3 py-2 text-[11px] leading-relaxed lg:pointer-events-none lg:bottom-4 lg:left-4 lg:top-auto">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 font-semibold text-brand-400 md:mb-1"
+        className="flex items-center gap-1.5 font-semibold text-brand-400 lg:mb-1"
         aria-expanded={open}
       >
         범례
-        <span className="text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
+        <span className="text-fg-faint lg:hidden">{open ? "▾" : "▸"}</span>
       </button>
-      <div className={open ? "mt-1 md:mt-0" : "max-md:hidden"}>
+      <div className={open ? "mt-1 lg:mt-0" : "max-lg:hidden"}>
         <div className="mb-1 flex flex-wrap gap-x-3">
           {roles.map((r) => (
             <span key={r} className="flex items-center gap-1.5">

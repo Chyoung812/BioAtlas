@@ -128,7 +128,7 @@ export function HumanScene() {
             href="https://poly.pizza/m/eWGDnQ0jzmH"
             target="_blank"
             rel="noreferrer"
-            className="absolute bottom-[76px] left-3 z-10 text-[10px] text-fg-faint hover:text-fg-muted md:bottom-4 md:left-4"
+            className="absolute bottom-[76px] left-3 z-10 text-[10px] text-fg-faint hover:text-fg-muted lg:bottom-4 lg:left-4"
           >
             인체 모델: &quot;Male base&quot; by Артур Мигранов · CC BY 3.0
           </a>

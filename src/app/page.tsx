@@ -45,8 +45,8 @@ export default function Home() {
           네트워크(Cytoscape)는 컨테이너 크기 변화를 따라가지 않아 제외. */}
       <div
         className={`absolute inset-0 ${
-          sheetOpen && view !== "network" ? "max-md:bottom-[55dvh]" : ""
-        } ${view === "scene" ? "max-md:top-24" : ""}`}
+          sheetOpen && view !== "network" ? "max-lg:bottom-[55dvh]" : ""
+        } ${view === "scene" ? "max-lg:top-24" : ""}`}
       >
         <AnimatePresence mode="wait">
           <motion.div

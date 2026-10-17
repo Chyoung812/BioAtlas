@@ -56,7 +56,7 @@ export function Scene3D() {
           href="https://humanatlas.io/3d-reference-library"
           target="_blank"
           rel="noreferrer"
-          className="absolute left-3 top-1 z-10 text-[10px] text-fg-faint hover:text-fg-muted md:bottom-4 md:left-4 md:top-auto"
+          className="absolute left-3 top-1 z-10 text-[10px] text-fg-faint hover:text-fg-muted lg:bottom-4 lg:left-4 lg:top-auto"
         >
           3D 장기 모델: Human Reference Atlas (HuBMAP) · CC BY 4.0
         </a>

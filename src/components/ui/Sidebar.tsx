@@ -54,15 +54,15 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`panel fixed inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-2xl md:absolute md:bottom-4 md:left-auto md:right-4 md:top-16 md:h-auto md:w-80 md:rounded-2xl ${
+      className={`panel fixed inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-2xl lg:absolute lg:bottom-4 lg:left-auto lg:right-4 lg:top-16 lg:h-auto lg:w-80 lg:rounded-2xl ${
         sheetOpen ? "h-[55dvh]" : ""
       }`}
     >
       <div
         onClick={() => setSheetOpen(!sheetOpen)}
-        className="border-b border-line px-4 py-3 max-md:cursor-pointer"
+        className="border-b border-line px-4 py-3 max-lg:cursor-pointer"
       >
-        <div className="mx-auto mb-2 h-1 w-10 rounded-full bg-subtle md:hidden" />
+        <div className="mx-auto mb-2 h-1 w-10 rounded-full bg-subtle lg:hidden" />
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-sm font-semibold text-fg">
             {level === "body" && "장기를 선택하세요"}
@@ -71,7 +71,7 @@ export function Sidebar() {
               `${tissue?.name ?? ""} · 패스웨이`}
           </h2>
           <button
-            className="shrink-0 text-xs text-fg-faint md:hidden"
+            className="shrink-0 text-xs text-fg-faint lg:hidden"
             aria-expanded={sheetOpen}
           >
             {sheetOpen ? "접기 ▾" : "펼치기 ▴"}
@@ -80,7 +80,7 @@ export function Sidebar() {
         {organ && (
           <p
             className={`mt-1 text-xs leading-relaxed text-fg-muted ${
-              sheetOpen ? "" : "max-md:hidden"
+              sheetOpen ? "" : "max-lg:hidden"
             }`}
           >
             {tissue?.description ?? organ.description}
@@ -89,7 +89,7 @@ export function Sidebar() {
       </div>
 
       <div
-        className={`flex-1 overflow-y-auto p-3 ${sheetOpen ? "" : "max-md:hidden"}`}
+        className={`flex-1 overflow-y-auto p-3 ${sheetOpen ? "" : "max-lg:hidden"}`}
       >
         {/* body 레벨: 안내 */}
         {level === "body" && (

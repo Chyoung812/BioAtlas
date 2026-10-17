@@ -29,7 +29,7 @@ export function Minimap() {
   if (level === "body") return null;
 
   return (
-    <div className="absolute left-4 top-16 z-20 hidden md:block">
+    <div className="absolute left-4 top-16 z-20 hidden lg:block">
       <AnimatePresence>
         {minimapOpen ? (
           <motion.div
