@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { bindAtlasToUrl, useAtlas } from "@/store/useAtlas";
@@ -28,7 +28,9 @@ const NetworkView = dynamic(
 export default function Home() {
   const level = useAtlas((s) => s.level);
   const sheetOpen = useAtlas((s) => s.sheetOpen);
-  useEffect(() => bindAtlasToUrl(), []);
+  // 자식 useEffect(Sidebar의 setSheetOpen 등)가 먼저 set 하면 persist 가 기본값으로
+  // 저장소를 덮어쓴다. 레이아웃 이펙트는 모든 useEffect 보다 먼저 돌아 복원이 앞선다.
+  useLayoutEffect(() => bindAtlasToUrl(), []);
 
   // 탐색 깊이에 따라 중앙 뷰 전환:
   //  body        → 2D 인체 바디맵 (누구나 알아보는 진입 화면)

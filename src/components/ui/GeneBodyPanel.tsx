@@ -117,9 +117,11 @@ export function MultiOrganHint() {
   const geneFocus = useAtlas((s) => s.geneFocus);
   const level = useAtlas((s) => s.level);
   const focusGene = useAtlas((s) => s.focusGene);
+  const hidden = useAtlas((s) => s.multiOrganHintHidden);
+  const hide = useAtlas((s) => s.hideMultiOrganHint);
   const [open, setOpen] = useState(false); // 모바일에서만 의미 있음 (데스크톱은 항상 펼침)
 
-  if (geneFocus || level !== "body") return null;
+  if (hidden || geneFocus || level !== "body") return null;
 
   const picks = multiOrganGenes().slice(0, 3);
   if (picks.length === 0) return null;
@@ -130,18 +132,26 @@ export function MultiOrganHint() {
         open ? "right-3 p-4" : "px-3 py-1.5"
       }`}
     >
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between gap-2 text-left text-sm font-medium text-fg md:pointer-events-none"
-        aria-expanded={open}
-      >
-        여러 장기에 걸친 유전자
-        <span className="text-xs text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
-      </button>
+      <div className="flex items-center gap-1">
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left text-sm font-medium text-fg md:pointer-events-none"
+          aria-expanded={open}
+        >
+          여러 장기에서 일하는 유전자 Top 3
+          <span className="text-xs text-fg-faint md:hidden">{open ? "▾" : "▸"}</span>
+        </button>
+        <button
+          onClick={hide}
+          aria-label="추천 유전자 닫기"
+          className="shrink-0 rounded-md px-1.5 py-0.5 text-fg-faint hover:bg-subtle hover:text-fg"
+        >
+          ✕
+        </button>
+      </div>
       <div className={open ? "" : "max-md:hidden"}>
         <p className="mt-1 text-xs leading-relaxed text-fg-muted">
-          장기를 하나씩 파고들면 절대 보이지 않는 것들입니다. 몸 전체에 한 번에
-          띄워 보세요.
+          클릭하면 이 유전자가 발현되는 장기를 인체 지도에 한 번에 표시합니다.
         </p>
         <ul className="mt-3 space-y-1">
           {picks.map((d) => (

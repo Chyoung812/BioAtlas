@@ -31,6 +31,7 @@ interface AtlasState {
   /** 모바일 하단 시트 펼침 여부 (데스크톱에서는 무시) */
   sheetOpen: boolean;
   pathwaySort: "relevance" | "category" | "name";
+  multiOrganHintHidden: boolean;
 
   /** 북마크한 유전자 심볼 (이 브라우저에만 저장) */
   bookmarks: string[];
@@ -60,6 +61,7 @@ interface AtlasState {
   setSheetOpen: (open: boolean) => void;
   setPathwaySort: (sort: "relevance" | "category" | "name") => void;
   toggleBookmark: (symbol: string) => void;
+  hideMultiOrganHint: () => void;
 }
 
 export const useAtlas = create<AtlasState>()(
@@ -76,6 +78,7 @@ export const useAtlas = create<AtlasState>()(
       minimapOpen: true,
       sheetOpen: false,
       pathwaySort: "relevance",
+      multiOrganHintHidden: false,
       bookmarks: [],
 
       // 드릴다운으로 들어가는 순간 유전자 분포 뷰는 역할이 끝난다 → 함께 해제.
@@ -190,10 +193,14 @@ export const useAtlas = create<AtlasState>()(
             ? s.bookmarks.filter((b) => b !== symbol)
             : [symbol, ...s.bookmarks],
         })),
+      hideMultiOrganHint: () => set({ multiOrganHintHidden: true }),
     }),
     {
       name: "bioatlas",
-      partialize: (s) => ({ bookmarks: s.bookmarks }),
+      partialize: (s) => ({
+        bookmarks: s.bookmarks,
+        multiOrganHintHidden: s.multiOrganHintHidden,
+      }),
       // 정적 HTML과 첫 렌더를 맞추려고 저장값은 마운트 뒤(bindAtlasToUrl)에 읽는다
       skipHydration: true,
     }
